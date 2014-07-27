@@ -60,7 +60,8 @@ rstack <- function() {
 }
 
 
-## O(n) in the size of the input, converts to list
+#' @title Default method for converting to an rstack
+#' @seealso \code{as.rstack}
 as.rstack.default <- function(input) {
   lastnode <- NULL
   listin <- rev(as.list(input))
@@ -75,7 +76,8 @@ as.rstack.default <- function(input) {
   return(newstack)
 }
 
-# O(1)
+#' @title Default method for checking emptyness of an rstack
+#' @seealso \code{is_empty}
 is_empty.rstack <- function(d) {
   if(length(d) < 1) {
     return(TRUE)
@@ -84,21 +86,62 @@ is_empty.rstack <- function(d) {
   }
 }
 
-## Default print. Awww yes.
+#' @title Default print method for an rstack
+#' 
+#' @description Prints the top of an rstack, up to the first 6 elements.
+#' 
+#' @param s The stack to print
+#' @export
+#' 
 print.rstack <- function(s) {
   cat(paste("An rstack with ", length(s), " elements. \n"))
-  if(length(s) > 6 | T) {
+  if(length(s) > 6) {
     cat("Top of the stack:\n")
-    str(as.list(head(s, 1)), comp.str = " ", no.list = T)
+    str(as.list(head(s, 6)), comp.str = " ", no.list = T)
   } else {
     str(as.list(head(s, length(s))), comp.str = "", no.list = T)
   }
 }
 
-## O(n). Requires all elements to be the same length, and if any are named to have the same
-## names. Stops otherwise.
-as.data.frame.rstack <- function(d) {
-  dlist <- as.list(d)
+
+#' @title Convert an \code{rstack} to a \code{data.frame}.
+#' 
+#' @description Converts the elements of an \code{rstack} into rows of a dataframe, if this is reasonable.
+#' 
+#' @details This method runs in O(N) time, and will only work if all elements of the stack have the
+#' same length() (e.g., same number of columns), and if any of the elements have names, then those
+#' names do not conflict (e.g., same column names where used). This is accomplished by a call to
+#' \code{do.call("rbind", as.list(s))}, where \code{as.list(s)} converts the stack \code{s} to a list
+#' where the top element becomes the first element of the list.
+#' @param s The stack to convert
+#' @return A data frame with the first row the previous top of the stack.
+#' @export
+#' @examples 
+#' s <- rstack()
+#' s <- insert_top(s, data.frame(names = c("Bob", "Joe"), ages = c(25, 18)))
+#' s <- insert_top(s, data.frame(names = c("Mary", "Kate", "Ashley"), ages = c(27, 26, 21)))
+#' print(s)
+#' 
+#' sd <- as.data.frame(s)
+#' print(sd)
+#' 
+#' 
+#' ## Building a stack in a loop, converting to a dataframe after the fact:
+#' require("dplyr")
+#' s <- rstack()
+#' for(i in 1:10000) {
+#'  if(runif(1,0,1) < 0.5) {
+#'    s <- s %>% insert_top(data.frame(i = i, type = "sqrt", val = sqrt(i)))
+#'  } else {
+#'    s <- s %>% insert_top(data.frame(i = i, type = "log", val = log(i)))
+#'  }
+#'  if(i %% 100 == 0) {
+#'    print(i/10000)
+#'  }
+#' }
+#' print(head(as.data.frame(s)))
+as.data.frame.rstack <- function(s) {
+  dlist <- as.list(s)
   uniquelens <- unique(lapply(dlist, length))
   if(length(uniquelens) > 1) {
     stop("Sorry, can't convert an rstack to a data frame unless all elements have the same length().")
@@ -110,8 +153,8 @@ as.data.frame.rstack <- function(d) {
   return(do.call(rbind, dlist))
 }
 
-## insert_tops an element to the front of the given stack, returns modified stack (original left alone)
-## O(1)
+#' @title Default method for \code{insert_top} for rstack.
+#' @seealso \code{insert_top}
 insert_top.rstack <- function(s, newdata) {
   newnode <- rstacknode(newdata)
   newstack <- rstack()
@@ -121,8 +164,9 @@ insert_top.rstack <- function(s, newdata) {
   return(newstack)
 }
 
-## Returns the data element at the top of the given stack, leaving the given stack alone.
-## O(1)
+
+#' @title Default method for \code{peek_top} for rstacks.
+#' @seealso \code{peek_top}
 peek_top.rstack <- function(s) {
   if(is.null(s$head)) {
     return(NA)
@@ -131,16 +175,41 @@ peek_top.rstack <- function(s) {
   }
 }
 
-## Returns the length of the given stack.
-## O(1)
+#' @title Default method for \code{length} on an rstack.
+#' 
+#' @description Returns the number of elements in an \code{rstack}.
+#' 
+#' @details O(1) time, as this information is stored seperately and updated on insert/remove.
+#' @param s The stack to get the length of
+#' @return A vector of length 1, which the number of elements of the stack.
+#' @export
+#' @examples
+#' s <- rstack()
+#' s <- insert_top(s, "a")
+#' print(length(s))         # 1
+#' s <- insert_top(s, "b")
+#' print(length(s))         # 2
 length.rstack <- function(s) {
   return(s$len)
 }
 
 
-## Converts the stack to a list, with [[1]] being the top.
-## Leaves the original stack alone
-## O(n); with pre-allocation of the returned list
+#' @title Conversion of an \code{rstack} to a \code{list}
+#' 
+#' @description Converts an \code{rstack} to a list, where the top of the stack becomes
+#' the first element of the list, the second-from-top the second, and so on. 
+#' 
+#' @details O(N), but the generated list is pre-allocated for efficiency.
+#' @param s The stack to convert
+#' @return A list
+#' @export
+#' @examples
+#' s <- rstack()
+#' s <- insert_top(s, "a")
+#' s <- insert_top(s, "b")
+#' 
+#' slist <- as.list(s)
+#' print(slist)
 as.list.rstack <- function(s) {
   retlist <- vector("list", s$len)
   node <- s$head
@@ -153,8 +222,29 @@ as.list.rstack <- function(s) {
   return(retlist)
 }
 
-## Reverses a stack. 
-## O(n), but uses lists as an itermediary for whatever we can eek out from R's lists
+#' @title Reverse an \code{rstack}
+#' 
+#' @description Returns a reversed version of an \code{rstack}, where the old last element (generally
+#' inaccessible) is now the top.
+#' 
+#' @details This method is O(N), though it works behind-the-scenes by converting the input stack
+#' to a list, reversing the list, and building the result as a new rstack. The original is thus
+#' left alone, preserving O(1) amortized time for the original (assuming the "cost" of reversing
+#' is charged to the newly created stack) at the cost of additional memory usage. Of course, 
+#' if the stack is not being used in a preserved manner, e.g. \code{s <- rev(s)}, the garbage collector
+#' will be free to clean up the original data if it is no longer usable.
+#' @param s The stack to reverse
+#' @return A reversed version fo the stack
+#' @export
+#' @examples
+#' s <- rstack()
+#' s <- insert_top(s, "a")
+#' s <- insert_top(s, "b")
+#' s <- insert_top(s, "c")
+#' 
+#' r <- rev(s)
+#' print(r)
+#' print(s)
 rev.rstack <- function(s) {
   saslist <- as.list(s)
   lastnode <- NULL
@@ -171,8 +261,8 @@ rev.rstack <- function(s) {
 
 
 
-## Returns a version of the stack without the top element
-## O(1)
+#' @title Default method for \code{rstack} \code{without_top}
+#' @seealso \code{without_top}
 without_top.rstack <- function(s, n = 1) {
   newstack <- rstack()
   node <- s$head
@@ -186,15 +276,28 @@ without_top.rstack <- function(s, n = 1) {
 
 
 
-## Returns the first few elements of an rstack as a new rstack.
-## O(n) (n is the size of the head requested),
-## not optimized with as.list or anything really 
-head.rstack <- function(x, n = 6L) {
+#' @title Return the top n elements of a stack as a stack
+#' 
+#' @description Returns the top n elements of a stack as a stack, or all of the elements if its length is less than n.
+#' 
+#' @details Runs in O(n) time (in the size of the number of elements requested)
+#' @param s The stack to get the head of
+#' @param n The number of elements to get
+#' @export
+#' @examples 
+#' s <- rstack()
+#' s <- insert_top(s, "a")
+#' s <- insert_top(s, "b")
+#' s <- insert_top(s, "c")
+#' 
+#' st <- head(s, n = 2)
+#' print(st)
+head.rstack <- function(s, n = 6L) {
   newstack <- rstack()
   if(n == 0) {
     return(newstack)
   }
-  node <- x$head
+  node <- s$head
   for(i in seq(1,n)) {
     if(!is.null(node)) {
       newstack <- insert_top(newstack, node$data)
