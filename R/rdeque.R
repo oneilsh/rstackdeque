@@ -5,6 +5,7 @@
 ### means we can always peek at the top and bottom 6 elements, or whatever is there)
 
 ## Todo: peek_front and peek_back need to work even if there are fewer than 2 elements
+## Github test...
 
 
 #' @title Create a new rdeque
