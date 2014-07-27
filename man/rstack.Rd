@@ -9,12 +9,12 @@ rstack()
 Creates a new, empty, \code{rstack} ready for use.
 }
 \details{
-An rstack supports efficient insert into the top with \code{\link{insert_top}} (returning a version of
-the stack with the new element), \code{\link{peek_top}} (returing the data stored at the top of the stack), and
-\code{\link{without_top}} (returning a version with the top element removed).
+An rstack supports efficient insert into the top with \code{insert_top} (returning a version of
+the stack with the new element), \code{peek_top} (returing the data stored at the top of the stack), and
+\code{without_top} (returning a version with the top element removed).
 
 Other handy functions
-insclude \code{\link{as.list}} and \code{\link{as.data.frame}} (the latter of which requires that
+insclude \code{as.list} and \code{as.data.frame} (the latter of which requires that
 all elements can be appended to become rows of a data frame in a reasonable manner). Operations
 are amortized O(1).
 

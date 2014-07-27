@@ -3,10 +3,10 @@
 \alias{rev.rstack}
 \title{Reverse an \code{rstack}}
 \usage{
-\method{rev}{rstack}(s)
+\method{rev}{rstack}(x)
 }
 \arguments{
-\item{s}{The stack to reverse}
+\item{x}{The stack to reverse}
 }
 \value{
 A reversed version fo the stack

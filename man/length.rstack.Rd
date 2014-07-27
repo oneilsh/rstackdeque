@@ -3,10 +3,10 @@
 \alias{length.rstack}
 \title{Default method for \code{length} on an rstack.}
 \usage{
-\method{length}{rstack}(s)
+\method{length}{rstack}(x)
 }
 \arguments{
-\item{s}{The stack to get the length of}
+\item{x}{The stack to get the length of}
 }
 \value{
 A vector of length 1, which the number of elements of the stack.

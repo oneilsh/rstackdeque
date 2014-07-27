@@ -3,10 +3,12 @@
 \alias{print.rstack}
 \title{Default print method for an rstack}
 \usage{
-\method{print}{rstack}(s)
+\method{print}{rstack}(x, ...)
 }
 \arguments{
-\item{s}{The stack to print}
+\item{x}{The stack to print}
+
+\item{...}{Arguments to be passed to or from other methods (ignored)}
 }
 \description{
 Prints the top of an rstack, up to the first 6 elements.

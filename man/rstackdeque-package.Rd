@@ -3,12 +3,13 @@
 \alias{rstackdeque}
 \docType{package}
 \title{
-What the package does (short line)
-~~ package title ~~
+Persistent, fast amortized stack and deque (double-ended queue) data structures for R.
 }
 \description{
-More about what it does (maybe more than one line)
-~~ A concise (1-5 lines) description of the package ~~
+Provides stacks and deques for R. Insertion/removal are functional (insertion and
+removals are side-effect free and returned modified versions) and generally 
+O(1) amortized. Includes some convenient helpers such as \code{as.data.frame}
+and \code{as.list}.
 }
 \details{
 \tabular{ll}{
@@ -18,25 +19,38 @@ Version: \tab 1.0\cr
 Date: \tab 2014-07-27\cr
 License: \tab What license is it under?\cr
 }
-~~ An overview of how to use the package, including the most important ~~
-~~ functions ~~
+Stack and deque data structures for R: rstack() and
+rdeque(). For efficiency, these structures support limited access; for
+stacks: insert_top(), peek_top(), and without_top() (the latter returning a
+version of the stack without the top element); for deques: insert_front(),
+peek_front(), and without_front() (the latter returning a version of the
+deque without the front element), as well as corresponding methods
+insert_back(), peek_back(), and without_back(). Both types also support
+O(N) conversion to lists with, as.list(), and for convenience
+as.data.frame(), which requires that all element have the same length() and
+non-contradictory names().
+
+Stacks are implemented as linked-lists via environments, with references behind-the-scenes
+for O(1) time. Deques are implemented as a pair of stacks, as in the first chapter of [1], with the 
+modification that rebalancing creates a copy to preserve efficiency for old versions
+at the cost of using O(N) memory for the new version.
 }
 \author{
-Who wrote it
-
-Maintainer: Who to complain to <yourfault@somewhere.net>
-~~ The author and/or maintainer of the package ~~
+Shawn T. O'Neil <shawn.oneil@cgrb.oregonstate.edu>
 }
 \references{
-~~ Literature or other references for background information ~~
+
+[1] \emph{Purely Functional Data Structures}, Okasaki, C. 1999. Cambridge University Press.
+
 }
-~~ Optionally other standard keywords, one per line, from file KEYWORDS ~~
-~~ in the R documentation directory ~~
+
 \keyword{ package }
 \seealso{
-~~ Optional links to other man pages, e.g. ~~
-~~ \code{\link[<pkg>:<pkg>-package]{<pkg>}} ~~
+The \code{hash} package on CRAN, which provides hash-tables for R.
+
+\code{http://cran.r-project.org/web/packages/hash/hash.pdf}
 }
 \examples{
-~~ simple examples of the most important functions ~~
+s <- rstack()
+s <- insert_top(s, "a")
 }

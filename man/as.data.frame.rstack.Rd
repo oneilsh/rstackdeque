@@ -3,10 +3,16 @@
 \alias{as.data.frame.rstack}
 \title{Convert an \code{rstack} to a \code{data.frame}.}
 \usage{
-\method{as.data.frame}{rstack}(s)
+\method{as.data.frame}{rstack}(x, row.names = NULL, optional = FALSE, ...)
 }
 \arguments{
-\item{s}{The stack to convert}
+\item{x}{The stack to convert}
+
+\item{row.names}{Passed on to as.data.frame before final conversion}
+
+\item{optional}{Passed onto as.data.frame before final conversion}
+
+\item{...}{Passed onto as.data.frame before final conversion}
 }
 \value{
 A data frame with the first row the previous top of the stack.

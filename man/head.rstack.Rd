@@ -3,10 +3,12 @@
 \alias{head.rstack}
 \title{Return the top n elements of a stack as a stack}
 \usage{
-\method{head}{rstack}(s, n = 6L)
+\method{head}{rstack}(x, n = 6L, ...)
 }
 \arguments{
-\item{s}{The stack to get the head of}
+\item{x}{The stack to get the head of}
+
+\item{...}{Arguments to be passed to or from other methods (ignored)}
 
 \item{n}{The number of elements to get}
 }

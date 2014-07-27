@@ -3,10 +3,12 @@
 \alias{as.list.rstack}
 \title{Conversion of an \code{rstack} to a \code{list}}
 \usage{
-\method{as.list}{rstack}(s)
+\method{as.list}{rstack}(x, ...)
 }
 \arguments{
-\item{s}{The stack to convert}
+\item{x}{The stack to convert}
+
+\item{...}{Additional arguments passed to as.list after initial conversion to list.}
 }
 \value{
 A list
