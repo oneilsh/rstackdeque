@@ -1,8 +1,3 @@
-
-
-
-## TODO: check for warnings on trying to remove from an empty queue or stack
-
 #' @title
 #' Create a new rstacknode with a given object
 #' 
@@ -103,11 +98,14 @@ is_empty.rstack <- function(d) {
 print.rstack <- function(x, ...) {
   s <- x
   cat(paste("An rstack with ", length(s), " elements. \n"))
-  if(length(s) > 6) {
-    cat("Top of the stack:\n")
-    str(as.list(head(s, 6)), comp.str = " ", no.list = T)
-  } else {
-    str(as.list(head(s, length(s))), comp.str = "", no.list = T)
+  if(length(s) > 0) {
+    if(length(s) > 6) {
+      cat("Top of the stack:\n")
+      str(as.list(head(s, 6)), comp.str = " ", no.list = T)
+      cat("    ...")
+    } else {
+      str(as.list(head(s, length(s))), comp.str = "", no.list = T)
+    }
   }
 }
 
@@ -182,7 +180,7 @@ insert_top.rstack <- function(s, e) {
 #' @rdname peek_top
 peek_top.rstack <- function(s) {
   if(is.null(s$head)) {
-    return(NA)
+    return(NULL)
   } else {
     return(s$head$data)
   }
@@ -279,6 +277,9 @@ rev.rstack <- function(x) {
 #' @seealso \code{without_top}
 #' @rdname without_top
 without_top.rstack <- function(s, n = 1) {
+  if(length(s) < 1) {
+    stop("Cannot run without_top() on an empty rstack. Check with is_empty() first.")
+  } 
   newstack <- rstack()
   node <- s$head
   for(i in seq(1,n)) {

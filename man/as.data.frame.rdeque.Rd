@@ -28,7 +28,6 @@ names do not conflict (e.g., same column names where used). This is accomplished
 where the front element becomes the first element of the list and the back element becomes the last of the list.
 }
 \examples{
-require(rstackdeque)
 d <- rdeque()
 d <- insert_front(d, data.frame(names = c("Bob", "Joe"), ages = c(25, 18)))
 d <- insert_back(d, data.frame(names = c("Mary", "Kate", "Ashley"), ages = c(27, 26, 21)))

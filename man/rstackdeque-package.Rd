@@ -51,6 +51,50 @@ The \code{hash} package on CRAN, which provides hash-tables for R.
 \code{http://cran.r-project.org/web/packages/hash/hash.pdf}
 }
 \examples{
+## Basic stack operations
 s <- rstack()
-s <- insert_top(s, "a")
+s <- insert_top(s, "A")
+s <- insert_top(s, "B")
+print(s)               ## B and A
+
+s2 <- without_top(s)
+print(s2)              ## just A
+print(s)               ## still B and A
+print(peek_top(s))     ## B
+
+## Basic deque operations
+d <- rdeque()
+d <- insert_front(d, "A")
+d <- insert_front(d, "B")
+d <- insert_back(d, "C")
+d <- insert_back(d, "D")
+print(d)               ## B A C and D
+
+d2 <- without_back(d)
+print(d2)              ## B A C
+prind(d)               ## still B A C and D
+
+## To and from lists:
+e <- as.rstack(1:20000)
+print(e)               ## stack of 20000
+elist <- as.list(e)    ## list of 20000
+
+
+## Converting a stack or deque to dataframe, built row-by-row
+require("dplyr")
+s <- rstack()
+for(i in 1:10000) {
+ if(runif(1,0,1) < 0.5) {
+   s <- s \%>\% insert_top(data.frame(i = i, type = "sqrt", val = sqrt(i)))
+ } else {
+   s <- s \%>\% insert_top(data.frame(i = i, type = "log", val = log(i)))
+ }
+ if(i \%\% 100 == 0) {
+   print(i/10000)
+ }
 }
+print(head(as.data.frame(s)))
+
+
+} % end examples
+

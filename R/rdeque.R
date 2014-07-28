@@ -8,6 +8,18 @@
 ## Github test...
 
 
+
+
+
+
+
+
+
+############# METHODS
+
+
+
+
 #' @title Create a new rdeque
 #' 
 #' @description Creates a new, empty, \code{rdeque} ready for use.
@@ -24,7 +36,6 @@
 #' all elements can be appended to become rows of a data frame in a reasonable manner). Most operations
 #' are amortized O(1) (so long as we assume the cost of removal is charged to the new variable).
 #' 
-
 #' 
 #' @export
 #' @examples
@@ -138,12 +149,18 @@ as.list.rdeque <- function(x, ...) {
 print.rdeque <- function(x, ...) {
   d <- x
   cat(paste("A deque with ", length(d), " elements.\n"))
-  cat(paste("Front to back: \n"))
-  str(as.list(head(d$l, 6)), comp.str = "$", no.list = T)
-  if(length(d) > 12) {
-    cat("     ...\n")
+  if(length(d) > 0) {
+    cat(paste("Front to back: \n"))
   }
-  str(rev(as.list(head(d$r, 6))), comp.str = "$", no.list = T)
+  if(length(d$l) > 0) {
+    str(as.list(head(d$l, 6)), comp.str = "$", no.list = T)
+  }
+  if(length(d) > 12) {
+    cat("    ...\n")
+  }
+  if(length(d$r) > 0) {
+    str(rev(as.list(head(d$r, 6))), comp.str = "$", no.list = T)
+  }
 }
 
 #' @title Convert an \code{rdeque} to a \code{data.frame}.
@@ -225,6 +242,9 @@ fix.rdeque <- function(d) {
 #' @seealso \code{without_front}
 #' @rdname without_front
 without_front.rdeque <- function(d, n = 1) {
+  if(length(d) < 1) {
+    stop("Sorry, cannot run without_front() on an rdeque that is empty. Check with is_empty() first.")
+  }
   if(n < 1) {
     return(d)
     ## if the length of l is 0, then r has only one element (invariant)
@@ -246,6 +266,9 @@ without_front.rdeque <- function(d, n = 1) {
 #' @seealso \code{without_front}
 #' @rdname without_back
 without_back.rdeque <- function(d, n = 1) {
+  if(length(d) < 1) {
+    stop("Sorry, cannot run without_back() on an rdeque that is empty. Check with is_empty() first.")
+  }
   if(n < 1) {
     return(d)
     ## if the length of r is 0, then l has only one element (invariant)
@@ -266,14 +289,26 @@ without_back.rdeque <- function(d, n = 1) {
 #' @seealso \code{peek_front}
 #' @rdname peek_front
 peek_front.rdeque <- function(d) {
-  return(peek_top(d$l))
+  if(length(d) < 1) {return(NULL)}
+  if(length(d$l) > 0) {
+    return(peek_top(d$l))
+    # invariant: if l is empty but the deque is not, r has only one element
+  } else {
+    return(peek_top(d$r))
+  }
 }
 
 #' @title Default method for \code{rdeque} \code{peek_back}
 #' @seealso \code{peek_back}
 #' @rdname peek_back
 peek_back.rdeque <- function(d) {
-  return(peek_top(d$r))
+  if(length(d) < 1) {return(NULL)}
+  if(length(d$r) > 0) {
+    return(peek_top(d$r))
+    # invariant: if r is empty but the deque is not, l has only one element
+  } else {
+    return(peek_top(d$l))
+  }
 }
 
 
@@ -300,6 +335,14 @@ insert_back.rdeque <- function(d, e) {
   newd <- fix(newd)
   return(newd)
 }
+
+
+
+
+
+
+
+
 
 
 #' @title Internal fix method for deques
@@ -456,6 +499,8 @@ peek_back <- function(d) {UseMethod("peek_back", d)}
 #' print(d)
 insert_front <- function(d, e) {UseMethod("insert_front", d)}
 
+
+
 #' @title Insert an element into the back of an \code{rdeque}
 #' 
 #' @description Returns a version of the deque with the new element in the back position.
@@ -475,5 +520,9 @@ insert_front <- function(d, e) {UseMethod("insert_front", d)}
 #' print(d2)
 #' print(d)
 insert_back <- function(d, e) {UseMethod("insert_back", d)}
+
+
+
+
 
 

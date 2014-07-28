@@ -24,9 +24,37 @@ test_that("insert_front and without_front work as expected", {
   ## s still ok?
   expect_that(length(s), equals(3))
   expect_that(as.list(s), is_identical_to(as.list(c("a", "b", "c"))) )
+
+  s <- without_front(s)
+  s <- without_front(s)
+  s <- without_front(s)
+  expect_that(is_empty(s), equals(TRUE))
 })
 
 
+test_that("peek_front and peek_back work for nearly-empty deques", {
+  d <- rdeque()
+  d <- insert_front(d, "a")
+  expect_that(peek_front(d), equals("a"))
+  expect_that(peek_back(d), equals("a"))
+
+  d2 <- rdeque()
+  d2 <- insert_front(d2, "a")
+  expect_that(peek_front(d2), equals("a"))
+  expect_that(peek_back(d2), equals("a"))
+  
+  d3 <- rdeque()
+  d3 <- insert_front(d3, "a")
+  d3 <- insert_front(d3, "b")
+  expect_that(peek_front(d3), equals("b"))
+  expect_that(peek_back(d3), equals("a"))
+
+  d4 <- rdeque()
+  d4 <- insert_back(d4, "a")
+  d4 <- insert_back(d4, "b")
+  expect_that(peek_back(d4), equals("b"))
+  expect_that(peek_front(d4), equals("a"))
+})
 
 test_that("insert_back and without_back work as expected", {
   s <- rdeque()
@@ -53,4 +81,10 @@ test_that("insert_back and without_back work as expected", {
   ## s still ok?
   expect_that(length(s), equals(3))
   expect_that(as.list(s), is_identical_to(as.list(c("c", "b", "a"))) )
+  
+  s <- without_back(s)
+  s <- without_back(s)
+  s <- without_back(s)
+  expect_that(is_empty(s), equals(TRUE))
+  
 })
