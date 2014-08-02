@@ -11,10 +11,6 @@
 
 
 
-
-
-
-
 ############# METHODS
 
 
@@ -37,6 +33,7 @@
 #' are amortized O(1) (so long as we assume the cost of removal is charged to the new variable).
 #' 
 #' 
+#' @name rdeque
 #' @export
 #' @examples
 #' d <- rdeque()
@@ -46,8 +43,8 @@
 #' d <- insert_back(d, "d")
 #' print(d)
 #' 
-#' df <- without_back(d)
-#' print(df)
+#' d2 <- without_back(d)
+#' print(d2)
 #' print(d)
 #' 
 #' b <- peek_front(d)
@@ -64,6 +61,7 @@ rdeque <- function() {
 #' @title Default method for checking emptyness of an rdeque
 #' @seealso \code{is_empty}
 #' @rdname is_empty
+#' @name is_empty
 is_empty.rdeque <- function(d) {
   if(length(d) < 1) {
     return(TRUE)
@@ -76,6 +74,7 @@ is_empty.rdeque <- function(d) {
 #' @title Default method for converting to an rdeque
 #' @seealso \code{as.rdeque}
 #' @rdname as.rdeque
+#' @name as.rdeque
 as.rdeque.default <- function(x) {
   input <- x
   newd <- rdeque()
@@ -106,6 +105,7 @@ as.rdeque.default <- function(x) {
 #' @param x The deque to get the length of
 #' @return A vector of length 1, which the number of elements of the deque
 #' @export
+#' @name length
 #' @examples
 #' d <- rdeque()
 #' d <- insert_front(d, "a")
@@ -127,6 +127,7 @@ length.rdeque <- function(x) {
 #' @param ... Additional parameters sent to as.list after initial conversion.
 #' @return A list
 #' @export
+#' @name as.list
 #' @examples
 #' d <- rdeque()
 #' d <- insert_front(d, "a")
@@ -145,6 +146,7 @@ as.list.rdeque <- function(x, ...) {
 #' @param x The deque to print
 #' @param ... Arguments passed to or from other functions (unused)
 #' @export
+#' @name print
 #' 
 print.rdeque <- function(x, ...) {
   d <- x
@@ -178,6 +180,7 @@ print.rdeque <- function(x, ...) {
 #' @param ... Passed onto as.data.frame before final conversion
 #' @return A data frame with the first row(s) the previous front of the deque, last row(s) previous back of the deque.
 #' @export
+#' @name as.data.frame
 #' @examples 
 #' d <- rdeque()
 #' d <- insert_front(d, data.frame(names = c("Bob", "Joe"), ages = c(25, 18)))
@@ -221,6 +224,7 @@ as.data.frame.rdeque <- function(x, row.names = NULL, optional = FALSE, ...) {
 
 #' @title Internal method for maintaining deque-i-ness
 #' @rdname fix
+#' @name fix
 fix.rdeque <- function(d) {
   if(length(d) < 2 | (length(d$l) > 6 & length(d$r) > 6)) {
     return(d)
@@ -241,6 +245,7 @@ fix.rdeque <- function(d) {
 #' @title Default method for \code{rdeque} \code{without_front}
 #' @seealso \code{without_front}
 #' @rdname without_front
+#' @name without_front
 without_front.rdeque <- function(d, n = 1) {
   if(length(d) < 1) {
     stop("Sorry, cannot run without_front() on an rdeque that is empty. Check with is_empty() first.")
@@ -265,6 +270,7 @@ without_front.rdeque <- function(d, n = 1) {
 #' @title Default method for \code{rdeque} \code{without_front}
 #' @seealso \code{without_front}
 #' @rdname without_back
+#' @name without_back
 without_back.rdeque <- function(d, n = 1) {
   if(length(d) < 1) {
     stop("Sorry, cannot run without_back() on an rdeque that is empty. Check with is_empty() first.")
@@ -288,6 +294,7 @@ without_back.rdeque <- function(d, n = 1) {
 #' @title Default method for \code{rdeque} \code{peek_front}
 #' @seealso \code{peek_front}
 #' @rdname peek_front
+#' @name peek_front
 peek_front.rdeque <- function(d) {
   if(length(d) < 1) {return(NULL)}
   if(length(d$l) > 0) {
@@ -298,9 +305,11 @@ peek_front.rdeque <- function(d) {
   }
 }
 
+
 #' @title Default method for \code{rdeque} \code{peek_back}
 #' @seealso \code{peek_back}
 #' @rdname peek_back
+#' @name peek_back
 peek_back.rdeque <- function(d) {
   if(length(d) < 1) {return(NULL)}
   if(length(d$r) > 0) {
@@ -316,6 +325,7 @@ peek_back.rdeque <- function(d) {
 #' @title Default method for \code{rdeque} \code{insert_front}
 #' @seealso \code{insert_front}
 #' @rdname insert_front
+#' @name insert_front
 insert_front.rdeque <- function(d, e) {
   newd <- rdeque()
   newd$l <- insert_top(d$l, e)
@@ -328,6 +338,7 @@ insert_front.rdeque <- function(d, e) {
 #' @title Default method for \code{rdeque} \code{insert_back}
 #' @seealso \code{insert_back}
 #' @rdname insert_back
+#' @name insert_back
 insert_back.rdeque <- function(d, e) {
   newd <- rdeque()
   newd$r <- insert_top(d$r, e)
@@ -368,7 +379,7 @@ fix <- function(d) {UseMethod("fix", d)}
 #' columns, rather than a deque of rows.
 #' @param x Input to convert to a deque
 #' @return A new rdeque
-#' 
+#' @name as.rdeque
 #' @export
 #' @examples
 #' d <- as.rdeque(1:20)
@@ -399,6 +410,7 @@ as.rdeque <- function(x) {UseMethod("as.rdeque", x)}
 #' @param n The number of elements to remove
 #' @return A version of the deque with \code{n} elements removed.
 #' @export
+#' @name without_front
 #' @examples
 #' d <- rdeque()
 #' d <- insert_front(d, "a")
@@ -427,6 +439,7 @@ without_front <- function(d) {UseMethod("without_front", d)}
 #' @param n The number of elements to remove
 #' @return A version of the deque with \code{n} elements removed.
 #' @export
+#' @name without_back
 #' @examples
 #' d <- rdeque()
 #' d <- insert_front(d, "a")
@@ -451,6 +464,7 @@ without_back <- function(d) {UseMethod("without_back", d)}
 #' @details O(1) worst-case time.
 #' @param d The deque to look at.
 #' @return The data element.
+#' @name peek_front
 #' @examples
 #' d <- rstack()
 #' d <- insert_front(d, "a")
@@ -460,6 +474,11 @@ without_back <- function(d) {UseMethod("without_back", d)}
 #' print(d)
 peek_front <- function(d) {UseMethod("peek_front", d)}
 
+
+
+
+
+
 #' @title Return the data element at the back of the deque.
 #' 
 #' @description Simply returns the data element sitting at the back of the deque,
@@ -468,6 +487,7 @@ peek_front <- function(d) {UseMethod("peek_front", d)}
 #' @details O(1) worst-case time.
 #' @param d The deque to look at.
 #' @return The data element.
+#' @name peek_back
 #' @examples
 #' d <- rstack()
 #' d <- insert_front(d, "a")
@@ -487,6 +507,7 @@ peek_back <- function(d) {UseMethod("peek_back", d)}
 #' @param d The \code{rdeque} to insert onto.
 #' @param e The element to insert.
 #' @return Modified version of the deque
+#' @name insert_front
 #' @export
 #' @examples
 #' d <- rdeque()
@@ -509,6 +530,7 @@ insert_front <- function(d, e) {UseMethod("insert_front", d)}
 #' @param d The \code{rdeque} to insert onto.
 #' @param e The element to insert.
 #' @return Modified version of the deque
+#' @name insert_back
 #' @export
 #' @examples
 #' d <- rdeque()

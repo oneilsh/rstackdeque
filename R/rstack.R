@@ -4,7 +4,7 @@
 #' @description
 #' For internal use by \code{rstack}s and \code{rdeque}s. An environment with no parent,
 #' reference for the data and the next node.
-#' 
+#' @name rstacknode
 #' @param data Data to reference with this node
 #' @return Environment
 #' 
@@ -35,7 +35,7 @@ rstacknode <- function(data) {
 #' to the newly created stack), at the cost of memory usage. However, this means that if stacks
 #' are used in a non-persistent way, e.g. \code{s <- rev(s)}, then the garbage collector is free to clean
 #' up old versions of the data.
-#' 
+#' @name rstack
 #' @export
 #' @examples
 #' s <- rstack()
@@ -61,6 +61,7 @@ rstack <- function() {
 #' @title Default method for converting to an rstack
 #' @seealso \code{as.rstack}
 #' @rdname as.rstack
+#' @name as.rstack
 as.rstack.default <- function(x) {
   input <- x
   lastnode <- NULL
@@ -79,6 +80,7 @@ as.rstack.default <- function(x) {
 #' @title Default method for checking emptyness of an rstack
 #' @seealso \code{is_empty}
 #' @rdname is_empty
+#' @name is_empty
 is_empty.rstack <- function(d) {
   if(length(d) < 1) {
     return(TRUE)
@@ -91,6 +93,7 @@ is_empty.rstack <- function(d) {
 #' 
 #' @description Prints the top of an rstack, up to the first 6 elements.
 #' 
+#' @name print
 #' @param x The stack to print
 #' @param ... Arguments to be passed to or from other methods (ignored)
 #' @export
@@ -125,6 +128,7 @@ print.rstack <- function(x, ...) {
 #' @param ... Passed onto as.data.frame before final conversion
 #' @return A data frame with the first row the previous top of the stack.
 #' @export
+#' @name as.data.frame
 #' @examples 
 #' s <- rstack()
 #' s <- insert_top(s, data.frame(names = c("Bob", "Joe"), ages = c(25, 18)))
@@ -165,6 +169,7 @@ as.data.frame.rstack <- function(x, row.names = NULL, optional = FALSE, ...) {
 #' @title Default method for \code{insert_top} for rstack.
 #' @seealso \code{insert_top}
 #' @rdname insert_top
+#' @name insert_top
 insert_top.rstack <- function(s, e) {
   newnode <- rstacknode(e)
   newstack <- rstack()
@@ -178,12 +183,25 @@ insert_top.rstack <- function(s, e) {
 #' @title Default method for \code{peek_top} for rstacks.
 #' @seealso \code{peek_top}
 #' @rdname peek_top
+#' @name peek_top
 peek_top.rstack <- function(s) {
   if(is.null(s$head)) {
-    return(NULL)
+    stop("Sorry, you can't peek at the top of an empty stack. Try checking with empty() first.")
   } else {
     return(s$head$data)
   }
+}
+
+#' @title Default method for modifying the top of an rstack.
+#' @seealso \code{peek_top<-}
+#' @rdname peek_top<-
+#' @name peek_top<-
+`peek_top<-.rstack` <- function(s, value) {
+  if(length(s) < 1) {
+    stop("Sorry, you can't assign to the top of an empty stack. Try checking with empty() first.")
+  }
+  s$head$data <- value
+  return(s)
 }
 
 #' @title Default method for \code{length} on an rstack.
@@ -194,6 +212,7 @@ peek_top.rstack <- function(s) {
 #' @param x The stack to get the length of
 #' @return A vector of length 1, which the number of elements of the stack.
 #' @export
+#' @name length
 #' @examples
 #' s <- rstack()
 #' s <- insert_top(s, "a")
@@ -214,6 +233,7 @@ length.rstack <- function(x) {
 #' @param x The stack to convert
 #' @param ... Additional arguments passed to as.list after initial conversion to list.
 #' @return A list
+#' @name as.list
 #' @export
 #' @examples
 #' s <- rstack()
@@ -247,6 +267,7 @@ as.list.rstack <- function(x, ...) {
 #' will be free to clean up the original data if it is no longer usable.
 #' @param x The stack to reverse
 #' @return A reversed version fo the stack
+#' @name rev
 #' @export
 #' @examples
 #' s <- rstack()
@@ -276,6 +297,7 @@ rev.rstack <- function(x) {
 #' @title Default method for \code{rstack} \code{without_top}
 #' @seealso \code{without_top}
 #' @rdname without_top
+#' @name without_top
 without_top.rstack <- function(s, n = 1) {
   if(length(s) < 1) {
     stop("Cannot run without_top() on an empty rstack. Check with is_empty() first.")
@@ -301,6 +323,7 @@ without_top.rstack <- function(s, n = 1) {
 #' @param ... Arguments to be passed to or from other methods (ignored)
 #' @param n The number of elements to get
 #' @export
+#' @name head
 #' @examples 
 #' s <- rstack()
 #' s <- insert_top(s, "a")
@@ -336,7 +359,7 @@ head.rstack <- function(x, n = 6L, ...) {
 #' columns, rather than a stack of rows.
 #' @param x Input to convert to a stack
 #' @return A new rstack
-#' 
+#' @name as.rstack
 #' @export
 #' @examples
 #' s <- as.rstack(1:20)
@@ -360,6 +383,7 @@ as.rstack <- function(x) {UseMethod("as.rstack", x)}
 #' @param e The element to insert.
 #' @return Modified version of the stack.
 #' @export
+#' @name insert_top
 #' @examples
 #' s <- rstack()
 #' s <- insert_top(s, "a")
@@ -378,6 +402,7 @@ insert_top <- function(s, e) { UseMethod("insert_top", s) }
 #' @param d The \code{rstack} or \code{rdeque} to check
 #' @return 1-element logical vector
 #' @export
+#' @name is_empty
 #' @examples
 #' s <- rstack()
 #' print(is_empty(s))        ## TRUE
@@ -393,6 +418,7 @@ is_empty <- function(d) {UseMethod("is_empty", d)}
 #' @details O(1) worst-case time.
 #' @param s The stack to look at
 #' @return The data element.
+#' @name peek_top
 #' @examples
 #' s <- rstack()
 #' s <- insert_top(s, "a")
@@ -400,7 +426,37 @@ is_empty <- function(d) {UseMethod("is_empty", d)}
 #' e <- peek_top(s)
 #' print(e)
 #' print(s)
+#' 
+#' ## Assigning to the top data element with peek_top:
+#' s <- rstack()
+#' s <- insert_top(data.frame(a = 1, b = 1))
+#' s <- insert_top(data.frame(a = 1, b = 1))
+#' 
+#' peek_top(s)$a <- 100
+#' print(s)
+#' 
+#' peek_top(s) <- data.frame(a = 100, b = 100)
 peek_top <- function(s) { UseMethod("peek_top", s) }
+
+#' @title Assign to/modify the top of a stack.
+#' 
+#' @description Allows modification access to the top of a stack.
+#' 
+#' @details O(1) worst case time. Throws an error if the stack is empty.
+#' @param s The stack to modify the first element of
+#' @param value The value to assign to the top data element.
+#' @name peek_top<-
+#' @examples
+#' s <- rstack()
+#' s <- insert_top(data.frame(a = 1, b = 1))
+#' s <- insert_top(data.frame(a = 1, b = 1))
+#' 
+#' peek_top(s)$a <- 100
+#' print(s)
+#' 
+#' peek_top(s) <- data.frame(a = 100, b = 100)
+`peek_top<-` <- function(s, value) { UseMethod("peek_top<-", s) }
+
 
 #' @title Return version of the stack without the top
 #' 
@@ -413,6 +469,7 @@ peek_top <- function(s) { UseMethod("peek_top", s) }
 #' @param s The stack to remove elements from
 #' @param n The number of elements to remove
 #' @return A version of the stack with \code{n} elements removed.
+#' @name without_top
 #' @export
 #' @examples
 #' s <- rstack()
