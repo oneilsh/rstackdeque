@@ -6,19 +6,18 @@ Version: 1.0
 Date: 2014-07-27
 Author: Shawn T. O'Neil
 Maintainer: Shawn T. O'Neil <shawn.oneil@cgrb.oregonstate.edu>
-Description: Provides stack and deque data structures for R: rstack() and
-    rdeque(). For efficiency, these structures support limited access; for
-    stacks: insert_top(), peek_top(), and without_top() (the latter returning a
-    version of the stack without the top element); for deques: insert_front(),
-    peek_front(), and without_front() (the latter returning a version of the
-    deque without the front element), as well as corresponding methods
-    insert_back(), peek_back(), and without_back(). Both types also support
-    O(N) conversion to lists with, as.list(), and for convenience
-    as.data.frame(), which requires that all element have the same length() and
-    non-contradictory names().
+Description: Provides stack, deque and queue data structures for R: rstack(),
+    rdeque() and rpqueue(). For efficiency, these structures support limited
+    access; for stacks: insert_top(), peek_top(), and without_top() (the latter
+    returning a version of the stack without the top element); for queues:
+    insert_front(), peek_front(), and without_front() (the latter returning a
+    version of the deque without the front element), and for dequeues
+    additional corresponding methods insert_back(), peek_back(), and
+    without_back(). All types also support O(N) conversion to lists with
+    as.list(), and to data frames with as.data.frame(), which requires that all
+    element have the same length and non-contradictory names.
 License: MIT + file LICENSE
 Suggests:
     testthat,
-    dplyr
 Depends:
     utils

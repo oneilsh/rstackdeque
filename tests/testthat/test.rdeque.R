@@ -28,7 +28,7 @@ test_that("insert_front and without_front work as expected", {
   s <- without_front(s)
   s <- without_front(s)
   s <- without_front(s)
-  expect_that(is_empty(s), equals(TRUE))
+  expect_that(empty(s), equals(TRUE))
 })
 
 
@@ -85,6 +85,6 @@ test_that("insert_back and without_back work as expected", {
   s <- without_back(s)
   s <- without_back(s)
   s <- without_back(s)
-  expect_that(is_empty(s), equals(TRUE))
+  expect_that(empty(s), equals(TRUE))
   
 })
