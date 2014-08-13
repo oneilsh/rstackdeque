@@ -1,5 +1,9 @@
-Rstackdeque: Persistent queues and stacks for R
-================================================
+Rstackdeque
+========================================================
+
+Persistent stacks, deques, and queues for R
+---------------------------------------------
+
 
 More info to come as this package is reviewed.
 
