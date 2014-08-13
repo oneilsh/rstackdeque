@@ -15,4 +15,20 @@ Environment
 For internal use by \code{rstack}s and \code{rdeque}s. An environment with no parent,
 reference for the data and the next node.
 }
+\details{
+A class providing an O(1) worst-case time for stacks. Exported functions:
+
+rstack()
+as.rstack(input)
+empty(s)
+print(s)
+as.data.frame(s)
+peek_top(s)
+length(s)
+insert_top(s, element)
+without_top(s)
+as.list(s)
+rev(s)
+head(s, n = 6)
+}
 

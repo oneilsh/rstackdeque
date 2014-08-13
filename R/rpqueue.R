@@ -55,9 +55,9 @@
 #' @export
 rpqueue <- function() {
   newq <- new.env(parent = emptyenv())
-  newq$lhat <- lazylist()
-  newq$l <- lazylist()
-  newq$r <- lazylist()
+  newq$lhat <- rstack()
+  newq$l <- rstack()
+  newq$r <- rstack()
   class(newq) <- "rpqueue"
   return(newq)
 }
@@ -160,36 +160,7 @@ as.rpqueue <- function(x) {UseMethod("as.rpqueue", x)}
 #' print(qlist)
 #' @export
 as.list.rpqueue <- function(x, ...) {
-  if(length(x) < 1) {return(list())}
-  frontlist <- vector("list", length(x$l))
-  index <- 1
-  xl <- x$l
-  data <- xl$head
-  frontlist[[index]] <- data
-  tail <- xl$tail
-  while(!is.null(tail)) {
-    index <- index + 1
-    xl <- tail()
-    data <- xl$head
-    frontlist[[index]] <- data
-    tail <- xl$tail
-  }
-  
-  revlist <- vector("list", length(x$r))
-  index <- 1
-  xr <- x$r
-  data <- xr$head
-  revlist[[index]] <- data
-  tail <- xr$tail
-  while(!is.null(tail)) {
-    index <- index + 1
-    xr <- tail()
-    data <- xr$head
-    revlist[[index]] <- data
-    tail <- xr$tail
-  } 
-  
-  return(c(frontlist,rev(revlist)))
+  return(as.list(c(as.list(x$l), rev(as.list(x$r))), ...))
 }
 
 #' @title Convert an \code{rpqueue} to a \code{data.frame}.
@@ -258,7 +229,12 @@ peek_front.rpqueue <- function(x) {
   if(length(x) < 1) {
     stop("Sorry, can't peek_front into a queue that is empty. Try checking with empty() first.")
   }
-  return(x$l$head)
+  if(length(x$l) > 0) {
+    return(peek_top(x$l))
+    # invariant: if l is empty but the deque is not, r has only one element
+  } else {
+    return(peek_top(x$r))
+  }
 }
 peek_front <- function(x) {UseMethod("peek_front", x)}
 
@@ -291,16 +267,20 @@ rotate.rpqueue <- function(rpqueue, acclazylist) {
   }
   if(length(rpqueue$l) == 0) {
     newq <- rpqueue()
-    newq$l <- lazylist()
-    newq$l$head <- peek_top(rpqueue$r)
+    newq$l <- rstack()
+
+    newq$l$head <- rstacknode(peek_top(rpqueue$r))
+    newq$l$head$nextnode <- acclazylist$head  #ie, tail is the lazylist
+    #newq$l$head <- peek_top(rpqueue$r)
+    #newq$l$tail <- function() {return(acclazylist)}
     newq$l$len <- length(rpqueue) + length(acclazylist)
-    newq$l$tail <- function() {return(acclazylist)}
-    newq$r <- lazylist()
+    newq$r <- rstack()
     return(newq)
   } else {
     newq <- rpqueue()
-    newq$l <- lazylist()
-    newq$l$head <- peek_top(rpqueue$l)
+    newq$l <- rstack()
+    newq$l$head <- rstacknode(peek_top(rpqueue$l))
+    #newq$l$head <- peek_top(rpqueue$l)
     newq$l$len <- length(rpqueue) + length(acclazylist)
     
     without_heads <- rpqueue()
@@ -308,9 +288,11 @@ rotate.rpqueue <- function(rpqueue, acclazylist) {
     without_heads$r <- without_top(rpqueue$r)
     
     acc <- insert_top(acclazylist, peek_top(rpqueue$r))
-    newq$l$tail <- function() {return(rotate(without_heads, acc)$l)}
+    delayedAssign("nextnode", rotate(without_heads, acc)$l$head, assign.env = newq$l$head)
+    ###newq$l$head$nextnode <- rotate(without_heads, acc)$l$head 
+    #newq$l$tail <- function() {return(rotate(without_heads, acc)$l)}
     #newq$l$tail <- function() {return(rotate(without_heads, insert_top(acclazylist, peek_top(rpqueue$r)))$l)} # 3.6
-    newq$r <- lazylist()
+    newq$r <- rstack()
     return(newq)
   }
 }
@@ -343,11 +325,11 @@ makeequal.rpqueue <- function(rpqueue) {
     return(newq)
   } else {
     newq <- rpqueue()
-    acc <- lazylist()
+    acc <- rstack()
     resq <- rotate(rpqueue, acc)
     newq$l <- resq$l
     newq$lhat <- resq$l
-    newq$r <- lazylist()
+    newq$r <- rstack()
     return(newq)
   }
 }
@@ -382,54 +364,4 @@ without_front.rpqueue <- function(x) {
   return(makeequal(newq))
 }
 without_front <- function(x) {UseMethod("without_front", x)}
-
-
-
-#rpq <- rpqueue()
-#rpq <- insert_back(rpq, "A")
-#rpq <- insert_back(rpq, "B")
-#rpq <- insert_back(rpq, "C")
-#print(length(rpq))
-#rpq <- without_front(rpq)
-#print(length(rpq))
-
-
-
-require(rstackdeque)
-require(microbenchmark)
-require(ggplot2)
-
-results <- rstack()
-
-ns <- c(10)*1000
-times <- 10
-
-#################################
-## times an mix 2/3 insertion, 1/3 removal series into empty rpqueus
-mix_n_rpqueue <- function(index) {
-  n <- ns[[index]]
-  test_rpqueue <- rpqueue()
-  for(i in seq(1,n)) {
-    if(i%%3 == 0) {
-      test_rpqueue <- without_front(test_rpqueue)
-    } else {
-      test_rpqueue <- insert_back(test_rpqueue, i)
-    }
-    if(i %% 5000 == 0) {
-      print(i/n)
-    }
-  }
-}
-
-for(index in seq(1,length(ns))) {
-  print(paste(index, "rpqueue mix"))
-  gc()
-  res <- data.frame(time = microbenchmark(mix_n_rpqueue(index), times = times)$time/1000000000)
-  res$count <- ns[[index]]
-  res$struct <- "rpqueue"
-  res$test <- "mix"
-  results <- insert_top(results, res)
-}
-
-print(median(as.data.frame(results)$time))
 

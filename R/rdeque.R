@@ -316,7 +316,7 @@ peek_front.rdeque <- function(x) {
 
 #' @export
 peek_back.rdeque <- function(d) {
-  if(length(x) < 1) {
+  if(length(d) < 1) {
     stop("Sorry, can't peek_front into a queue that is empty. Try checking with empty() first.")
   }
   if(length(d$r) > 0) {

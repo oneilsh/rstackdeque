@@ -9,6 +9,23 @@ rdeque()
 Creates a new, empty, \code{rdeque} ready for use.
 }
 \details{
+O(1) amortized deque, but only when used semi-persistnetly. Exported functions:
+
+rdeque()
+empty(d)
+as.rdeque(input)
+length(d)
+as.list(d)
+print(d)
+as.data.frame(d)
+without_front(d)
+without_back(d)
+insert_front(d, element)
+insert_back(d, element)
+peek_front(d)
+peek_back(d)
+head()
+
 An rdeque supports efficient insert into the front and back with \code{insert_front} and
 \code{insert_back} (returning a version of
 the deque with the new element), peek into the front and back with \code{peek_front} and \code{peek_back}
@@ -19,7 +36,8 @@ the deque with the new element), peek into the front and back with \code{peek_fr
 Other handy functions
 include \code{as.list} and \code{as.data.frame} (the latter of which requires that
 all elements can be appended to become rows of a data frame in a reasonable manner). Most operations
-are amortized O(1) (so long as we assume the cost of removal is charged to the new variable).
+are amortized O(1), UNLESS previous versions of the structure are used heavily. In these cases, if you notice
+significant slowdown, consider using an rpqueue.
 }
 \examples{
 d <- rdeque()
@@ -29,8 +47,8 @@ d <- insert_back(d, "c")
 d <- insert_back(d, "d")
 print(d)
 
-df <- without_back(d)
-print(df)
+d2 <- without_back(d)
+print(d2)
 print(d)
 
 b <- peek_front(d)

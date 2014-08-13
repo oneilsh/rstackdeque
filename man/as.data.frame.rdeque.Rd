@@ -39,16 +39,15 @@ print(ddf)
 
 ## Building a deque in a loop, converting to a dataframe after the fact;
 ## sometimes adding to the front, sometimes to the back
-require("dplyr")
 d <- rdeque()
-for(i in 1:10000) {
+for(i in 1:1000) {
  if(runif(1,0,1) < 0.5) {
-   d <- d \%>\% insert_front(data.frame(i = i, type = "sqrt", val = sqrt(i)))
+   d <- insert_front(d, data.frame(i = i, type = "sqrt", val = sqrt(i)))
  } else {
-   d <- d \%>\% insert_back(data.frame(i = i, type = "log", val = log(i)))
+   d <- insert_back(d, data.frame(i = i, type = "log", val = log(i)))
  }
  if(i \%\% 100 == 0) {
-   print(i/10000)
+   print(i/1000)
  }
 }
 print(head(as.data.frame(d)))

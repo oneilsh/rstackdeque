@@ -38,16 +38,15 @@ print(sd)
 
 
 ## Building a stack in a loop, converting to a dataframe after the fact:
-require("dplyr")
 s <- rstack()
-for(i in 1:10000) {
+for(i in 1:1000) {
  if(runif(1,0,1) < 0.5) {
-   s <- s \%>\% insert_top(data.frame(i = i, type = "sqrt", val = sqrt(i)))
+   s <- insert_top(s, data.frame(i = i, type = "sqrt", val = sqrt(i)))
  } else {
-   s <- s \%>\% insert_top(data.frame(i = i, type = "log", val = log(i)))
+   s <- insert_top(s, data.frame(i = i, type = "log", val = log(i)))
  }
  if(i \%\% 100 == 0) {
-   print(i/10000)
+   print(i/1000)
  }
 }
 print(head(as.data.frame(s)))
