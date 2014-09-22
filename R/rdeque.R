@@ -254,7 +254,7 @@ as.data.frame.rdeque <- function(x, row.names = NULL, optional = FALSE, ...) {
 
 
 #' @export
-fix.rdeque <- function(d) {
+fixd.rdeque <- function(d) {
   if(length(d) < 2 | (length(d$l) > 6 & length(d$r) > 6)) {
     return(d)
   } else {
@@ -281,7 +281,7 @@ without_front.rdeque <- function(x) {
   newd$l <- x$l
   newd$r <- x$r
   newd$l <- without_top(newd$l)
-  newd <- fix(newd)
+  newd <- fixd(newd)
   return(newd)
 }
 
@@ -296,7 +296,7 @@ without_back.rdeque <- function(d) {
   newd$l <- d$l
   newd$r <- d$r
   newd$r <- without_top(newd$r)
-  newd <- fix(newd)
+  newd <- fixd(newd)
   return(newd)
 }
 
@@ -334,7 +334,7 @@ insert_front.rdeque <- function(d, e) {
   newd <- rdeque()
   newd$l <- insert_top(d$l, e)
   newd$r <- d$r
-  newd <- fix(newd)
+  newd <- fixd(newd)
   return(newd)
 }
 
@@ -344,7 +344,7 @@ insert_back.rdeque <- function(x, e) {
   newd <- rdeque()
   newd$r <- insert_top(x$r, e)
   newd$l <- x$l
-  newd <- fix(newd)
+  newd <- fixd(newd)
   return(newd)
 }
 
@@ -367,7 +367,7 @@ insert_back.rdeque <- function(x, e) {
 #' @param d The deque to fix
 #' @return The fixed, "balanced" deque
 #' @export
-fix <- function(d) {UseMethod("fix", d)}
+fixd <- function(d) {UseMethod("fixd", d)}
 
 
 #' @title Create an \code{rdeque} from a given input
