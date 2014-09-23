@@ -14,6 +14,7 @@
 #' peek_front(d)
 #' peek_back(d)
 #' head() 
+#' @import utils
 
 
 
