@@ -271,8 +271,6 @@ rotate.rpqueue <- function(rpqueue, acclazylist) {
 
     newq$l$head <- rstacknode(peek_top(rpqueue$r))
     newq$l$head$nextnode <- acclazylist$head  #ie, tail is the lazylist
-    #newq$l$head <- peek_top(rpqueue$r)
-    #newq$l$tail <- function() {return(acclazylist)}
     newq$l$len <- length(rpqueue) + length(acclazylist)
     newq$r <- rstack()
     return(newq)
@@ -280,7 +278,6 @@ rotate.rpqueue <- function(rpqueue, acclazylist) {
     newq <- rpqueue()
     newq$l <- rstack()
     newq$l$head <- rstacknode(peek_top(rpqueue$l))
-    #newq$l$head <- peek_top(rpqueue$l)
     newq$l$len <- length(rpqueue) + length(acclazylist)
     
     without_heads <- rpqueue()
@@ -289,9 +286,6 @@ rotate.rpqueue <- function(rpqueue, acclazylist) {
     
     acc <- insert_top(acclazylist, peek_top(rpqueue$r))
     delayedAssign("nextnode", rotate(without_heads, acc)$l$head, assign.env = newq$l$head)
-    ###newq$l$head$nextnode <- rotate(without_heads, acc)$l$head 
-    #newq$l$tail <- function() {return(rotate(without_heads, acc)$l)}
-    #newq$l$tail <- function() {return(rotate(without_heads, insert_top(acclazylist, peek_top(rpqueue$r)))$l)} # 3.6
     newq$r <- rstack()
     return(newq)
   }
