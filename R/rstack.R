@@ -153,7 +153,7 @@ print.rstack <- function(x, ...) {
 #' print(head(as.data.frame(s)))
 #' @export
 as.data.frame.rstack <- function(x, row.names = NULL, optional = FALSE, ...) {
-  dlist <- as.list(x)
+  dlist <- lapply(as.list(x), as.data.frame)
   uniquelens <- unique(lapply(dlist, length))
   if(length(uniquelens) > 1) {
     stop("Sorry, can't convert an rstack to a data frame unless all elements have the same length().")

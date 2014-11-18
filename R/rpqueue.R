@@ -203,7 +203,7 @@ as.list.rpqueue <- function(x, ...) {
 #' print(tail(as.data.frame(q)))
 #' @export
 as.data.frame.rpqueue <- function(x, row.names = NULL, optional = FALSE, ...) {
-  dlist <- as.list(x)
+  dlist <- lapply(as.list(x), as.data.frame)
   uniquelens <- unique(lapply(dlist, length))
   if(length(uniquelens) > 1) {
     stop("Sorry, can't convert an rdeque to a data frame unless all elements have the same length().")
