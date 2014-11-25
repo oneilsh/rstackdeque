@@ -2,7 +2,7 @@ Package: rstackdeque
 Type: Package
 Title: Persistent, fast amortized stack and deque (double-ended queue) data
     structures for R.
-Version: 1.0
+Version: 1.01
 Date: 2014-07-27
 Author: Shawn T. O'Neil
 Maintainer: Shawn T. O'Neil <shawn.oneil@cgrb.oregonstate.edu>
