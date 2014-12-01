@@ -3,7 +3,10 @@
 \alias{rdeque}
 \title{Create a new rdeque}
 \usage{
-rdeque()
+rdeque(...)
+}
+\arguments{
+\item{...}{additional arguments to be passed to or from methods.}
 }
 \description{
 Creates a new, empty, \code{rdeque} ready for use.

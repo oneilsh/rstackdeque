@@ -3,12 +3,14 @@
 \alias{insert_front}
 \title{Insert an element into the front of an \code{rdeque}}
 \usage{
-insert_front(d, e)
+insert_front(d, e, ...)
 }
 \arguments{
 \item{d}{The \code{rdeque} to insert onto.}
 
 \item{e}{The element to insert.}
+
+\item{...}{additional arguments to be passed to or from methods.}
 }
 \value{
 Modified version of the deque

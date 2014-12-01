@@ -3,10 +3,12 @@
 \alias{peek_back}
 \title{Return the data element at the back of the deque.}
 \usage{
-peek_back(d)
+peek_back(d, ...)
 }
 \arguments{
 \item{d}{The deque to look at.}
+
+\item{...}{additional arguments to be passed to or from methods.}
 }
 \value{
 The data element.

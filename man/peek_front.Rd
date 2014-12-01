@@ -3,10 +3,12 @@
 \alias{peek_front}
 \title{Return the data element at the front of the deque.}
 \usage{
-peek_front(x)
+peek_front(x, ...)
 }
 \arguments{
 \item{x}{The deque to look at.}
+
+\item{...}{additional arguments to be passed to or from methods.}
 }
 \value{
 The data element.

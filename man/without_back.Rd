@@ -3,10 +3,12 @@
 \alias{without_back}
 \title{Return version of the deque without the back}
 \usage{
-without_back(d)
+without_back(d, ...)
 }
 \arguments{
 \item{d}{The deque to remove elements from}
+
+\item{...}{additional arguments to be passed to or from methods.}
 }
 \value{
 A version of the deque with \code{n} elements removed.

@@ -3,10 +3,12 @@
 \alias{peek_top}
 \title{Return the data element at the top of the stack.}
 \usage{
-peek_top(s)
+peek_top(s, ...)
 }
 \arguments{
 \item{s}{The stack to look at}
+
+\item{...}{additional arguments to be passed to or from methods.}
 }
 \value{
 The data element.

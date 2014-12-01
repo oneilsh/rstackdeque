@@ -3,12 +3,14 @@
 \alias{without_top}
 \title{Return version of the stack without the top}
 \usage{
-without_top(s, n)
+without_top(s, n, ...)
 }
 \arguments{
 \item{s}{The stack to remove elements from}
 
 \item{n}{The number of elements to remove}
+
+\item{...}{additional arguments to be passed to or from methods.}
 }
 \value{
 A version of the stack with \code{n} elements removed.

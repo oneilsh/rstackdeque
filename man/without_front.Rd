@@ -3,10 +3,12 @@
 \alias{without_front}
 \title{Return version of a deque/queue without the front}
 \usage{
-without_front(x)
+without_front(x, ...)
 }
 \arguments{
 \item{x}{The deque/queue to remove elements from}
+
+\item{...}{additional arguments to be passed to or from methods.}
 }
 \value{
 A version of the deque/queue with the front element removed.

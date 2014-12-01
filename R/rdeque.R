@@ -33,6 +33,7 @@
 #' 
 #' @description Creates a new, empty, \code{rdeque} ready for use.
 #' 
+#' @param ... additional arguments to be passed to or from methods.
 #' @details An rdeque supports efficient insert into the front and back with \code{insert_front} and 
 #' \code{insert_back} (returning a version of
 #' the deque with the new element), peek into the front and back with \code{peek_front} and \code{peek_back} 
@@ -61,7 +62,7 @@
 #' b <- peek_front(d)
 #' print(b)
 #' @export
-rdeque <- function() {
+rdeque <- function(...) {
   d <- new.env(parent = emptyenv())
   d$l <- rstack()
   d$r <- rstack()
@@ -71,7 +72,7 @@ rdeque <- function() {
 
 
 #' @export
-empty.rdeque <- function(x) {
+empty.rdeque <- function(x, ...) {
   if(length(x) < 1) {
     return(TRUE)
   } else {
@@ -119,7 +120,7 @@ head.rdeque <- function(x, n = 6L, ...) {
 
 
 #' @export
-as.rdeque.default <- function(x) {
+as.rdeque.default <- function(x, ...) {
   input <- x
   newd <- rdeque()
   if(length(input) == 0) {
@@ -240,22 +241,25 @@ print.rdeque <- function(x, ...) {
 #' print(tail(as.data.frame(d)))
 #' @export
 as.data.frame.rdeque <- function(x, row.names = NULL, optional = FALSE, ...) {
-  dlist <- lapply(as.list(x), as.data.frame, ...)
+  dlist <- lapply(as.list(x), as.data.frame, optional = optional, ...)
   uniquelens <- unique(lapply(dlist, length))
   if(length(uniquelens) > 1) {
-    stop("Sorry, can't convert an rdeque to a data frame unless all elements have the same length().")
+    stop("cannot convert an rdeque to a data.frame unless all elements have the same length()")
   }
   uniquenamesets <- unique(lapply(dlist, names))
   if(length(uniquenamesets) > 1) {
-    stop("Sorry, can't convert an rdeque to a data frame when elements have contradictory names().")
+    stop("cannot convert an rdeque to a data.frame when elements have contradictory names()")
   }
   return(as.data.frame(do.call(rbind, dlist), row.names, optional, ...))
 }
 
 
 
-#' @export
-fixd.rdeque <- function(d) {
+#' @title Fixd
+#' @param d The deque to fix
+#' @param ... additional arguments to be passed to or from methods.
+#' @description Fixes an rdeque so the two sides are roughly equal.
+fixd.rdeque <- function(d, ...) {
   if(length(d) < 2 | (length(d$l) > 6 & length(d$r) > 6)) {
     return(d)
   } else {
@@ -273,7 +277,7 @@ fixd.rdeque <- function(d) {
 
 
 #' @export
-without_front.rdeque <- function(x) {
+without_front.rdeque <- function(x, ...) {
     ## if the length of l is 0, then r has only one element (invariant), so we can return an empty deque
   if(length(x$l) == 0) {
     return(rdeque())
@@ -288,7 +292,7 @@ without_front.rdeque <- function(x) {
 
 
 #' @export
-without_back.rdeque <- function(d) {
+without_back.rdeque <- function(d, ...) {
     ## if the length of r is 0, then l has only one element (invariant), so we can return an empty deque
   if(length(d$r) == 0) {
     return(rdeque())
@@ -302,9 +306,9 @@ without_back.rdeque <- function(d) {
 }
 
 #' @export
-peek_front.rdeque <- function(x) {
+peek_front.rdeque <- function(x, ...) {
   if(length(x) < 1) {
-    stop("Sorry, can't peek_front into a queue that is empty. Try checking with empty() first.")
+    stop("cannot peek_front() into a queue that is empty, try checking with empty() first")
   }
   if(length(x$l) > 0) {
     return(peek_top(x$l))
@@ -314,11 +318,81 @@ peek_front.rdeque <- function(x) {
   }
 }
 
+#' @export
+`peek_front<-.rdeque` <- function(x, ..., value) {
+  if(length(x) < 1) {
+    stop("cannot assign to the front of an empty deque, try checking with empty() first")
+  }
+  x$l$head$data <- value
+  return(x)
+}
+
+#' @title Assign to/modify the front of a deque.
+#' 
+#' @description Allows modification access to the front of a deque or queue.
+#' 
+#' @details O(1) worst case time. Throws an error if the deque is empty.
+#' @param x deque or queue to modify the front element of
+#' @param value The value to assign to the front data element.
+#' @param ... additional arguments to be passed to or from methods.
+#' @examples
+#' d <- rdeque()
+#' d <- insert_front(d, data.frame(a = 1, b = 1))
+#' d <- insert_front(d, data.frame(a = 1, b = 1))
+#' 
+#' peek_front(d)$a <- 100
+#' print(d)
+#' 
+#' peek_front(d) <- data.frame(a = 100, b = 100)
+#' 
+#' 
+#' 
+#' q <- rpqueue()
+#' q <- insert_front(d, data.frame(a = 1, b = 1))
+#' q <- insert_front(d, data.frame(a = 1, b = 1))
+#' 
+#' peek_front(q)$a <- 100
+#' print(q)
+#' 
+#' peek_front(q) <- data.frame(a = 100, b = 100)
+#' @export
+`peek_front<-` <- function(x, ..., value) { UseMethod("peek_front<-", x) }
+
 
 #' @export
-peek_back.rdeque <- function(d) {
+`peek_back<-.rdeque` <- function(d, ..., value) {
   if(length(d) < 1) {
-    stop("Sorry, can't peek_front into a queue that is empty. Try checking with empty() first.")
+    stop("cannot assign to the back of an empty deque, try checking with empty() first")
+  }
+  d$r$head$data <- value
+  return(d)
+}
+
+#' @title Assign to/modify the front of a deque.
+#' 
+#' @description Allows modification access to the back of a deque.
+#' 
+#' @details O(1) worst case time. Throws an error if the deque is empty.
+#' @param d The deque to modify the back element of
+#' @param value The value to assign to the back data element.
+#' @param ... additional arguments to be passed to or from methods.
+#' @examples
+#' d <- rdeque()
+#' d <- insert_front(d, data.frame(a = 1, b = 1))
+#' d <- insert_front(d, data.frame(a = 1, b = 1))
+#' 
+#' peek_back(d)$a <- 100
+#' print(d)
+#' 
+#' peek_back(d) <- data.frame(a = 100, b = 100)
+#' @export
+`peek_back<-` <- function(d, ..., value) { UseMethod("peek_back<-", d) }
+
+
+#' @export
+peek_back.rdeque <- function(d, ...) {
+  if(length(d) < 1) {
+    stop("cannot peek_back() into a queue that is empty, try checking with empty() first")
   }
   if(length(d$r) > 0) {
     return(peek_top(d$r))
@@ -331,7 +405,7 @@ peek_back.rdeque <- function(d) {
 
 
 #' @export
-insert_front.rdeque <- function(d, e) {
+insert_front.rdeque <- function(d, e, ...) {
   newd <- rdeque()
   newd$l <- insert_top(d$l, e)
   newd$r <- d$r
@@ -341,7 +415,7 @@ insert_front.rdeque <- function(d, e) {
 
 
 #' @export
-insert_back.rdeque <- function(x, e) {
+insert_back.rdeque <- function(x, e, ...) {
   newd <- rdeque()
   newd$r <- insert_top(x$r, e)
   newd$l <- x$l
@@ -358,7 +432,7 @@ insert_back.rdeque <- function(x, e) {
 
 
 
-#' @title Internal fix method for deques
+#' @title Fix method for deques
 #' 
 #' @description Maintains the invariant that there is always something in $l and $r
 #' so long as there is 2 more elements in the queue.
@@ -366,9 +440,9 @@ insert_back.rdeque <- function(x, e) {
 #' @details In fact, fix will be called whenever there are fewer than 6 elements in both
 #' the front and end of the deque. Generally this method is O(N), and so a full copy is returned.
 #' @param d The deque to fix
+#' @param ... additional arguments to be passed to or from methods.
 #' @return The fixed, "balanced" deque
-#' @export
-fixd <- function(d) {UseMethod("fixd", d)}
+fixd <- function(d, ...) {UseMethod("fixd", d)}
 
 
 #' @title Create an \code{rdeque} from a given input
@@ -381,6 +455,7 @@ fixd <- function(d) {UseMethod("fixd", d)}
 #' columns when run through \code{as.list}, running \code{as.rdeque} results in a deque of
 #' columns, rather than a deque of rows.
 #' @param x Input to convert to a deque
+#' @param ... additional arguments to be passed to or from methods.
 #' @return A new rdeque
 #' @examples
 #' d <- as.rdeque(1:20)
@@ -393,7 +468,7 @@ fixd <- function(d) {UseMethod("fixd", d)}
 #' oops <- as.rdeque(iris)
 #' print(oops)
 #' @export
-as.rdeque <- function(x) {UseMethod("as.rdeque", x)}
+as.rdeque <- function(x, ...) {UseMethod("as.rdeque", x)}
 
 
 
@@ -409,6 +484,7 @@ as.rdeque <- function(x) {UseMethod("as.rdeque", x)}
 #' throw an error if the structure is empty to begin with.
 #' 
 #' @param x The deque/queue to remove elements from
+#' @param ... additional arguments to be passed to or from methods.
 #' @return A version of the deque/queue with the front element removed.
 #' @examples
 #' d <- rdeque()
@@ -424,7 +500,7 @@ as.rdeque <- function(x) {UseMethod("as.rdeque", x)}
 #' 
 #' print(d)
 #' @export
-without_front <- function(x) {UseMethod("without_front", x)}
+without_front <- function(x, ...) {UseMethod("without_front", x)}
 
 
 #' @title Return version of the deque without the back
@@ -436,6 +512,7 @@ without_front <- function(x) {UseMethod("without_front", x)}
 #' number of elements removed would exceed the size of the deque, an empty deque is returned.
 #' 
 #' @param d The deque to remove elements from
+#' @param ... additional arguments to be passed to or from methods.
 #' @return A version of the deque with \code{n} elements removed.
 #' @examples
 #' d <- rdeque()
@@ -451,7 +528,7 @@ without_front <- function(x) {UseMethod("without_front", x)}
 #' 
 #' print(d)
 #' @export
-without_back <- function(d) {UseMethod("without_back", d)}
+without_back <- function(d, ...) {UseMethod("without_back", d)}
 
 
 #' @title Return the data element at the front of the deque.
@@ -461,6 +538,7 @@ without_back <- function(d) {UseMethod("without_back", d)}
 #' 
 #' @details O(1) worst-case time.
 #' @param x The deque to look at.
+#' @param ... additional arguments to be passed to or from methods.
 #' @return The data element.
 #' @examples
 #' d <- rdeque()
@@ -470,7 +548,7 @@ without_back <- function(d) {UseMethod("without_back", d)}
 #' print(e)
 #' print(d)
 #' @export
-peek_front <- function(x) {UseMethod("peek_front", x)}
+peek_front <- function(x, ...) {UseMethod("peek_front", x)}
 
 
 
@@ -484,6 +562,7 @@ peek_front <- function(x) {UseMethod("peek_front", x)}
 #' 
 #' @details O(1) worst-case time.
 #' @param d The deque to look at.
+#' @param ... additional arguments to be passed to or from methods.
 #' @return The data element.
 #' @examples
 #' d <- rdeque()
@@ -493,7 +572,7 @@ peek_front <- function(x) {UseMethod("peek_front", x)}
 #' print(e)
 #' print(d)
 #' @export
-peek_back <- function(d) {UseMethod("peek_back", d)}
+peek_back <- function(d, ...) {UseMethod("peek_back", d)}
 
 
 
@@ -504,6 +583,7 @@ peek_back <- function(d) {UseMethod("peek_back", d)}
 #' @details O(1) time worst-case. Does not modify the original deque. 
 #' @param d The \code{rdeque} to insert onto.
 #' @param e The element to insert.
+#' @param ... additional arguments to be passed to or from methods.
 #' @return Modified version of the deque
 #' @examples
 #' d <- rdeque()
@@ -515,7 +595,7 @@ peek_back <- function(d) {UseMethod("peek_back", d)}
 #' print(d2)
 #' print(d)
 #' @export
-insert_front <- function(d, e) {UseMethod("insert_front", d)}
+insert_front <- function(d, e, ...) {UseMethod("insert_front", d)}
 
 
 
@@ -526,6 +606,7 @@ insert_front <- function(d, e) {UseMethod("insert_front", d)}
 #' @details O(1) time worst-case. Does not modify the original. 
 #' @param x The deque or queue to insert onto.
 #' @param e The element to insert.
+#' @param ... additional arguments to be passed to or from methods.
 #' @return Modified version of the deque/queue.
 #' @examples
 #' d <- rdeque()
@@ -537,7 +618,7 @@ insert_front <- function(d, e) {UseMethod("insert_front", d)}
 #' print(d2)
 #' print(d)
 #' @export
-insert_back <- function(x, e) {UseMethod("insert_back", x)}
+insert_back <- function(x, e, ...) {UseMethod("insert_back", x)}
 
 
 

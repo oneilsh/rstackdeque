@@ -3,7 +3,10 @@
 \alias{rstack}
 \title{Create a new rstack}
 \usage{
-rstack()
+rstack(...)
+}
+\arguments{
+\item{...}{additional arguments to be passed to or from methods}
 }
 \description{
 Creates a new, empty, \code{rstack} ready for use.

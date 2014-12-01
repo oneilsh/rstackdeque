@@ -25,6 +25,7 @@
 #' 
 #' @description Creates a new, empty, \code{rpqueue} ready for use.
 #' 
+#' @param ... additional arguments to be passed to or from methods.
 #' @details An rpqueue supports efficient insert into the back with \code{insert_back} and 
 #' (returning a version of
 #' the queue with the new element), peek into the front with \code{peek_front}
@@ -53,7 +54,7 @@
 #' b <- peek_front(q)
 #' print(b)
 #' @export
-rpqueue <- function() {
+rpqueue <- function(...) {
   newq <- new.env(parent = emptyenv())
   newq$lhat <- rstack()
   newq$l <- rstack()
@@ -112,7 +113,7 @@ head.rpqueue <- function(x, n = 6L, ...) {
 
 
 #' @export
-as.rpqueue.default <- function(x) {
+as.rpqueue.default <- function(x, ...) {
   retq <- rpqueue()
   for(el in as.list(x)) {
     retq <- insert_back(retq, el)
@@ -130,6 +131,7 @@ as.rpqueue.default <- function(x) {
 #' columns when run through \code{as.list}, running \code{as.rpqueue} results in a queue of
 #' columns, rather than a queue of rows.
 #' @param x Input to convert to a queue
+#' @param ... additional arguments to be passed to or from methods.
 #' @return A new rpqueue
 #' @examples
 #' d <- as.rpqueue(1:20)
@@ -139,7 +141,7 @@ as.rpqueue.default <- function(x) {
 #' oops <- as.rdeque(iris)
 #' print(oops)
 #' @export
-as.rpqueue <- function(x) {UseMethod("as.rpqueue", x)}
+as.rpqueue <- function(x, ...) {UseMethod("as.rpqueue", x)}
 
 
 #' @title Conversion of an \code{rpqueue} to a \code{list}
@@ -203,21 +205,21 @@ as.list.rpqueue <- function(x, ...) {
 #' print(tail(as.data.frame(q)))
 #' @export
 as.data.frame.rpqueue <- function(x, row.names = NULL, optional = FALSE, ...) {
-  dlist <- lapply(as.list(x), as.data.frame, ...)
+  dlist <- lapply(as.list(x), as.data.frame, optional = optional, ...)
   uniquelens <- unique(lapply(dlist, length))
   if(length(uniquelens) > 1) {
-    stop("Sorry, can't convert an rdeque to a data frame unless all elements have the same length().")
+    stop("cannot convert an rpqueue to a data.frame unless all elements have the same length()")
   }
   uniquenamesets <- unique(lapply(dlist, names))
   if(length(uniquenamesets) > 1) {
-    stop("Sorry, can't convert an rpqueue to a data frame when elements have contradictory names().")
+    stop("cannot convert an rpqueue to a data.frame when elements have contradictory names()")
   }
   return(as.data.frame(do.call(rbind, dlist), row.names, optional, ...))
 }
 
 
 #' @export
-empty.rpqueue <- function(x) {
+empty.rpqueue <- function(x, ...) {
   if(length(x) > 0) {return(FALSE)}
   return(TRUE)
 }
@@ -225,9 +227,9 @@ empty <- function(x) {UseMethod("empty", x)}
 
 
 #' @export
-peek_front.rpqueue <- function(x) {
+peek_front.rpqueue <- function(x, ...) {
   if(length(x) < 1) {
-    stop("Sorry, can't peek_front into a queue that is empty. Try checking with empty() first.")
+    stop("cannot peek_front() into a queue that is empty, try checking with empty() first")
   }
   if(length(x$l) > 0) {
     return(peek_top(x$l))
@@ -236,7 +238,25 @@ peek_front.rpqueue <- function(x) {
     return(peek_top(x$r))
   }
 }
-peek_front <- function(x) {UseMethod("peek_front", x)}
+peek_front <- function(x, ...) {UseMethod("peek_front", x)}
+
+
+#' @export
+`peek_front<-.rpqueue` <- function(x, ..., value) {
+  if(length(x) < 1) {
+    stop("cannot assign to the front of an empty deque or queue, try checking with empty() first")
+  }
+
+  if(length(x$l) > 0) {
+    peek_top(x$l, ...) <- value 
+    # invariant: if l is empty but the deque is not, r has only one element
+  } else {
+    peek_top(x$r, ...) <- value
+  }
+  
+  return(x)
+}
+
 
 
 #' @title Default method for \code{length} on an rpqueue
@@ -259,8 +279,12 @@ length.rpqueue <- function(x) {
 
 
 
-#' @export
-rotate.rpqueue <- function(rpqueue, acclazylist) {
+#' @title Rotate
+#' @param rpqueue The rpqueue to rotate
+#' @param acclazylist The lazy list accumulator
+#' @param ... additional arguments to be passed to or from methods.
+#' @description The lazy list accumulator, keeping the queue partially rotated
+rotate.rpqueue <- function(rpqueue, acclazylist, ...) {
   ## safety check :-P
   if(length(rpqueue) == 0) {
     return(rpqueue)
@@ -293,22 +317,25 @@ rotate.rpqueue <- function(rpqueue, acclazylist) {
 
 #' @title Incremental rotation method for rpqueue objects
 #' 
-#' @description An internal method for keeping the pair of lazy lists approximately equal
+#' @description An method for keeping the pair of lazy lists approximately equal
 #' in length in an incremental fashion. 
 #' 
+#' @param ... additional arguments to be passed to or from methods.
 #' @details See \emph{Simple and Efficient Purely Functional Queues and Deques}, 
 #' Okasaki 1995, J. Functional Programming, 5(4) 583 to 592
 #' 
 #' @param rpqueue The rpqueue to rotate
 #' @param acclazylist A lazy list that serves as the incremental accumulator
 #' @return A fully rotated queue, but with the l list delayed in evaluation
-#' @export
-rotate <- function(rpqueue, acclazylist) {UseMethod("rotate", rpqueue)}
+rotate <- function(rpqueue, acclazylist, ...) {UseMethod("rotate", rpqueue)}
 
 
 
-#' @export
-makeequal.rpqueue <- function(rpqueue) {
+#' @title Makeequal
+#' @description See makeequal generic
+#' @param rpqueue The queue to make equal
+#' @param ... additional arguments to be passed to or from methods.
+makeequal.rpqueue <- function(rpqueue, ...) {
   #print(paste(length(rpqueue$lhat, length(rpqueue$l), length(rpqueue$r))))
   if(length(rpqueue$lhat) > 0) {
     # maybe here we can avoid creating a whole new object?
@@ -330,26 +357,26 @@ makeequal.rpqueue <- function(rpqueue) {
 #' @title Make the two sides equal if needed.
 #' @details A wrapper around rotate.
 #' @param rpqueue The queue to make equal
+#' @param ... additional arguments to be passed to or from methods.
 #' @return A made-equal queue (if it needed it)
-#' @export
-makeequal <- function(rpqueue) {UseMethod("makeequal", rpqueue)}
+makeequal <- function(rpqueue, ...) {UseMethod("makeequal", rpqueue)}
 
 
 #' @export
-insert_back.rpqueue <- function(x, e) {
+insert_back.rpqueue <- function(x, e, ...) {
   newq <- rpqueue()
   newq$l <- x$l
   newq$r <- insert_top(x$r, e)
   newq$lhat <- x$lhat
   return(makeequal(newq))
 }
-insert_back <- function(x, e) {UseMethod("insert_back", x)}
+insert_back <- function(x, e, ...) {UseMethod("insert_back", x)}
 
 
 #' @export
-without_front.rpqueue <- function(x) {
+without_front.rpqueue <- function(x, ...) {
   if(length(x) < 1) {
-    stop("Sorry, you can't get a version of an empty queue without the front. Try checking with empty() head.")
+    stop("cannot run without_front() on an empty rpqueue, try checking with empty() first")
   }
   newq <- rpqueue()
   newq$l <- without_top(x$l)
@@ -357,5 +384,5 @@ without_front.rpqueue <- function(x) {
   newq$lhat <- x$lhat
   return(makeequal(newq))
 }
-without_front <- function(x) {UseMethod("without_front", x)}
+without_front <- function(x, ...) {UseMethod("without_front", x)}
 

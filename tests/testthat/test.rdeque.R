@@ -1,3 +1,31 @@
+test_that("peek_front assignment works as expected", {
+  d <- rdeque()
+  d <- insert_front(d, data.frame(a = 1, b = 2))
+  d <- insert_front(d, data.frame(a = 3, b = 4))
+  peek_front(d)$a <- 300
+  
+  dlist <- as.list(d)
+  expect_that(dlist[[1]], equals(data.frame(a = 300, b = 4)))
+  
+  peek_front(d) <- data.frame(a = 300, b = 400)
+  dlist <- as.list(d)
+  expect_that(dlist[[1]], equals(data.frame(a = 300, b = 400)))
+})
+
+test_that("peek_back assignment works as expected", {
+  d <- rdeque()
+  d <- insert_front(d, data.frame(a = 1, b = 2))
+  d <- insert_front(d, data.frame(a = 3, b = 4))
+  peek_back(d)$a <- 100
+  
+  dlist <- as.list(d)
+  expect_that(dlist[[2]], equals(data.frame(a = 100, b = 2)))
+  
+  peek_back(d) <- data.frame(a = 100, b = 2)
+  dlist <- as.list(d)
+  expect_that(dlist[[2]], equals(data.frame(a = 100, b = 2)))
+})
+
 
 test_that("insert_front and without_front work as expected", {
   s <- rdeque()

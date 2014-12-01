@@ -1,3 +1,17 @@
+test_that("peek_top assignment works as expected", {
+  s <- rstack()
+  s <- insert_top(s, data.frame(a = 1, b = 2))
+  s <- insert_top(s, data.frame(a = 3, b = 4))
+  peek_top(s)$a <- 300
+  
+  slist <- as.list(s)
+  expect_that(slist[[1]], equals(data.frame(a = 300, b = 4)))
+  
+  peek_top(s) <- data.frame(a = 300, b = 400)
+  slist <- as.list(s)
+  expect_that(slist[[1]], equals(data.frame(a = 300, b = 400)))
+})
+
 
 test_that("insert and remove work as expected", {
   s <- rstack()

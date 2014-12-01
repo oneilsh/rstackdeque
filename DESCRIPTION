@@ -1,23 +1,24 @@
 Package: rstackdeque
 Type: Package
-Title: Persistent, fast amortized stack and deque (double-ended queue) data
-    structures for R.
+Title: Persistent Fast Amortized Stack and Queue Data Structures
 Version: 1.1
-Date: 2014-11-25
+Date: 2014-12-01
+URL: https://github.com/oneilsh/rstackdeque
+BugReports: https://github.com/oneilsh/rstackdeque/issues
 Author: Shawn T. O'Neil
 Maintainer: Shawn T. O'Neil <shawn.oneil@cgrb.oregonstate.edu>
 Description: Provides stack, deque and queue data structures for R: rstack(),
     rdeque() and rpqueue(). For efficiency, these structures support limited
     access; for stacks: insert_top(), peek_top(), and without_top() (the latter
-    returning a version of the stack without the top element); for queues:
+    returning a version of the stack without the top element). For queues:
     insert_front(), peek_front(), and without_front() (the latter returning a
-    version of the deque without the front element), and for dequeues
-    additional corresponding methods insert_back(), peek_back(), and
+    version of the deque without the front element). For dequeues
+    additional corresponding methods include insert_back(), peek_back(), and
     without_back(). All types also support O(N) conversion to lists with
     as.list(), and to data frames with as.data.frame(), which requires that all
     element have the same length and non-contradictory names.
 License: MIT + file LICENSE
 Suggests:
-    testthat,
+    testthat
 Depends:
     utils

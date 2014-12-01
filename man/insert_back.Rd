@@ -3,12 +3,14 @@
 \alias{insert_back}
 \title{Insert an element into the back of an \code{rdeque} or \code{rpqueue}}
 \usage{
-insert_back(x, e)
+insert_back(x, e, ...)
 }
 \arguments{
 \item{x}{The deque or queue to insert onto.}
 
 \item{e}{The element to insert.}
+
+\item{...}{additional arguments to be passed to or from methods.}
 }
 \value{
 Modified version of the deque/queue.

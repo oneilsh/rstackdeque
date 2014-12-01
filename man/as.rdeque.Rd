@@ -3,10 +3,12 @@
 \alias{as.rdeque}
 \title{Create an \code{rdeque} from a given input}
 \usage{
-as.rdeque(x)
+as.rdeque(x, ...)
 }
 \arguments{
 \item{x}{Input to convert to a deque}
+
+\item{...}{additional arguments to be passed to or from methods.}
 }
 \value{
 A new rdeque

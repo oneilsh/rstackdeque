@@ -3,12 +3,14 @@
 \alias{insert_top}
 \title{Insert an element into the top of an \code{rstack}}
 \usage{
-insert_top(s, e)
+insert_top(s, e, ...)
 }
 \arguments{
 \item{s}{The \code{rstack} to insert onto.}
 
 \item{e}{The element to insert.}
+
+\item{...}{additional arguments to be passed to or from methods.}
 }
 \value{
 Modified version of the stack.

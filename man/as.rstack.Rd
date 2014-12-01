@@ -3,10 +3,12 @@
 \alias{as.rstack}
 \title{Create an \code{rstack} from a given input}
 \usage{
-as.rstack(x)
+as.rstack(x, ...)
 }
 \arguments{
 \item{x}{Input to convert to a stack}
+
+\item{...}{additional arguments to be passed to or from methods}
 }
 \value{
 A new rstack
