@@ -240,7 +240,7 @@ print.rdeque <- function(x, ...) {
 #' print(tail(as.data.frame(d)))
 #' @export
 as.data.frame.rdeque <- function(x, row.names = NULL, optional = FALSE, ...) {
-  dlist <- lapply(as.list(x), as.data.frame)
+  dlist <- lapply(as.list(x), as.data.frame, ...)
   uniquelens <- unique(lapply(dlist, length))
   if(length(uniquelens) > 1) {
     stop("Sorry, can't convert an rdeque to a data frame unless all elements have the same length().")
