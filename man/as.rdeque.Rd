@@ -6,12 +6,12 @@
 as.rdeque(x, ...)
 }
 \arguments{
-\item{x}{Input to convert to a deque}
+\item{x}{input to convert to an rdeque.}
 
 \item{...}{additional arguments to be passed to or from methods.}
 }
 \value{
-A new rdeque
+a new rdeque.
 }
 \description{
 Creates a new \code{rdeque} from a given input. Coerces input to a

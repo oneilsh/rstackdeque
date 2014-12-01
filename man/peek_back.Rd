@@ -6,12 +6,12 @@
 peek_back(d, ...)
 }
 \arguments{
-\item{d}{The deque to look at.}
+\item{d}{rdeque to look at.}
 
 \item{...}{additional arguments to be passed to or from methods.}
 }
 \value{
-The data element.
+data element at the back of the rdeque.
 }
 \description{
 Simply returns the data element sitting at the back of the deque,

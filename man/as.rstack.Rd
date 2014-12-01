@@ -6,12 +6,12 @@
 as.rstack(x, ...)
 }
 \arguments{
-\item{x}{Input to convert to a stack}
+\item{x}{input to convert to a stack.}
 
-\item{...}{additional arguments to be passed to or from methods}
+\item{...}{additional arguments to be passed to or from methods.}
 }
 \value{
-A new rstack
+a new rstack.
 }
 \description{
 Creates a new \code{rstack} from a given input. Coerces input to a

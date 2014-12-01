@@ -8,6 +8,9 @@ rdeque(...)
 \arguments{
 \item{...}{additional arguments to be passed to or from methods.}
 }
+\value{
+a new empty rdeque.
+}
 \description{
 Creates a new, empty, \code{rdeque} ready for use.
 }

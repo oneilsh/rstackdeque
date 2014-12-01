@@ -6,14 +6,14 @@
 insert_front(d, e, ...)
 }
 \arguments{
-\item{d}{The \code{rdeque} to insert onto.}
+\item{d}{rdequeue to insert onto.}
 
-\item{e}{The element to insert.}
+\item{e}{element to insert.}
 
 \item{...}{additional arguments to be passed to or from methods.}
 }
 \value{
-Modified version of the deque
+modified version of the rdeque.
 }
 \description{
 Returns a version of the deque with the new element in the front position.

@@ -6,16 +6,16 @@
 \method{as.data.frame}{rdeque}(x, row.names = NULL, optional = FALSE, ...)
 }
 \arguments{
-\item{x}{The deque to convert}
+\item{x}{rdeque to convert.}
 
-\item{row.names}{Passed on to as.data.frame before final conversion}
+\item{row.names}{passed on to as.data.frame before final conversion.}
 
-\item{optional}{Passed onto as.data.frame before final conversion}
+\item{optional}{passed onto as.data.frame before final conversion.}
 
-\item{...}{Passed onto as.data.frame before final conversion}
+\item{...}{passed onto as.data.frame before final conversion.}
 }
 \value{
-A data frame with the first row(s) the previous front of the deque, last row(s) previous back of the deque.
+a data.frame with the first row(s) the previous front of the deque, last row(s) previous back of the deque.
 }
 \description{
 Converts the elements of an \code{rdeque} into rows of a dataframe, if this is reasonable.

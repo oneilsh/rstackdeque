@@ -6,12 +6,12 @@
 \method{as.list}{rdeque}(x, ...)
 }
 \arguments{
-\item{x}{The stack to convert}
+\item{x}{rdeque to convert.}
 
-\item{...}{Additional parameters sent to as.list after initial conversion.}
+\item{...}{additional parameters sent to as.list after initial conversion.}
 }
 \value{
-A list
+a list.
 }
 \description{
 Converts an \code{rdeque} to a list, where the front of the deque becomes

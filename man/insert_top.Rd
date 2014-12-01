@@ -6,14 +6,14 @@
 insert_top(s, e, ...)
 }
 \arguments{
-\item{s}{The \code{rstack} to insert onto.}
+\item{s}{rstack to insert onto.}
 
-\item{e}{The element to insert.}
+\item{e}{element to insert.}
 
 \item{...}{additional arguments to be passed to or from methods.}
 }
 \value{
-Modified version of the stack.
+modified version of the stack.
 }
 \description{
 Returns a version of the stack with the new element in the top position.

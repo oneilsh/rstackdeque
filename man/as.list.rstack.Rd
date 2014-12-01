@@ -6,12 +6,12 @@
 \method{as.list}{rstack}(x, ...)
 }
 \arguments{
-\item{x}{The stack to convert}
+\item{x}{rstack to convert.}
 
-\item{...}{Additional arguments passed to as.list after initial conversion to list.}
+\item{...}{additional arguments passed to as.list after initial conversion to list.}
 }
 \value{
-A list
+a list.
 }
 \description{
 Converts an \code{rstack} to a list, where the top of the stack becomes

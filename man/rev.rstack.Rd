@@ -6,10 +6,10 @@
 \method{rev}{rstack}(x)
 }
 \arguments{
-\item{x}{The stack to reverse}
+\item{x}{rstack to reverse.}
 }
 \value{
-A reversed version fo the stack
+a reversed version of the stack.
 }
 \description{
 Returns a reversed version of an \code{rstack}, where the old last element (generally

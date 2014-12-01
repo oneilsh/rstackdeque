@@ -6,13 +6,13 @@
 rstacknode(data)
 }
 \arguments{
-\item{data}{Data to reference with this node}
+\item{data}{data to reference with this node.}
 }
 \value{
-Environment
+an environment.
 }
 \description{
-For internal use by \code{rstack}s and \code{rdeque}s. An environment with no parent,
+For use by \code{rstack}s and \code{rdeque}s. An environment with no parent,
 reference for the data and the next node.
 }
 \details{

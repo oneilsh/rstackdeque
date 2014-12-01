@@ -6,11 +6,14 @@
 \method{head}{rstack}(x, n = 6L, ...)
 }
 \arguments{
-\item{x}{The stack to get the head of}
+\item{x}{rstack to get the head of.}
 
-\item{n}{The number of elements to get}
+\item{n}{number of elements to get.}
 
-\item{...}{Arguments to be passed to or from other methods (ignored)}
+\item{...}{arguments to be passed to or from other methods (ignored).}
+}
+\value{
+a smaller rstack, with only the top elements kept.
 }
 \description{
 Returns the top n elements of a stack as a stack, or all of the elements if its length is less than n.

@@ -6,14 +6,14 @@
 insert_back(x, e, ...)
 }
 \arguments{
-\item{x}{The deque or queue to insert onto.}
+\item{x}{rdeque or rpqueue to insert onto.}
 
-\item{e}{The element to insert.}
+\item{e}{element to insert.}
 
 \item{...}{additional arguments to be passed to or from methods.}
 }
 \value{
-Modified version of the deque/queue.
+modified version of the rdeque or rpqueue.
 }
 \description{
 Returns a version of the deque/queue with the new element in the back position.

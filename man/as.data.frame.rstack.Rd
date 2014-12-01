@@ -6,16 +6,16 @@
 \method{as.data.frame}{rstack}(x, row.names = NULL, optional = FALSE, ...)
 }
 \arguments{
-\item{x}{The stack to convert}
+\item{x}{rstack to convert.}
 
-\item{row.names}{Passed on to as.data.frame before final conversion}
+\item{row.names}{passed on to as.data.frame before final conversion.}
 
-\item{optional}{Passed onto as.data.frame before final conversion}
+\item{optional}{passed onto as.data.frame before final conversion.}
 
-\item{...}{Passed onto as.data.frame before final conversion}
+\item{...}{Passed onto as.data.frame before final conversion.}
 }
 \value{
-A data frame with the first row the previous top of the stack.
+a data frame with the first row the previous top of the stack.
 }
 \description{
 Converts the elements of an \code{rstack} into rows of a dataframe, if this is reasonable.

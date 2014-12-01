@@ -6,12 +6,12 @@
 without_front(x, ...)
 }
 \arguments{
-\item{x}{The deque/queue to remove elements from}
+\item{x}{rdeque or rpqueue to remove elements from.}
 
 \item{...}{additional arguments to be passed to or from methods.}
 }
 \value{
-A version of the deque/queue with the front element removed.
+a version of the rdeque or rpqueue with the front element removed.
 }
 \description{
 Return version of a deque/queue without the front

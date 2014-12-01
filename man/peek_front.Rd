@@ -6,12 +6,12 @@
 peek_front(x, ...)
 }
 \arguments{
-\item{x}{The deque to look at.}
+\item{x}{rdeque to look at.}
 
 \item{...}{additional arguments to be passed to or from methods.}
 }
 \value{
-The data element.
+data element at the front of the rdeque.
 }
 \description{
 Simply returns the data element sitting at the front of the deque,

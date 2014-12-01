@@ -6,14 +6,14 @@
 without_top(s, n, ...)
 }
 \arguments{
-\item{s}{The stack to remove elements from}
+\item{s}{rstack to remove elements from.}
 
-\item{n}{The number of elements to remove}
+\item{n}{number of elements to remove.}
 
 \item{...}{additional arguments to be passed to or from methods.}
 }
 \value{
-A version of the stack with \code{n} elements removed.
+version of the stack with \code{n} elements removed.
 }
 \description{
 Return version of the stack without the top

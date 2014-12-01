@@ -6,12 +6,12 @@
 peek_top(s, ...)
 }
 \arguments{
-\item{s}{The stack to look at}
+\item{s}{stack to look at.}
 
 \item{...}{additional arguments to be passed to or from methods.}
 }
 \value{
-The data element.
+data element existing at the top of the given stack.
 }
 \description{
 Simply returns the data element sitting at the top of the stack,

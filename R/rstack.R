@@ -19,10 +19,10 @@
 #' Create a new rstacknode with a given object
 #' 
 #' @description
-#' For internal use by \code{rstack}s and \code{rdeque}s. An environment with no parent,
+#' For use by \code{rstack}s and \code{rdeque}s. An environment with no parent,
 #' reference for the data and the next node.
-#' @param data Data to reference with this node
-#' @return Environment
+#' @param data data to reference with this node.
+#' @return an environment.
 #' 
 rstacknode <- function(data) {
   newnode <- new.env(parent = emptyenv())
@@ -51,7 +51,8 @@ rstacknode <- function(data) {
 #' to the newly created stack), at the cost of memory usage. However, this means that if stacks
 #' are used in a non-persistent way, e.g. \code{s <- rev(s)}, then the garbage collector is free to clean
 #' up old versions of the data.
-#' @param ... additional arguments to be passed to or from methods
+#' @param ... additional arguments to be passed to or from methods.
+#' @return an empty rstack.
 #' @examples
 #' s <- rstack()
 #' s <- insert_top(s, "a")
@@ -124,11 +125,11 @@ print.rstack <- function(x, ...) {
 #' names do not conflict (e.g., same column names where used). This is accomplished by a call to
 #' \code{do.call("rbind", as.list(s))}, where \code{as.list(s)} converts the stack \code{s} to a list
 #' where the top element becomes the first element of the list.
-#' @param x The stack to convert
-#' @param row.names Passed on to as.data.frame before final conversion
-#' @param optional Passed onto as.data.frame before final conversion
-#' @param ... Passed onto as.data.frame before final conversion
-#' @return A data frame with the first row the previous top of the stack.
+#' @param x rstack to convert.
+#' @param row.names passed on to as.data.frame before final conversion.
+#' @param optional passed onto as.data.frame before final conversion.
+#' @param ... Passed onto as.data.frame before final conversion.
+#' @return a data frame with the first row the previous top of the stack.
 #' @examples 
 #' s <- rstack()
 #' s <- insert_top(s, data.frame(names = c("Bob", "Joe"), ages = c(25, 18)))
@@ -202,8 +203,8 @@ peek_top.rstack <- function(s, ...) {
 #' @description Returns the number of elements in an \code{rstack}.
 #' 
 #' @details O(1) time, as this information is stored seperately and updated on insert/remove.
-#' @param x The stack to get the length of
-#' @return A vector of length 1, which the number of elements of the stack.
+#' @param x rstack to get the length of.
+#' @return a vector of length 1, which the number of elements of the stack.
 #' @examples
 #' s <- rstack()
 #' s <- insert_top(s, "a")
@@ -222,9 +223,9 @@ length.rstack <- function(x) {
 #' the first element of the list, the second-from-top the second, and so on. 
 #' 
 #' @details O(N), but the generated list is pre-allocated for efficiency.
-#' @param x The stack to convert
-#' @param ... Additional arguments passed to as.list after initial conversion to list.
-#' @return A list
+#' @param x rstack to convert.
+#' @param ... additional arguments passed to as.list after initial conversion to list.
+#' @return a list.
 #' @examples
 #' s <- rstack()
 #' s <- insert_top(s, "a")
@@ -256,8 +257,8 @@ as.list.rstack <- function(x, ...) {
 #' is charged to the newly created stack) at the cost of additional memory usage. Of course, 
 #' if the stack is not being used in a preserved manner, e.g. \code{s <- rev(s)}, the garbage collector
 #' will be free to clean up the original data if it is no longer usable.
-#' @param x The stack to reverse
-#' @return A reversed version fo the stack
+#' @param x rstack to reverse.
+#' @return a reversed version of the stack.
 #' @examples
 #' s <- rstack()
 #' s <- insert_top(s, "a")
@@ -306,9 +307,10 @@ without_top.rstack <- function(s, n = 1, ...) {
 #' @description Returns the top n elements of a stack as a stack, or all of the elements if its length is less than n.
 #' 
 #' @details Runs in O(n) time (in the size of the number of elements requested)
-#' @param x The stack to get the head of
-#' @param ... Arguments to be passed to or from other methods (ignored)
-#' @param n The number of elements to get
+#' @param x rstack to get the head of.
+#' @param ... arguments to be passed to or from other methods (ignored).
+#' @param n number of elements to get.
+#' @return a smaller rstack, with only the top elements kept.
 #' @examples 
 #' s <- rstack()
 #' s <- insert_top(s, "a")
@@ -350,9 +352,9 @@ head.rstack <- function(x, n = 6L, ...) {
 #' @details O(N) in the size of the input. Note that because data frames return a list of 
 #' columns when run through \code{as.list}, running \code{as.rstack} results in a stack of
 #' columns, rather than a stack of rows.
-#' @param x Input to convert to a stack
-#' @param ... additional arguments to be passed to or from methods
-#' @return A new rstack
+#' @param x input to convert to a stack.
+#' @param ... additional arguments to be passed to or from methods.
+#' @return a new rstack.
 #' @examples
 #' s <- as.rstack(1:20)
 #' print(s)
@@ -372,10 +374,10 @@ as.rstack <- function(x, ...) {UseMethod("as.rstack", x)}
 #' @description Returns a version of the stack with the new element in the top position.
 #' 
 #' @details O(1) time worst-case. Does not modify the original stack.
-#' @param s The \code{rstack} to insert onto.
-#' @param e The element to insert.
+#' @param s rstack to insert onto.
+#' @param e element to insert.
 #' @param ... additional arguments to be passed to or from methods.
-#' @return Modified version of the stack.
+#' @return modified version of the stack.
 #' @examples
 #' s <- rstack()
 #' s <- insert_top(s, "a")
@@ -398,9 +400,9 @@ insert_top <- function(s, e, ...) { UseMethod("insert_top", s) }
 #' 
 #' @description Returns \code{TRUE} if the structure has length 0, FALSE otherwise.
 #' 
-#' @param x The \code{rstack}, \code{rdeque}, or \code{rpqueue} to check
+#' @param x rstack, rdeque, or rpqueue to check.
 #' @param ... additional arguments to be passed to or from methods.
-#' @return 1-element logical vector
+#' @return 1-element logical vector.
 #' @examples
 #' s <- rstack()
 #' print(empty(s))        ## TRUE
@@ -419,9 +421,9 @@ empty <- function(x, ...) {UseMethod("empty", x)}
 #' leaving the stack alone.
 #' 
 #' @details O(1) worst-case time.
-#' @param s The stack to look at
+#' @param s stack to look at.
 #' @param ... additional arguments to be passed to or from methods.
-#' @return The data element.
+#' @return data element existing at the top of the given stack.
 #' @examples
 #' s <- rstack()
 #' s <- insert_top(s, "a")
@@ -449,9 +451,10 @@ peek_top <- function(s, ...) { UseMethod("peek_top", s) }
 #' @description Allows modification access to the top of a stack.
 #' 
 #' @details O(1) worst case time. Throws an error if the stack is empty.
-#' @param s The stack to modify the first element of
-#' @param value The value to assign to the top data element.
+#' @param s rstack to modify the first element of.
+#' @param value value to assign to the top data element.
 #' @param ... additional arguments to be passed to or from methods.
+#' @return modified rstack.
 #' @examples
 #' s <- rstack()
 #' s <- insert_top(s, data.frame(a = 1, b = 1))
@@ -473,10 +476,10 @@ peek_top <- function(s, ...) { UseMethod("peek_top", s) }
 #' @details O(n) time worst case (in the number of elements removed). If the
 #' number of elements removed would exceed the size of the stack, an empty stack is returned.
 #' 
-#' @param s The stack to remove elements from
-#' @param n The number of elements to remove
+#' @param s rstack to remove elements from.
+#' @param n number of elements to remove.
 #' @param ... additional arguments to be passed to or from methods.
-#' @return A version of the stack with \code{n} elements removed.
+#' @return version of the stack with \code{n} elements removed.
 #' @examples
 #' s <- rstack()
 #' s <- insert_top(s, "a")

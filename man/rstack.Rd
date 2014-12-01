@@ -6,7 +6,10 @@
 rstack(...)
 }
 \arguments{
-\item{...}{additional arguments to be passed to or from methods}
+\item{...}{additional arguments to be passed to or from methods.}
+}
+\value{
+an empty rstack.
 }
 \description{
 Creates a new, empty, \code{rstack} ready for use.

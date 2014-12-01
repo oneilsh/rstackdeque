@@ -6,10 +6,10 @@
 \method{length}{rstack}(x)
 }
 \arguments{
-\item{x}{The stack to get the length of}
+\item{x}{rstack to get the length of.}
 }
 \value{
-A vector of length 1, which the number of elements of the stack.
+a vector of length 1, which the number of elements of the stack.
 }
 \description{
 Returns the number of elements in an \code{rstack}.
