@@ -14,7 +14,7 @@
 a list.
 }
 \description{
-Converts an \code{rstack} to a list, where the top of the stack becomes
+Converts an rstack to a list, where the top of the stack becomes
 the first element of the list, the second-from-top the second, and so on.
 }
 \details{

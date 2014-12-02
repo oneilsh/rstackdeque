@@ -12,7 +12,7 @@
 a vector of length 1, which the number of elements of the stack.
 }
 \description{
-Returns the number of elements in an \code{rstack}.
+Returns the number of elements in an rstack.
 }
 \details{
 O(1) time, as this information is stored seperately and updated on insert/remove.

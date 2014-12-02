@@ -14,7 +14,7 @@
 a list.
 }
 \description{
-Converts an \code{rdeque} to a list, where the front of the deque becomes
+Converts an rdeque to a list, where the front of the deque becomes
 the first element of the list, the back the last.
 }
 \details{

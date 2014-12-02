@@ -31,15 +31,15 @@
 
 #' @title Create a new empty rdeque.
 #' 
-#' @description Creates a new, empty, \code{rdeque} ready for use.
+#' @description Creates a new, empty, rdeque ready for use.
 #' 
 #' @param ... additional arguments to be passed to or from methods.
 #' @return a new empty rdeque.
-#' @details An rdeque supports efficient insert into the front and back with \code{insert_front} and 
-#' \code{insert_back} (returning a version of
-#' the deque with the new element), peek into the front and back with \code{peek_front} and \code{peek_back} 
+#' @details An rdeque supports efficient insert into the front and back with insert_front and 
+#' insert_back (returning a version of
+#' the deque with the new element), peek into the front and back with peek_front and peek_back 
 #' (returing the data stored at the front or back), and removal with
-#' \code{without_front} and \code{without_back} (returning a version with the front or back
+#' without_front and without_back (returning a version with the front or back
 #'  element removed). 
 #' 
 #' Other handy functions
@@ -146,7 +146,7 @@ as.rdeque.default <- function(x, ...) {
 
 #' @title Default method for length of an rdeque.
 #' 
-#' @description Returns the number of elements in an \code{rdeque}.
+#' @description Returns the number of elements in an rdeque.
 #' 
 #' @details O(1) time, as this information is stored seperately and updated on insert/remove.
 #' @param x rdeque to get the length of.
@@ -165,7 +165,7 @@ length.rdeque <- function(x) {
 
 #' @title Convert an rdeque to a list.
 #' 
-#' @description Converts an \code{rdeque} to a list, where the front of the deque becomes
+#' @description Converts an rdeque to a list, where the front of the deque becomes
 #' the first element of the list, the back the last. 
 #' 
 #' @details O(N), but the generated list is pre-allocated for efficiency.
@@ -204,12 +204,12 @@ print.rdeque <- function(x, ...) {
 
 #' @title Convert an rdeque to a data.frame, if applicable.
 #' 
-#' @description Converts the elements of an \code{rdeque} into rows of a dataframe, if this is reasonable.
+#' @description Converts the elements of an rdeque into rows of a dataframe, if this is reasonable.
 #' 
 #' @details This method runs in O(N) time, and will only work if all elements of the deque have the
 #' same length() (e.g., same number of columns), and if any of the elements have names, then those
 #' names do not conflict (e.g., same column names where used). This is accomplished by a call to
-#' \code{do.call("rbind", as.list(d))}, where \code{as.list(d)} converts the deque \code{d} to a list
+#' \code{do.call("rbind", as.list(d))}, where \code{as.list(d)} converts the deque d to a list
 #' where the front element becomes the first element of the list and the back element becomes the last of the list.
 #' @param x rdeque to convert.
 #' @param row.names passed on to as.data.frame before final conversion.
@@ -452,7 +452,7 @@ fixd <- function(d, ...) {UseMethod("fixd", d)}
 
 #' @title Create a new rdeque pre-filled from a given input.
 #' 
-#' @description Creates a new \code{rdeque} from a given input. Coerces input to a 
+#' @description Creates a new rdeque from a given input. Coerces input to a 
 #' list first using \code{as.list}, the elements of which become elements of the deque, and the
 #' first element becoming the front of the deque.
 #'
@@ -510,7 +510,7 @@ without_front <- function(x, ...) {UseMethod("without_front", x)}
 
 #' @title Return a version of an rdeque without the back element.
 #' 
-#' @details Simply returns a version of the given deque without the back \code{n} elements
+#' @details Simply returns a version of the given deque without the back n elements
 #' (n = 1 by default). The original deque is left alone.
 #' 
 #' @details O(n) time worst case (in the number of elements removed). If the
@@ -518,7 +518,7 @@ without_front <- function(x, ...) {UseMethod("without_front", x)}
 #' 
 #' @param d rdeque to remove elements from.
 #' @param ... additional arguments to be passed to or from methods.
-#' @return a version of the rdeque with \code{n} elements removed.
+#' @return a version of the rdeque with n elements removed.
 #' @examples
 #' d <- rdeque()
 #' d <- insert_front(d, "a")

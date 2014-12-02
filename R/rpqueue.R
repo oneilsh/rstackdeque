@@ -23,15 +23,15 @@
 
 #' @title Create a new empty rpqueue.
 #' 
-#' @description Creates a new, empty, \code{rpqueue} ready for use.
+#' @description Creates a new, empty, rpqueue ready for use.
 #' 
 #' @param ... additional arguments to be passed to or from methods.
 #' @return a new rpqueue.
-#' @details An rpqueue supports efficient insert into the back with \code{insert_back} and 
+#' @details An rpqueue supports efficient insert into the back with insert_back and 
 #' (returning a version of
-#' the queue with the new element), peek into the front with \code{peek_front}
+#' the queue with the new element), peek into the front with peek_front
 #' (returing the data stored at the front element), and removal with
-#' \code{without_front} (returning a version with the front
+#' without_front (returning a version with the front
 #'  element removed). 
 #' 
 #' Other handy functions
@@ -125,7 +125,7 @@ as.rpqueue.default <- function(x, ...) {
 
 #' @title Create an rpqueue pre-filled from a given input.
 #' 
-#' @description Creates a new \code{rpqueue} from a given input. Coerces input to a 
+#' @description Creates a new rpqueue from a given input. Coerces input to a 
 #' list first using \code{as.list}, the elements of which become elements of the queue, and the
 #' first element becoming the front of the queue
 #'
@@ -148,7 +148,7 @@ as.rpqueue <- function(x, ...) {UseMethod("as.rpqueue", x)}
 
 #' @title Convert an rpqueue to a list.
 #' 
-#' @description Converts an \code{rpqueue} to a list, where the front of the queue becomes
+#' @description Converts an rpqueue to a list, where the front of the queue becomes
 #' the first element of the list, the back the last. 
 #' 
 #' @details O(N), but the generated list is pre-allocated for efficiency.
@@ -169,12 +169,12 @@ as.list.rpqueue <- function(x, ...) {
 
 #' @title Convert an rpqueue to a data.frame, if applicable.
 #' 
-#' @description Converts the elements of an \code{rpqueue} into rows of a dataframe, if this is reasonable.
+#' @description Converts the elements of an rpqueue into rows of a dataframe, if this is reasonable.
 #' 
 #' @details This method runs in O(N) time, and will only work if all elements of the deque have the
 #' same length() (e.g., same number of columns), and if any of the elements have names, then those
 #' names do not conflict (e.g., same column names where used). This is accomplished by a call to
-#' \code{do.call("rbind", as.list(d))}, where \code{as.list(d)} converts the deque \code{d} to a list
+#' \code{do.call("rbind", as.list(d))}, where \code{as.list(d)} converts the deque d to a list
 #' where the front element becomes the first element of the list and the back element becomes the last of the list.
 #' @param x rpqueue to convert.
 #' @param row.names passed on to as.data.frame before final conversion.
@@ -263,7 +263,7 @@ peek_front <- function(x, ...) {UseMethod("peek_front", x)}
 
 #' @title Default method for length of an rpqueue.
 #' 
-#' @description Returns the number of elements in an \code{rpqueue}.
+#' @description Returns the number of elements in an rpqueue.
 #' 
 #' @details O(1) time, as this information is stored seperately and updated on insert/remove.
 #' @param x rpqueue to get the length of.
@@ -286,7 +286,7 @@ length.rpqueue <- function(x) {
 #' @param acclazylist lazy list accumulator.
 #' @param ... additional arguments to be passed to or from methods.
 #' @return rotated rpqueue.
-#' @description The lazy list accumulator, keeping the queue partially rotated
+#' @description The lazy list accumulator, keeping the queue partially rotated. 
 rotate.rpqueue <- function(rpqueue, acclazylist, ...) {
   ## safety check :-P
   if(length(rpqueue) == 0) {
@@ -320,7 +320,7 @@ rotate.rpqueue <- function(rpqueue, acclazylist, ...) {
 
 #' @title Incremental rotation for an rpqueue.
 #' 
-#' @description An method for keeping the pair of lazy lists approximately equal
+#' @description A method for keeping the pair of lazy lists approximately equal
 #' in length in an incremental fashion. 
 #' 
 #' @param ... additional arguments to be passed to or from methods.
@@ -335,7 +335,7 @@ rotate <- function(rpqueue, acclazylist, ...) {UseMethod("rotate", rpqueue)}
 
 
 #' @title Makeequal for an rpqueue.
-#' @description See makeequal generic
+#' @description Used for keeping an rpqueue O(1) as it is used.
 #' @param rpqueue rpqueue to make equal.
 #' @param ... additional arguments to be passed to or from methods.
 #' @return an rpqueue.

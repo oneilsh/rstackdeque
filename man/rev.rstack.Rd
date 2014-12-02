@@ -12,7 +12,7 @@
 a reversed version of the stack.
 }
 \description{
-Returns a reversed version of an \code{rstack}, where the old last element (generally
+Returns a reversed version of an rstack, where the old last element (generally
 inaccessible) is now the top.
 }
 \details{

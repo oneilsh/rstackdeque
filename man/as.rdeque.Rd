@@ -14,7 +14,7 @@ as.rdeque(x, ...)
 a new rdeque.
 }
 \description{
-Creates a new \code{rdeque} from a given input. Coerces input to a
+Creates a new rdeque from a given input. Coerces input to a
 list first using \code{as.list}, the elements of which become elements of the deque, and the
 first element becoming the front of the deque.
 }

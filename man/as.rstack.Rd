@@ -14,7 +14,7 @@ as.rstack(x, ...)
 a new rstack.
 }
 \description{
-Creates a new \code{rstack} from a given input. Coerces input to a
+Creates a new rstack from a given input. Coerces input to a
 list first using \code{as.list}, the elements of which become elements of the stack, and the
 first element becoming the top of the stack.
 }

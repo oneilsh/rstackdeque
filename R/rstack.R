@@ -19,7 +19,7 @@
 #' Create a new rstacknode from a given object.
 #' 
 #' @description
-#' For use by \code{rstack}s and \code{rdeque}s. An environment with no parent,
+#' For use by rstacks and rdeques. Simply an environment with no parent,
 #' reference for the data and the next node.
 #' @param data data to reference with this node.
 #' @return an environment.
@@ -35,18 +35,18 @@ rstacknode <- function(data) {
 
 #' @title Create a new empty rstack.
 #' 
-#' @description Creates a new, empty, \code{rstack} ready for use.
+#' @description Creates a new, empty, rstack ready for use.
 #' 
-#' @details An rstack supports efficient insert into the top with \code{insert_top} (returning a version of
-#' the stack with the new element), \code{peek_top} (returing the data stored at the top of the stack), and
-#' \code{without_top} (returning a version with the top element removed). 
+#' @details An rstack supports efficient insert into the top with insert_top (returning a version of
+#' the stack with the new element), peek_top (returing the data stored at the top of the stack), and
+#' without_top (returning a version with the top element removed). 
 #' 
 #' Other handy functions
 #' insclude \code{as.list} and \code{as.data.frame} (the latter of which requires that
 #' all elements can be appended to become rows of a data frame in a reasonable manner). Operations
 #' are amortized O(1).
 #' 
-#' The \code{rstack} class also supports \code{rev} - this operation is O(N), and results in a copy. This 
+#' The rstack class also supports rev - this operation is O(N), and results in a copy. This 
 #' means previous versions will retain their O(1) amortized nature (if we assume the cost of the reverse is charged
 #' to the newly created stack), at the cost of memory usage. However, this means that if stacks
 #' are used in a non-persistent way, e.g. \code{s <- rev(s)}, then the garbage collector is free to clean
@@ -118,12 +118,12 @@ print.rstack <- function(x, ...) {
 
 #' @title Convert an rstack to a data.frame.
 #' 
-#' @description Converts the elements of an \code{rstack} into rows of a dataframe, if this is reasonable.
+#' @description Converts the elements of an rstack into rows of a dataframe, if this is reasonable.
 #' 
 #' @details This method runs in O(N) time, and will only work if all elements of the stack have the
 #' same length() (e.g., same number of columns), and if any of the elements have names, then those
 #' names do not conflict (e.g., same column names where used). This is accomplished by a call to
-#' \code{do.call("rbind", as.list(s))}, where \code{as.list(s)} converts the stack \code{s} to a list
+#' \code{do.call("rbind", as.list(s))}, where \code{as.list(s)} converts the stack s to a list
 #' where the top element becomes the first element of the list.
 #' @param x rstack to convert.
 #' @param row.names passed on to as.data.frame before final conversion.
@@ -200,7 +200,7 @@ peek_top.rstack <- function(s, ...) {
 
 #' @title Default method for length on an rstack.
 #' 
-#' @description Returns the number of elements in an \code{rstack}.
+#' @description Returns the number of elements in an rstack.
 #' 
 #' @details O(1) time, as this information is stored seperately and updated on insert/remove.
 #' @param x rstack to get the length of.
@@ -219,7 +219,7 @@ length.rstack <- function(x) {
 
 #' @title Convert an rstack to a list.
 #' 
-#' @description Converts an \code{rstack} to a list, where the top of the stack becomes
+#' @description Converts an rstack to a list, where the top of the stack becomes
 #' the first element of the list, the second-from-top the second, and so on. 
 #' 
 #' @details O(N), but the generated list is pre-allocated for efficiency.
@@ -248,7 +248,7 @@ as.list.rstack <- function(x, ...) {
 
 #' @title Reverse an rstack.
 #' 
-#' @description Returns a reversed version of an \code{rstack}, where the old last element (generally
+#' @description Returns a reversed version of an rstack, where the old last element (generally
 #' inaccessible) is now the top.
 #' 
 #' @details This method is O(N), though it works behind-the-scenes by converting the input stack
@@ -345,7 +345,7 @@ head.rstack <- function(x, n = 6L, ...) {
 
 #' @title Create an rstack pre-filled from a given input.
 #' 
-#' @description Creates a new \code{rstack} from a given input. Coerces input to a 
+#' @description Creates a new rstack from a given input. Coerces input to a 
 #' list first using \code{as.list}, the elements of which become elements of the stack, and the
 #' first element becoming the top of the stack.
 #'
@@ -398,7 +398,7 @@ insert_top <- function(s, e, ...) { UseMethod("insert_top", s) }
 
 #' @title Check if an rstack, rdeque, or rpqueue is empty.
 #' 
-#' @description Returns \code{TRUE} if the structure has length 0, FALSE otherwise.
+#' @description Returns TRUE if the structure has length 0, FALSE otherwise.
 #' 
 #' @param x rstack, rdeque, or rpqueue to check.
 #' @param ... additional arguments to be passed to or from methods.
@@ -470,7 +470,7 @@ peek_top <- function(s, ...) { UseMethod("peek_top", s) }
 
 #' @title Return a version of an rstack without the top element.
 #' 
-#' @details Simply returns a version of the given stack without the top \code{n} elements
+#' @details Simply returns a version of the given stack without the top n elements
 #' (n = 1 by default). The original stack is left alone.
 #' 
 #' @details O(n) time worst case (in the number of elements removed). If the
@@ -479,7 +479,7 @@ peek_top <- function(s, ...) { UseMethod("peek_top", s) }
 #' @param s rstack to remove elements from.
 #' @param n number of elements to remove.
 #' @param ... additional arguments to be passed to or from methods.
-#' @return version of the stack with \code{n} elements removed.
+#' @return version of the stack with n elements removed.
 #' @examples
 #' s <- rstack()
 #' s <- insert_top(s, "a")

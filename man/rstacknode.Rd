@@ -12,7 +12,7 @@ rstacknode(data)
 an environment.
 }
 \description{
-For use by \code{rstack}s and \code{rdeque}s. An environment with no parent,
+For use by rstacks and rdeques. Simply an environment with no parent,
 reference for the data and the next node.
 }
 \details{

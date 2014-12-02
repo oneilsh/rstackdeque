@@ -11,13 +11,13 @@ without_back(d, ...)
 \item{...}{additional arguments to be passed to or from methods.}
 }
 \value{
-a version of the rdeque with \code{n} elements removed.
+a version of the rdeque with n elements removed.
 }
 \description{
 Return a version of an rdeque without the back element.
 }
 \details{
-Simply returns a version of the given deque without the back \code{n} elements
+Simply returns a version of the given deque without the back n elements
 (n = 1 by default). The original deque is left alone.
 }
 \examples{

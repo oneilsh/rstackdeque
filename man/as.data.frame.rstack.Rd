@@ -18,13 +18,13 @@
 a data frame with the first row the previous top of the stack.
 }
 \description{
-Converts the elements of an \code{rstack} into rows of a dataframe, if this is reasonable.
+Converts the elements of an rstack into rows of a dataframe, if this is reasonable.
 }
 \details{
 This method runs in O(N) time, and will only work if all elements of the stack have the
 same length() (e.g., same number of columns), and if any of the elements have names, then those
 names do not conflict (e.g., same column names where used). This is accomplished by a call to
-\code{do.call("rbind", as.list(s))}, where \code{as.list(s)} converts the stack \code{s} to a list
+\code{do.call("rbind", as.list(s))}, where \code{as.list(s)} converts the stack s to a list
 where the top element becomes the first element of the list.
 }
 \examples{

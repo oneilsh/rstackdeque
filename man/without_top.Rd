@@ -13,13 +13,13 @@ without_top(s, n, ...)
 \item{...}{additional arguments to be passed to or from methods.}
 }
 \value{
-version of the stack with \code{n} elements removed.
+version of the stack with n elements removed.
 }
 \description{
 Return a version of an rstack without the top element.
 }
 \details{
-Simply returns a version of the given stack without the top \code{n} elements
+Simply returns a version of the given stack without the top n elements
 (n = 1 by default). The original stack is left alone.
 }
 \examples{

@@ -12,7 +12,7 @@ rdeque(...)
 a new empty rdeque.
 }
 \description{
-Creates a new, empty, \code{rdeque} ready for use.
+Creates a new, empty, rdeque ready for use.
 }
 \details{
 O(1) amortized deque, but only when used semi-persistnetly. Exported functions:
@@ -32,11 +32,11 @@ peek_front(d)
 peek_back(d)
 head()
 
-An rdeque supports efficient insert into the front and back with \code{insert_front} and
-\code{insert_back} (returning a version of
-the deque with the new element), peek into the front and back with \code{peek_front} and \code{peek_back}
+An rdeque supports efficient insert into the front and back with insert_front and
+insert_back (returning a version of
+the deque with the new element), peek into the front and back with peek_front and peek_back
 (returing the data stored at the front or back), and removal with
-\code{without_front} and \code{without_back} (returning a version with the front or back
+without_front and without_back (returning a version with the front or back
  element removed).
 
 Other handy functions

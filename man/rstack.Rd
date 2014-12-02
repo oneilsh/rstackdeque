@@ -12,19 +12,19 @@ rstack(...)
 an empty rstack.
 }
 \description{
-Creates a new, empty, \code{rstack} ready for use.
+Creates a new, empty, rstack ready for use.
 }
 \details{
-An rstack supports efficient insert into the top with \code{insert_top} (returning a version of
-the stack with the new element), \code{peek_top} (returing the data stored at the top of the stack), and
-\code{without_top} (returning a version with the top element removed).
+An rstack supports efficient insert into the top with insert_top (returning a version of
+the stack with the new element), peek_top (returing the data stored at the top of the stack), and
+without_top (returning a version with the top element removed).
 
 Other handy functions
 insclude \code{as.list} and \code{as.data.frame} (the latter of which requires that
 all elements can be appended to become rows of a data frame in a reasonable manner). Operations
 are amortized O(1).
 
-The \code{rstack} class also supports \code{rev} - this operation is O(N), and results in a copy. This
+The rstack class also supports rev - this operation is O(N), and results in a copy. This
 means previous versions will retain their O(1) amortized nature (if we assume the cost of the reverse is charged
 to the newly created stack), at the cost of memory usage. However, this means that if stacks
 are used in a non-persistent way, e.g. \code{s <- rev(s)}, then the garbage collector is free to clean

@@ -12,7 +12,7 @@
 vector of length 1, which the number of elements of the deque.
 }
 \description{
-Returns the number of elements in an \code{rdeque}.
+Returns the number of elements in an rdeque.
 }
 \details{
 O(1) time, as this information is stored seperately and updated on insert/remove.
