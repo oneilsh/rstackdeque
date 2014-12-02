@@ -16,7 +16,7 @@
 
 
 #' @title
-#' Create a new rstacknode with a given object
+#' Create a new rstacknode from a given object.
 #' 
 #' @description
 #' For use by \code{rstack}s and \code{rdeque}s. An environment with no parent,
@@ -33,7 +33,7 @@ rstacknode <- function(data) {
 }
 
 
-#' @title Create a new rstack
+#' @title Create a new empty rstack.
 #' 
 #' @description Creates a new, empty, \code{rstack} ready for use.
 #' 
@@ -116,7 +116,7 @@ print.rstack <- function(x, ...) {
 }
 
 
-#' @title Convert an \code{rstack} to a \code{data.frame}.
+#' @title Convert an rstack to a data.frame.
 #' 
 #' @description Converts the elements of an \code{rstack} into rows of a dataframe, if this is reasonable.
 #' 
@@ -198,7 +198,7 @@ peek_top.rstack <- function(s, ...) {
   return(s)
 }
 
-#' @title Default method for \code{length} on an rstack.
+#' @title Default method for length on an rstack.
 #' 
 #' @description Returns the number of elements in an \code{rstack}.
 #' 
@@ -217,7 +217,7 @@ length.rstack <- function(x) {
 }
 
 
-#' @title Conversion of an \code{rstack} to a \code{list}
+#' @title Convert an rstack to a list.
 #' 
 #' @description Converts an \code{rstack} to a list, where the top of the stack becomes
 #' the first element of the list, the second-from-top the second, and so on. 
@@ -246,7 +246,7 @@ as.list.rstack <- function(x, ...) {
   return(as.list(retlist, ...))
 }
 
-#' @title Reverse an \code{rstack}
+#' @title Reverse an rstack.
 #' 
 #' @description Returns a reversed version of an \code{rstack}, where the old last element (generally
 #' inaccessible) is now the top.
@@ -302,7 +302,7 @@ without_top.rstack <- function(s, n = 1, ...) {
 
 
 
-#' @title Return the top n elements of a stack as a stack
+#' @title Return the top n elements of an rstack as an rstack.
 #' 
 #' @description Returns the top n elements of a stack as a stack, or all of the elements if its length is less than n.
 #' 
@@ -343,7 +343,7 @@ head.rstack <- function(x, n = 6L, ...) {
 }
 
 
-#' @title Create an \code{rstack} from a given input
+#' @title Create an rstack pre-filled from a given input.
 #' 
 #' @description Creates a new \code{rstack} from a given input. Coerces input to a 
 #' list first using \code{as.list}, the elements of which become elements of the stack, and the
@@ -369,7 +369,7 @@ head.rstack <- function(x, n = 6L, ...) {
 as.rstack <- function(x, ...) {UseMethod("as.rstack", x)}
 
 
-#' @title Insert an element into the top of an \code{rstack}
+#' @title Insert an element into the top of an rstack.
 #' 
 #' @description Returns a version of the stack with the new element in the top position.
 #' 
@@ -396,7 +396,7 @@ insert_top <- function(s, e, ...) { UseMethod("insert_top", s) }
 
 
 
-#' @title Check if a stack, deque, or queue is empty
+#' @title Check if an rstack, rdeque, or rpqueue is empty.
 #' 
 #' @description Returns \code{TRUE} if the structure has length 0, FALSE otherwise.
 #' 
@@ -415,7 +415,7 @@ empty <- function(x, ...) {UseMethod("empty", x)}
 
 
 
-#' @title Return the data element at the top of the stack.
+#' @title Return the data element at the top of an rstack.
 #' 
 #' @description Simply returns the data element sitting at the top of the stack,
 #' leaving the stack alone.
@@ -446,7 +446,7 @@ peek_top <- function(s, ...) { UseMethod("peek_top", s) }
 
 
 
-#' @title Assign to/modify the top of a stack.
+#' @title Assign to/modify the top of an rstack.
 #' 
 #' @description Allows modification access to the top of a stack.
 #' 
@@ -468,7 +468,7 @@ peek_top <- function(s, ...) { UseMethod("peek_top", s) }
 `peek_top<-` <- function(s, ..., value) { UseMethod("peek_top<-", s) }
 
 
-#' @title Return version of the stack without the top
+#' @title Return a version of an rstack without the top element.
 #' 
 #' @details Simply returns a version of the given stack without the top \code{n} elements
 #' (n = 1 by default). The original stack is left alone.

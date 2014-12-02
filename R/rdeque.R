@@ -29,7 +29,7 @@
 
 
 
-#' @title Create a new rdeque
+#' @title Create a new empty rdeque.
 #' 
 #' @description Creates a new, empty, \code{rdeque} ready for use.
 #' 
@@ -83,7 +83,7 @@ empty.rdeque <- function(x, ...) {
 
 
 
-#' @title Return the top n elements of a deque as a deque
+#' @title Return the top n elements of an rdeque as an rdeque.
 #' 
 #' @description Returns the top n elements of a deque as a deque, or all of the elements if its length is less than n.
 #' 
@@ -144,7 +144,7 @@ as.rdeque.default <- function(x, ...) {
 }
 
 
-#' @title Default method for \code{length} of an rdeque
+#' @title Default method for length of an rdeque.
 #' 
 #' @description Returns the number of elements in an \code{rdeque}.
 #' 
@@ -163,7 +163,7 @@ length.rdeque <- function(x) {
 }
 
 
-#' @title Conversion of an \code{rdeque} to a \code{list}
+#' @title Convert an rdeque to a list.
 #' 
 #' @description Converts an \code{rdeque} to a list, where the front of the deque becomes
 #' the first element of the list, the back the last. 
@@ -202,7 +202,7 @@ print.rdeque <- function(x, ...) {
   }
 }
 
-#' @title Convert an \code{rdeque} to a \code{data.frame}.
+#' @title Convert an rdeque to a data.frame, if applicable.
 #' 
 #' @description Converts the elements of an \code{rdeque} into rows of a dataframe, if this is reasonable.
 #' 
@@ -257,7 +257,7 @@ as.data.frame.rdeque <- function(x, row.names = NULL, optional = FALSE, ...) {
 
 
 
-#' @title Fixd
+#' @title Fix an rdeque.
 #' @param d The deque to fix
 #' @param ... additional arguments to be passed to or from methods.
 #' @return a fixed deque.
@@ -330,7 +330,7 @@ peek_front.rdeque <- function(x, ...) {
   return(x)
 }
 
-#' @title Assign to/modify the front of a deque.
+#' @title Assign to/modify the front of an rdeque.
 #' 
 #' @description Allows modification access to the front of a deque or queue.
 #' 
@@ -372,7 +372,7 @@ peek_front.rdeque <- function(x, ...) {
   return(d)
 }
 
-#' @title Assign to/modify the front of a deque.
+#' @title Assign to/modify the front of an rdeque.
 #' 
 #' @description Allows modification access to the back of a deque.
 #' 
@@ -437,7 +437,7 @@ insert_back.rdeque <- function(x, e, ...) {
 
 
 
-#' @title Fix method for deques
+#' @title Fix an rdequeue.
 #' 
 #' @description Maintains the invariant that there is always something in $l and $r
 #' so long as there is 2 more elements in the queue.
@@ -450,7 +450,7 @@ insert_back.rdeque <- function(x, e, ...) {
 fixd <- function(d, ...) {UseMethod("fixd", d)}
 
 
-#' @title Create an \code{rdeque} from a given input
+#' @title Create a new rdeque pre-filled from a given input.
 #' 
 #' @description Creates a new \code{rdeque} from a given input. Coerces input to a 
 #' list first using \code{as.list}, the elements of which become elements of the deque, and the
@@ -480,7 +480,7 @@ as.rdeque <- function(x, ...) {UseMethod("as.rdeque", x)}
 
 
 
-#' @title Return version of a deque/queue without the front
+#' @title Return a version of an rdeque or rpqueue without the front element.
 #' 
 #' @details Simply returns a version of the given structure without the front element.
 #' The original is left alone.
@@ -508,7 +508,7 @@ as.rdeque <- function(x, ...) {UseMethod("as.rdeque", x)}
 without_front <- function(x, ...) {UseMethod("without_front", x)}
 
 
-#' @title Return version of the deque without the back
+#' @title Return a version of an rdeque without the back element.
 #' 
 #' @details Simply returns a version of the given deque without the back \code{n} elements
 #' (n = 1 by default). The original deque is left alone.
@@ -536,7 +536,7 @@ without_front <- function(x, ...) {UseMethod("without_front", x)}
 without_back <- function(d, ...) {UseMethod("without_back", d)}
 
 
-#' @title Return the data element at the front of the deque.
+#' @title Return the data element at the front of an rdeque.
 #' 
 #' @description Simply returns the data element sitting at the front of the deque,
 #' leaving the deque alone.
@@ -560,7 +560,7 @@ peek_front <- function(x, ...) {UseMethod("peek_front", x)}
 
 
 
-#' @title Return the data element at the back of the deque.
+#' @title Return the data element at the back of an rdeque.
 #' 
 #' @description Simply returns the data element sitting at the back of the deque,
 #' leaving the deque alone.
@@ -581,7 +581,7 @@ peek_back <- function(d, ...) {UseMethod("peek_back", d)}
 
 
 
-#' @title Insert an element into the front of an \code{rdeque}
+#' @title Insert an element into the front of an rdeque.
 #' 
 #' @description Returns a version of the deque with the new element in the front position.
 #' 
@@ -604,7 +604,7 @@ insert_front <- function(d, e, ...) {UseMethod("insert_front", d)}
 
 
 
-#' @title Insert an element into the back of an \code{rdeque} or \code{rpqueue}
+#' @title Insert an element into the back of an rdequeu or rpqueue.
 #' 
 #' @description Returns a version of the deque/queue with the new element in the back position.
 #' 
