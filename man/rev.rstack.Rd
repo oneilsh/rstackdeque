@@ -9,17 +9,18 @@
 \item{x}{rstack to reverse.}
 }
 \value{
-a reversed version of the stack.
+a reversed version of the rstack.
 }
 \description{
 Returns a reversed version of an rstack, where the old last element (generally
-inaccessible) is now the top.
+inaccessible) is now the top (and thus now accessible).
 }
 \details{
-This method is O(N), though it works behind-the-scenes by converting the input stack
+This method runs in  \eqn{O(N)} in the size of the rstack, though it works behind-the-scenes
+for efficiency by converting the input stack
 to a list, reversing the list, and building the result as a new rstack. The original is thus
-left alone, preserving O(1) amortized time for the original (assuming the "cost" of reversing
-is charged to the newly created stack) at the cost of additional memory usage. Of course,
+left alone, preserving \eqn{O(1)} amortized time for the original (assuming the "cost" of reversing
+is charged to the newly created stack) at the cost of additional memory usage. But,
 if the stack is not being used in a preserved manner, e.g. \code{s <- rev(s)}, the garbage collector
 will be free to clean up the original data if it is no longer usable.
 }
@@ -32,5 +33,8 @@ s <- insert_top(s, "c")
 r <- rev(s)
 print(r)
 print(s)
+}
+\seealso{
+\code{\link{as.list.rstack}} for converting an rstack to a list.
 }
 

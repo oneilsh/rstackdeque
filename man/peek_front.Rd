@@ -8,7 +8,7 @@ peek_front(x, ...)
 \arguments{
 \item{x}{rdeque to look at.}
 
-\item{...}{additional arguments to be passed to or from methods.}
+\item{...}{additional arguments to be passed to or from methods (ignored).}
 }
 \value{
 data element at the front of the rdeque.
@@ -18,7 +18,7 @@ Simply returns the data element sitting at the front of the deque,
 leaving the deque alone.
 }
 \details{
-O(1) worst-case time.
+Runs in \eqn{O(1)} worst-case time.
 }
 \examples{
 d <- rdeque()

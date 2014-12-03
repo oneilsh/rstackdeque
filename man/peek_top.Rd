@@ -6,19 +6,19 @@
 peek_top(s, ...)
 }
 \arguments{
-\item{s}{stack to look at.}
+\item{s}{rstack to peek at.}
 
-\item{...}{additional arguments to be passed to or from methods.}
+\item{...}{additional arguments to be passed to or from methods (ignored).}
 }
 \value{
-data element existing at the top of the given stack.
+data element existing at the top of the rstack.
 }
 \description{
-Simply returns the data element sitting at the top of the stack,
-leaving the stack alone.
+Simply returns the data element sitting at the top of the rstack,
+leaving the rstack alone.
 }
 \details{
-O(1) worst-case time.
+Runs in \code{O(1)} worst-case time.
 }
 \examples{
 s <- rstack()
@@ -37,5 +37,8 @@ peek_top(s)$a <- 100
 print(s)
 
 peek_top(s) <- data.frame(a = 100, b = 100)
+}
+\seealso{
+\code{\link{without_top}} for removing the top element.
 }
 

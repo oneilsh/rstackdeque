@@ -11,14 +11,14 @@
 \item{...}{additional arguments passed to as.list after initial conversion to list.}
 }
 \value{
-a list.
+a list containing the elements of the stack in top-to-bottom order.
 }
 \description{
 Converts an rstack to a list, where the top of the stack becomes
 the first element of the list, the second-from-top the second, and so on.
 }
 \details{
-O(N), but the generated list is pre-allocated for efficiency.
+Runs in \eqn{O(N)} time in the size of the stack, but the generated list is pre-allocated for efficiency.
 }
 \examples{
 s <- rstack()
@@ -27,5 +27,8 @@ s <- insert_top(s, "b")
 
 slist <- as.list(s)
 print(slist)
+}
+\seealso{
+\code{\link{as.data.frame.rstack}}
 }
 

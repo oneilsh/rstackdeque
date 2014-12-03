@@ -6,7 +6,7 @@
 rdeque(...)
 }
 \arguments{
-\item{...}{additional arguments to be passed to or from methods.}
+\item{...}{additional arguments to be passed to or from methods (ignored).}
 }
 \value{
 a new empty rdeque.
@@ -15,35 +15,22 @@ a new empty rdeque.
 Creates a new, empty, rdeque ready for use.
 }
 \details{
-O(1) amortized deque, but only when used semi-persistnetly. Exported functions:
+An rdeque provided both "Last In, First Out" (LIFO) and "First In, First Out" (FIFO) access;
+envisaged as queue, elements may be added or removed from the front or the back with \code{\link{insert_front}},
+\code{\link{insert_back}}, \code{\link{without_front}}, and \code{\link{without_back}}. The front and back
+elements may be retrieved with \code{\link{peek_front}} and \code{\link{peek_back}}.
 
-rdeque()
-empty(d)
-as.rdeque(input)
-length(d)
-as.list(d)
-print(d)
-as.data.frame(d)
-without_front(d)
-without_back(d)
-insert_front(d, element)
-insert_back(d, element)
-peek_front(d)
-peek_back(d)
-head()
+Internally, rdeques are stored as a pair of rstacks; they provide \eqn{O(1)}-amortized insertion and removal,
+so long as they are not used persistently (that is, the variable storing the deque is always replaced
+by the modified version, e.g. \code{s <- without_front(s)}). When used persistently (e.g. \code{s2 <- without_front(s)}, which results
+in two deques being accessible), this cannot be gauranteed. When an \eqn{O(1)} worst-cast, fully
+persistent FIFO queue is needed, the rpqueue from this package provides these semantics. However,
+there is a constant-time overhead for rpqueues, such that rdeques are often more efficient (and flexible)
+in practice, even in when used persistently.
 
-An rdeque supports efficient insert into the front and back with insert_front and
-insert_back (returning a version of
-the deque with the new element), peek into the front and back with peek_front and peek_back
-(returing the data stored at the front or back), and removal with
-without_front and without_back (returning a version with the front or back
- element removed).
-
-Other handy functions
+Other useful functions
 include \code{as.list} and \code{as.data.frame} (the latter of which requires that
-all elements can be appended to become rows of a data frame in a reasonable manner). Most operations
-are amortized O(1), UNLESS previous versions of the structure are used heavily. In these cases, if you notice
-significant slowdown, consider using an rpqueue.
+all elements can be appended to become rows of a data frame in a reasonable manner).
 }
 \examples{
 d <- rdeque()
@@ -59,5 +46,8 @@ print(d)
 
 b <- peek_front(d)
 print(b)
+}
+\seealso{
+\code{\link{rstack}} for a fast LIFO-only structure.
 }
 

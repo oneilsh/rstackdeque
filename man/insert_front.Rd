@@ -6,11 +6,11 @@
 insert_front(d, e, ...)
 }
 \arguments{
-\item{d}{rdequeue to insert onto.}
+\item{d}{rdeque to insert onto.}
 
 \item{e}{element to insert.}
 
-\item{...}{additional arguments to be passed to or from methods.}
+\item{...}{additional arguments to be passed to or from methods (ignored).}
 }
 \value{
 modified version of the rdeque.
@@ -19,7 +19,7 @@ modified version of the rdeque.
 Returns a version of the deque with the new element in the front position.
 }
 \details{
-O(1) time worst-case. Does not modify the original deque.
+Runs in \eqn{O(1)} time worst-case. Does not modify the original rdeque.
 }
 \examples{
 d <- rdeque()
@@ -30,5 +30,8 @@ print(d)
 d2 <- insert_front(d, "c")
 print(d2)
 print(d)
+}
+\seealso{
+\code{\link{without_front}} for removing the front element.
 }
 

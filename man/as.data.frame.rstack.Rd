@@ -8,23 +8,24 @@
 \arguments{
 \item{x}{rstack to convert.}
 
-\item{row.names}{passed on to as.data.frame before final conversion.}
+\item{row.names}{passed on to \code{as.data.frame} before final conversion.}
 
-\item{optional}{passed onto as.data.frame before final conversion.}
+\item{optional}{passed onto \code{as.data.frame} before final conversion.}
 
-\item{...}{Passed onto as.data.frame before final conversion.}
+\item{...}{passed onto \code{as.data.frame} before final conversion.}
 }
 \value{
-a data frame with the first row the previous top of the stack.
+a data.frame with the first row the previous top of the stack.
 }
 \description{
-Converts the elements of an rstack into rows of a dataframe, if this is reasonable.
+Converts the elements of an rstack into rows of a data.frame, if this is reasonable.
 }
 \details{
-This method runs in O(N) time, and will only work if all elements of the stack have the
-same length() (e.g., same number of columns), and if any of the elements have names, then those
-names do not conflict (e.g., same column names where used). This is accomplished by a call to
-\code{do.call("rbind", as.list(s))}, where \code{as.list(s)} converts the stack s to a list
+This function runs in \eqn{O(N)} time in the size of the rstack, and will only work if all
+elements of the stack have the same length() (e.g., same number of columns), and if any of the
+elements have names, then those names do not conflict (e.g., same column names where used).
+This is accomplished by a call to
+\code{do.call("rbind", as.list.rstack(x))}, where \code{\link{as.list.rstack}} converts the rstack to a list
 where the top element becomes the first element of the list.
 }
 \examples{
@@ -36,6 +37,14 @@ print(s)
 sd <- as.data.frame(s)
 print(sd)
 
+## Elements may be similarly-named lists as well, representing individual rows:
+s <- rstack()
+s <- insert_top(s, list(name = "Bob", age = 25))
+s <- insert_top(s, list(name = "Mary", age = 24))
+print(s)
+
+sd <- as.data.frame(s)
+print(sd)
 
 ## Building a stack in a loop, converting to a dataframe after the fact:
 s <- rstack()
@@ -50,5 +59,8 @@ for(i in 1:1000) {
  }
 }
 print(head(as.data.frame(s)))
+}
+\seealso{
+\code{\link{as.list.rstack}} for conversion to a list and the generic \code{\link{as.data.frame}}.
 }
 

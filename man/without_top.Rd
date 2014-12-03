@@ -3,24 +3,22 @@
 \alias{without_top}
 \title{Return a version of an rstack without the top element.}
 \usage{
-without_top(s, n, ...)
+without_top(s, ...)
 }
 \arguments{
 \item{s}{rstack to remove elements from.}
 
-\item{n}{number of elements to remove.}
-
-\item{...}{additional arguments to be passed to or from methods.}
+\item{...}{additional arguments to be passed to or from methods (ignored).}
 }
 \value{
-version of the stack with n elements removed.
+version of the stack with the top \eqn{n} elements removed.
 }
 \description{
-Return a version of an rstack without the top element.
+Simply returns a version of the given stack without the top element. Results in an error if the structure is empty.
+The original rstack is left alone.
 }
 \details{
-Simply returns a version of the given stack without the top n elements
-(n = 1 by default). The original stack is left alone.
+Runs in \eqn{O(1)} time worst case.
 }
 \examples{
 s <- rstack()
@@ -35,5 +33,8 @@ s3 <- without_top(s, n = 2)
 print(s3)
 
 print(s)
+}
+\seealso{
+\code{\link{insert_top}} for inserting elements.
 }
 

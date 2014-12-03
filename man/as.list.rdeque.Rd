@@ -8,17 +8,17 @@
 \arguments{
 \item{x}{rdeque to convert.}
 
-\item{...}{additional parameters sent to as.list after initial conversion.}
+\item{...}{additional arguments passed to as.list after initial conversion to list.}
 }
 \value{
-a list.
+a list containing the elements of the rdeqeue in front-to-back order.
 }
 \description{
 Converts an rdeque to a list, where the front of the deque becomes
-the first element of the list, the back the last.
+the first element of the list, the second-from-front the second, and so on.
 }
 \details{
-O(N), but the generated list is pre-allocated for efficiency.
+Runs in \eqn{O(N)} time in the size of the rdeque, but the generated list is pre-allocated for efficiency.
 }
 \examples{
 d <- rdeque()
@@ -27,5 +27,8 @@ d <- insert_front(d, "b")
 
 dlist <- as.list(d)
 print(dlist)
+}
+\seealso{
+\code{\link{as.data.frame.rstack}} and the generic \code{\link{as.list}}.
 }
 

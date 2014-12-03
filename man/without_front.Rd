@@ -8,7 +8,7 @@ without_front(x, ...)
 \arguments{
 \item{x}{rdeque or rpqueue to remove elements from.}
 
-\item{...}{additional arguments to be passed to or from methods.}
+\item{...}{additional arguments to be passed to or from methods (ignored).}
 }
 \value{
 a version of the rdeque or rpqueue with the front element removed.

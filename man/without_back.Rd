@@ -8,30 +8,34 @@ without_back(d, ...)
 \arguments{
 \item{d}{rdeque to remove elements from.}
 
-\item{...}{additional arguments to be passed to or from methods.}
+\item{...}{additional arguments to be passed to or from methods (ignored).}
 }
 \value{
-a version of the rdeque with n elements removed.
+version of the rdeque with the back element removed.
 }
 \description{
-Return a version of an rdeque without the back element.
+Simply returns a version of the given rdeque without the back element
+The original rdeque is left alone.
 }
 \details{
-Simply returns a version of the given deque without the back n elements
-(n = 1 by default). The original deque is left alone.
+Runs in \eqn{O(1)}-amortized time if the rdeque is used non-persistently (see documentation
+of \code{\link{rdeque}} for details). If the given rdeque is empty, an error will be generated.
 }
 \examples{
 d <- rdeque()
 d <- insert_front(d, "a")
 d <- insert_front(d, "b")
-d <- insert_back(d, "c")
+d <- insert_front(d, "c")
 
 d2 <- without_back(d)
 print(d2)
 
-d3 <- without_back(d2)
+d3 <- without_back(d)
 print(d3)
 
 print(d)
+}
+\seealso{
+\code{\link{insert_back}} for inserting elements.
 }
 
