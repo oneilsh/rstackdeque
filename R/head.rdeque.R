@@ -1,6 +1,6 @@
 #' @export
 #' @import utils
-#' @title Return the first n elements of an rdeque as an rdeque.
+#' @title Return the first n elements of an rdeque as an rdeque
 #' 
 #' @description Returns the first n elements of a deque as a deque, or all of the elements if its length is less than n.
 #' 

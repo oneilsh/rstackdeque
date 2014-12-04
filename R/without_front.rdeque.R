@@ -1,5 +1,5 @@
 #' @export
-#' @title Return a version of an rdeque without the front element.
+#' @title Return a version of an rdeque without the front element
 #' 
 #' @description Simply returns a version of the given rdeque without the front element. Results in an error if the structure is empty.
 #' The original rdeque is left alone.
@@ -11,6 +11,7 @@
 #' @param ... additional arguments to be passed to or from methods (ignored).
 #' @return version of the rdeque with the front element removed.
 #' @seealso \code{\link{insert_front}} for inserting elements.
+#' @references Okasaki, Chris. Purely Functional Data Structures. Cambridge University Press, 1999.
 #' @examples
 #' d <- rdeque()
 #' d <- insert_front(d, "a")

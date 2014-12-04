@@ -1,5 +1,5 @@
 #' @export
-#' @title Assign to/modify the front of an rdeque.
+#' @title Assign to/modify the front of an rdeque
 #' 
 #' @description Allows modification access to the front of a deque.
 #' 

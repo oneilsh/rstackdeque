@@ -1,5 +1,5 @@
 #' @export
-#' @title Create a new empty rpqueue.
+#' @title Create a new empty rpqueue
 #' 
 #' @description Creates a new, empty, rpqueue ready for use.
 #' 
@@ -15,6 +15,7 @@
 #' include \code{as.list} and \code{as.data.frame} (the latter of which requires that
 #' all elements can be appended to become rows of a data frame in a reasonable manner). 
 #' @seealso \code{\link{rstack}} for a fast LIFO-only structure.
+#' @references Okasaki, Chris. Purely Functional Data Structures. Cambridge University Press, 1999.
 #' @examples
 #' q <- rpqueue()
 #' q <- insert_back(q, "a")

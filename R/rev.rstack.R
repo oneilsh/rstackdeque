@@ -1,5 +1,5 @@
 #' @export
-#' @title Reverse an rstack.
+#' @title Reverse an rstack
 #' 
 #' @description Returns a reversed version of an rstack, where the old last element (generally
 #' inaccessible) is now the top (and thus now accessible).

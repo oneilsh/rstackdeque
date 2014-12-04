@@ -1,5 +1,5 @@
 #' @export
-#' @title Insert an element into the back of an rpqueue.
+#' @title Insert an element into the back of an rpqueue
 #' 
 #' @description Returns a version of the queue with the new element in the back position.
 #' 
@@ -8,6 +8,7 @@
 #' @param e element to insert.
 #' @param ... additional arguments to be passed to or from methods (ignored).
 #' @return modified version of the rpqueue.
+#' @references Okasaki, Chris. Purely Functional Data Structures. Cambridge University Press, 1999.
 #' @examples
 #' q <- rpqueue()
 #' q <- insert_back(q, "a")

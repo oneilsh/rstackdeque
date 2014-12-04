@@ -1,5 +1,5 @@
 #' @export
-#' @title Check if an rdeque is empty.
+#' @title Check if an rdeque is empty
 #' @description Check if an rdeque is empty.
 #' @details Runs in \eqn{O(1)} time.
 #' @param x the rdeque to check.

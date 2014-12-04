@@ -1,5 +1,5 @@
 #' @export
-#' @title Assign to/modify the top of an rstack.
+#' @title Assign to/modify the top of an rstack
 #' 
 #' @description Allows modification access to the top of a stack.
 #' 

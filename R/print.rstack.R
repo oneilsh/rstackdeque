@@ -1,5 +1,5 @@
 #' @export
-#' @title Print an rstack.
+#' @title Print an rstack
 #' @description Prints a summary of the contents of an rstack, including the number of elements and the top few.
 #' @details Since only the top few elements are detailed, runs in \eqn{O(1)} time.
 #' @param x the rstack to print.

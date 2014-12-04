@@ -1,5 +1,5 @@
 #' @export 
-#' @title Return the data element at the front of an rdeque.
+#' @title Return the data element at the front of an rdeque
 #' 
 #' @description Simply returns the data element sitting at the front of the deque,
 #' leaving the deque alone.

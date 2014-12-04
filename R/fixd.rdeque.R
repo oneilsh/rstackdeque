@@ -1,10 +1,11 @@
 #' @export
-#' @title Fix an rdeque.
+#' @title Fix an rdeque
 #' @description A method used behind the scenes to provide \eqn{O(1)}-amortized time for most operations. 
 #' Runs in \eqn{O(n)} time worst case; restructures the rdeque so that the two internal rstacks 
 #' are roughly the same length.
 #' @param d The rdeque to fix.
 #' @param ... additional arguments to be passed to or from methods.
+#' @references Okasaki, Chris. Purely Functional Data Structures. Cambridge University Press, 1999.
 #' @return a fixed deque.
 fixd.rdeque <- function(d, ...) {
   if(length(d) < 2 | (length(d$l) > 6 & length(d$r) > 6)) {

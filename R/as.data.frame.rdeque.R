@@ -1,5 +1,5 @@
 #' @export
-#' @title Convert an rdeque to a data.frame.
+#' @title Convert an rdeque to a data.frame
 #' 
 #' @description Converts the elements of an rdeque into rows of a data.frame, if this is reasonable.
 #' 

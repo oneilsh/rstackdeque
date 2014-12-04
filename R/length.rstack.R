@@ -1,5 +1,5 @@
 #' @export
-#' @title Return the number of elements in an rstack.
+#' @title Return the number of elements in an rstack
 #' 
 #' @description Returns the number of elements in an rstack.
 #' 

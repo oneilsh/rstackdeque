@@ -1,5 +1,5 @@
 #' @export
-#' @title Assign to/modify the front of an rpqueue.
+#' @title Assign to/modify the front of an rpqueue
 #' 
 #' @description Allows modification access to the front of a queue.
 #' 

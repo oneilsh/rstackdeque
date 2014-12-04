@@ -1,5 +1,5 @@
 #' @export
-#' @title Create an rstack pre-filled from a given input.
+#' @title Create an rstack pre-filled from a given input
 #' 
 #' @description Creates a new rstack from a given input. Coerces input to a 
 #' list first using \code{as.list}, the element at \code{x[[1]]} becomes the top of the new rstack.

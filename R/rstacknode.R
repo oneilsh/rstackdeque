@@ -1,5 +1,5 @@
 #' @export
-#' @title Internal structure used by rstacks, rdeques, and rpqueues.
+#' @title Internal structure used by rstacks, rdeques, and rpqueues
 #' @description
 #' For use by rstacks and rdeques. Simply an environment with no parent,
 #' reference for the data and the next node.

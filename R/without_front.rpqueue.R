@@ -1,5 +1,5 @@
 #' @export
-#' @title Return a version of an rpqueue without the front element.
+#' @title Return a version of an rpqueue without the front element
 #' 
 #' @description Simply returns a version of the given rpqueue without the front element. Results in an error if the structure is empty.
 #' The original rpqueue is left alone.
@@ -10,6 +10,7 @@
 #' @param ... additional arguments to be passed to or from methods (ignored).
 #' @return version of the rpqueue with the front element removed.
 #' @seealso \code{\link{peek_front}} for accessing the front element.
+#' @references Okasaki, Chris. Purely Functional Data Structures. Cambridge University Press, 1999.
 #' @examples
 #' q <- rpqueue()
 #' q <- insert_back(q, "a")

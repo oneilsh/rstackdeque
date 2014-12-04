@@ -1,5 +1,5 @@
 #' @export
-#' @title Return the data element at the top of an rstack.
+#' @title Return the data element at the top of an rstack
 #' 
 #' @description Simply returns the data element sitting at the top of the rstack,
 #' leaving the rstack alone.

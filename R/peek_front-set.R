@@ -1,5 +1,5 @@
 #' @export
-#' @title Assign to/modify the front of an rdeque or rpqueue.
+#' @title Assign to/modify the front of an rdeque or rpqueue
 #' 
 #' @description Allows modification access to the front of a deque or queue.
 #' 

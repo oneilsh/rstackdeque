@@ -1,5 +1,5 @@
 #' @export
-#' @title Check if an rstack is empty.
+#' @title Check if an rstack is empty
 #' @description Check if an rstack is empty.
 #' @details Runs in \eqn{O(1)} time.
 #' @param x the rstack to check.

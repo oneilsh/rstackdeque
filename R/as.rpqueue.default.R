@@ -1,5 +1,5 @@
 #' @export
-#' @title Default method for converting to an rpqueue.
+#' @title Default method for converting to an rpqueue
 #' @description Default method for converting to an rpqueue.
 #' @details Elements from the input (of any type) are first converted to a list with \code{\link{as.list}}, 
 #' after this an rpqueue of the appropriate size is created holding the elements. The element at \code{x[[1]]}

@@ -1,5 +1,5 @@
 #' @export
-#' @title Create a pre-filled rpqueue from a given input.
+#' @title Create a pre-filled rpqueue from a given input
 #' 
 #' @description Creates a new rpqueue from a given input. Coerces input to a 
 #' list first using \code{as.list}, the element at \code{x[[1]]} becomes the front of the new queue.

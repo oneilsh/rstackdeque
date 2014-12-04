@@ -1,5 +1,5 @@
 #' @export
-#' @title Convert an rstack to a data.frame.
+#' @title Convert an rstack to a data.frame
 #' 
 #' @description Converts the elements of an rstack into rows of a data.frame, if this is reasonable.
 #' 

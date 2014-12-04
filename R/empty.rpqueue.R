@@ -1,5 +1,5 @@
 #' @export
-#' @title Check if an rpqueue is empty.
+#' @title Check if an rpqueue is empty
 #' @description Check if an rpqueue is empty.
 #' @details Runs in \eqn{O(1)} time.
 #' @param x the rpqueue to check.

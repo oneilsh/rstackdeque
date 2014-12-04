@@ -1,6 +1,6 @@
 #' @export
 #' @import utils
-#' @title Return the head (front) of an rpqueue.
+#' @title Return the head (front) of an rpqueue
 #' 
 #' @description Returns the first \eqn{n} elements of an rpqueue as an rpqueue, or all of the elements 
 #' if \code{length(x) < n}.

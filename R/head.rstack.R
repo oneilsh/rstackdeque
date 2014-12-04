@@ -1,6 +1,6 @@
 #' @export
 #' @import utils
-#' @title Return the head (top) of an rstack.
+#' @title Return the head (top) of an rstack
 #' 
 #' @description Returns the top \eqn{n} elements of an rstack as an stack, or all of the elements 
 #' if \code{length(x) < n}.

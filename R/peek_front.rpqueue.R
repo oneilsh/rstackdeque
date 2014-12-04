@@ -1,5 +1,5 @@
 #' @export
-#' @title Return the data element at the front of an rpqueue.
+#' @title Return the data element at the front of an rpqueue
 #' 
 #' @description Simply returns the data element sitting at the front of the rpqueue,
 #' leaving the queue alone.

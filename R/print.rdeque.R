@@ -1,5 +1,5 @@
 #' @export
-#' @title Print an rdeque.
+#' @title Print an rdeque
 #' @description Prints a summary of the contents of an rdeque, including the number of elements and the first and last few.
 #' @details Depending on the internal state of the rdeque, this method is not gauranteed to run in \eqn{O(1)} time.
 #' @param x the rdeque to print.

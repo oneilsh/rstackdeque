@@ -1,5 +1,5 @@
 #' @export
-#' @title Assign to/modify the back of an rdeque.
+#' @title Assign to/modify the back of an rdeque
 #' 
 #' @description Allows modification access to the back of a deque.
 #' 

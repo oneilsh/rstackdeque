@@ -1,5 +1,5 @@
 #' @export
-#' @title Maintenance function for rpqueues.
+#' @title Maintenance function for rpqueues
 #' @description Maintenance function for rpqueues, called automatically when needed by other functions.
 #' @details See \emph{Simple and Efficient Purely Functional Queues and Deques}, 
 #' Okasaki 1995, J. Functional Programming, 5(4) 583 to 592 for information on this function.
@@ -7,6 +7,7 @@
 #' @param acclazylist lazy list accumulator.
 #' @param ... additional arguments to be passed to or from methods (ignored).
 #' @return a fully rotated rpqueue, but with the l list delayed in evaluation.
+#' @references Okasaki, Chris. Purely Functional Data Structures. Cambridge University Press, 1999.
 #' @seealso \code{\link{makeequal}} helper function that calls this one.
 rotate.rpqueue <- function(rpqueue, acclazylist, ...) {
   ## safety check :-P

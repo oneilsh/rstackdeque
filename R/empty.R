@@ -1,5 +1,5 @@
 #' @export
-#' @title Check if an rstack, rdeque, or rpqueue is empty.
+#' @title Check if an rstack, rdeque, or rpqueue is empty
 #' 
 #' @description Check if an rstack, rdeque, or rpqueue is empty.
 #' @details Runs in \eqn{O(1)} time for all types.

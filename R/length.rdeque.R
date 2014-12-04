@@ -1,5 +1,5 @@
 #' @export
-#' @title Return the number of elements in an rdeque.
+#' @title Return the number of elements in an rdeque
 #' 
 #' @description Returns the number of elements in an rdeque.
 #' 
@@ -7,6 +7,7 @@
 #' @param x rdeque to get the length of.
 #' @return a vector of length 1 with the number of elements.
 #' @seealso \code{\link{empty}} for checking whether an rdeque is empty.
+#' @examples
 #' d <- rdeque()
 #' d <- insert_front(d, "a")
 #' print(length(d))         # 1

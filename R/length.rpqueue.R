@@ -1,5 +1,5 @@
 #' @export
-#' @title Return the number of elements in an rpqueue.
+#' @title Return the number of elements in an rpqueue
 #' 
 #' @description Returns the number of elements in an rpqueue.
 #' 
@@ -7,6 +7,7 @@
 #' @param x rpqueue to get the length of.
 #' @return a vector of length 1 with the number of elements.
 #' @seealso \code{\link{empty}} for checking whether an rpqueue is empty.
+#' @examples
 #' q <- rpqueue()
 #' q <- insert_back(q, "a")
 #' print(length(q))         # 1

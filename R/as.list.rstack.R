@@ -1,5 +1,5 @@
 #' @export
-#' @title Convert an rstack to a list.
+#' @title Convert an rstack to a list
 #' 
 #' @description Converts an rstack to a list, where the top of the stack becomes
 #' the first element of the list, the second-from-top the second, and so on. 

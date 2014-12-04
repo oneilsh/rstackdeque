@@ -1,5 +1,5 @@
 #' @export
-#' @title Create a new, empty rstack.
+#' @title Create a new, empty rstack
 #' 
 #' @description An rstack is a "Last In, First Out" (LIFO) structure imagined as being organized from
 #' top (last in) to bottom (first in), supporting efficient insertion into the 
@@ -21,6 +21,7 @@
 #' 
 #' @param ... additional arguments to be passed to or from methods.
 #' @return an empty rstack.
+#' @references Okasaki, Chris. Purely Functional Data Structures. Cambridge University Press, 1999.
 #' @examples
 #' s <- rstack()
 #' s <- insert_top(s, "a")

@@ -1,5 +1,5 @@
 #' @export
-#' @title Convert an rpqueue to a list.
+#' @title Convert an rpqueue to a list
 #' 
 #' @description Converts an rpqueue to a list, where the front of the queue becomes
 #' the first element of the list, the second-from-front the second, and so on. 

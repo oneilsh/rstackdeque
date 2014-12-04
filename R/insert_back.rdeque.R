@@ -1,5 +1,5 @@
 #' @export
-#' @title Insert an element into the back of an rdeque.
+#' @title Insert an element into the back of an rdeque
 #' 
 #' @description Returns a version of the deque with the new element in the back position.
 #' 
@@ -8,6 +8,7 @@
 #' @param e element to insert.
 #' @param ... additional arguments to be passed to or from methods (ignored).
 #' @return modified version of the rdeque.
+#' @references Okasaki, Chris. Purely Functional Data Structures. Cambridge University Press, 1999.
 #' @examples
 #' d <- rdeque()
 #' d <- insert_back(d, "a")

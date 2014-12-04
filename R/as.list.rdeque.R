@@ -1,5 +1,5 @@
 #' @export
-#' @title Convert an rdeque to a list.
+#' @title Convert an rdeque to a list
 #' 
 #' @description Converts an rdeque to a list, where the front of the deque becomes
 #' the first element of the list, the second-from-front the second, and so on. 

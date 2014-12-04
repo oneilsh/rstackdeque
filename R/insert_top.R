@@ -1,5 +1,5 @@
 #' @export
-#' @title Insert an element onto the top of an rstack.
+#' @title Insert an element onto the top of an rstack
 #' 
 #' @description Insert an element onto the top of an rstack.
 #' 
@@ -10,6 +10,7 @@
 #' @param ... additional arguments to be passed to or from methods (ignored).
 #' @return modified version of the stack with new element at top.
 #' @seealso \code{\link{rstack}} for information on rstacks, \code{\link{without_top}} for removal of top elements.
+#' @references Okasaki, Chris. Purely Functional Data Structures. Cambridge University Press, 1999.
 #' @examples
 #' s <- rstack()
 #' s <- insert_top(s, "a")

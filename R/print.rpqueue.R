@@ -1,5 +1,5 @@
 #' @export
-#' @title Print an rpqueue.
+#' @title Print an rpqueue
 #' @description Prints a summary of the contents of an rpqueue, including the number of elements and the first few.
 #' @details Since only the first few elements are detailed, runs in \eqn{O(1)} time.
 #' @param x the rpqueue to print.
