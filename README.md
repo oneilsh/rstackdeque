@@ -4,25 +4,45 @@ Rstackdeque
 Persistent stacks, deques, and queues for R
 ---------------------------------------------
 
+Have you ever wanted to use a stack or a queue for R, but just pulled your hair out
+trying to use lists or vectors instead? Enter rstackdeque.
 
-More info to come as this package is reviewed.
+The most important feature of the stacks and queues (and double-ended-queues, or "deques") in this package are not only are they reasonably fast (amortized or worst-case O(1) depending on which you're using), inserting and removal are implemented as "side-effect-free" functions operating similar to other R structures. For example:
+
+```
+> s <- rstack()
+> s <- insert_top(s, "A")
+> s <- insert_top(s, "B")
+> s <- insert_top(s, "C")
+> s2 <- without_top(s)
+> print(s)
+An rstack with  3  elements. 
+ : chr "C"
+ : chr "B"
+ : chr "A"
+> print(s2)
+An rstack with  2  elements. 
+ : chr "B"
+ : chr "A"
+```
 
 Install
 ---------
 
-You can install this package via devtools:
+You can install this package via CRAN:
 
 ```
-> install.packages("devtools")  # if needed
-> devtools::install_github("oneilsh/rstackdeque")
+> install.packages("rstackdeque") 
 ```
 
-Then load it up and check the help:
+Then load it up and check the help and examples:
 
 ```
 > require(rstackdeque)
-> help(rstackdeque)
+> help(package = "rstackdeque")
 > help(rstack)
 > help(rdeque)
 > help(rpqueue)
 ```
+
+Vignette coming soon.
