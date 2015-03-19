@@ -7,7 +7,17 @@ Persistent stacks, deques, and queues for R
 Have you ever wanted to use a stack or a queue for R, but just pulled your hair out
 trying to use lists or vectors instead? Enter rstackdeque.
 
-The most important feature of the stacks and queues (and double-ended-queues, or "deques") in this package are not only are they reasonably fast (amortized or worst-case O(1) depending on which you're using), inserting and removal are implemented as "side-effect-free" functions operating similar to other R structures. For example:
+The most important feature of the stacks and queues (and double-ended-queues, or 
+"deques") in this package are not only are they reasonably fast (amortized or 
+worst-case O(1) depending on which you're using), inserting and removal are 
+implemented as "side-effect-free" functions operating similar to other R 
+structures. 
+
+This is largely possible due to the fantastic work of
+Chris Okasaki: see [Purely Functional Data Structures](http://www.amazon.com/Purely-Functional-Structures-Chris-Okasaki/dp/0521663504) 
+and [Simple and Efficient Purely Functional Queues and Deques](http://www.westpoint.edu/eecs/SiteAssets/SitePages/Faculty%20Publication%20Documents/Okasaki/jfp95queue.pdf).
+
+For example:
 
 ```
 > s <- rstack()
