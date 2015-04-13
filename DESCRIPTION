@@ -1,7 +1,7 @@
 Package: rstackdeque
 Type: Package
 Title: Persistent Fast Amortized Stack and Queue Data Structures
-Version: 1.1
+Version: 1.1.1
 Date: 2014-12-01
 URL: https://github.com/oneilsh/rstackdeque
 BugReports: https://github.com/oneilsh/rstackdeque/issues
