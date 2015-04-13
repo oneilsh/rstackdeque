@@ -3,10 +3,7 @@
 \alias{rdeque}
 \title{Create a new empty rdeque}
 \usage{
-rdeque(...)
-}
-\arguments{
-\item{...}{additional arguments to be passed to or from methods (ignored).}
+rdeque()
 }
 \value{
 a new empty rdeque.

@@ -19,7 +19,6 @@
 #' @seealso \code{\link{insert_top}} for insertion, \code{\link{without_top}} for removal, 
 #' and \code{\link{peek_top}} for peeking.
 #' 
-#' @param ... additional arguments to be passed to or from methods.
 #' @return an empty rstack.
 #' @references Okasaki, Chris. Purely Functional Data Structures. Cambridge University Press, 1999.
 #' @examples
@@ -34,9 +33,10 @@
 #' 
 #' b <- peek_top(s)
 #' print(b)
-rstack <- function(...) {
+rstack <- function() {
   s <- new.env(parent = emptyenv())
   s$head <- NULL
+  s$tail <- NULL # for memoization
   s$len <- 0
   class(s) <- "rstack"
   return(s)

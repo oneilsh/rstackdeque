@@ -3,7 +3,6 @@
 #' 
 #' @description Creates a new, empty, rdeque ready for use.
 #' 
-#' @param ... additional arguments to be passed to or from methods (ignored).
 #' @return a new empty rdeque.
 #' @details An rdeque provided both "Last In, First Out" (LIFO) and "First In, First Out" (FIFO) access;
 #' envisaged as queue, elements may be added or removed from the front or the back with \code{\link{insert_front}},
@@ -38,7 +37,7 @@
 #' b <- peek_front(d)
 #' print(b)
 #' @export
-rdeque <- function(...) {
+rdeque <- function() {
   d <- new.env(parent = emptyenv())
   d$l <- rstack()
   d$r <- rstack()

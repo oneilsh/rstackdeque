@@ -20,15 +20,14 @@
 #' s2 <- without_top(s)
 #' print(s2)
 #' 
-#' s3 <- without_top(s, n = 2)
-#' print(s3)
-#' 
 #' print(s)
 without_top.rstack <- function(s, ...) {
   n = 1
-  if(length(s) < 1) {
+  if(length(s) < n) {
     stop("cannot run without_top() on an empty rstack, check with empty() first")
   } 
+  ## memozied
+  if(!is.null(s$tail)) {return(s$tail)}
   newstack <- rstack()
   node <- s$head
   for(i in seq(1,n)) {
@@ -36,6 +35,7 @@ without_top.rstack <- function(s, ...) {
   }
   newstack$len <- s$len - n
   newstack$head <- node
+  s$tail <- newstack
   return(newstack)
 }
 

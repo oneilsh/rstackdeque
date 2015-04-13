@@ -3,7 +3,6 @@
 #' 
 #' @description Creates a new, empty, rpqueue ready for use.
 #' 
-#' @param ... additional arguments to be passed to or from methods (ignored).
 #' @return a new rpqueue.
 #' @details An rpqueue provides "First In, First Out" (FIFO) access; envisaged
 #' as a queue, elements may be inserted at the back and removed from the front. Unlike
@@ -28,7 +27,7 @@
 #' 
 #' b <- peek_front(q)
 #' print(b)
-rpqueue <- function(...) {
+rpqueue <- function() {
   newq <- new.env(parent = emptyenv())
   newq$lhat <- rstack()
   newq$l <- rstack()

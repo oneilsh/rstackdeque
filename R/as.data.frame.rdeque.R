@@ -59,3 +59,4 @@ as.data.frame.rdeque <- function(x, row.names = NULL, optional = FALSE, ...) {
   return(as.data.frame(do.call(rbind, dlist), row.names, optional, ...))
 }
 
+

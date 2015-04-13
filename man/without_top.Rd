@@ -29,9 +29,6 @@ s <- insert_top(s, "c")
 s2 <- without_top(s)
 print(s2)
 
-s3 <- without_top(s, n = 2)
-print(s3)
-
 print(s)
 }
 \references{
