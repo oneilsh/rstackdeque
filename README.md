@@ -4,6 +4,10 @@ Rstackdeque
 Persistent stacks, deques, and queues for R
 ---------------------------------------------
 
+A full description can be found in the R journal pub: [https://journal.r-project.org/archive/2015-1/oneil.pdf](https://journal.r-project.org/archive/2015-1/oneil.pdf)
+
+...
+
 Have you ever wanted to use a stack or a queue for R, but just pulled your hair out
 trying to use lists or vectors instead? Enter rstackdeque.
 
