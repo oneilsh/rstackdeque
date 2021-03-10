@@ -23,7 +23,7 @@ and [Simple and Efficient Purely Functional Queues and Deques](http://www.westpo
 
 For example:
 
-```
+```r
 > s <- rstack()
 > s <- insert_top(s, "A")
 > s <- insert_top(s, "B")
@@ -45,13 +45,13 @@ Install
 
 You can install this package via CRAN:
 
-```
+```r
 > install.packages("rstackdeque") 
 ```
 
 Then load it up and check the help and examples:
 
-```
+```r
 > require(rstackdeque)
 > help(package = "rstackdeque")
 > help(rstack)
