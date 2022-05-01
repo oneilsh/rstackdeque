@@ -50,7 +50,7 @@ An `rstack()` is a stack-like structure, that supports adding elements to the "t
 
 ```r
 library(rstackdeque)
-library(magrittr)
+library(dplyr)
 
 
 suits <- rstack() %>%
@@ -173,3 +173,68 @@ print(letters_again)
 ```
  [1] "a" "b" "c" "d" "e" "f" "g" "h" "i" "j" "k" "l" "m" "n" "o" "p" "q" "r" "s" "t" "u" "v" "w" "x" "y" "z"
 ```
+
+If the elements are lists that have the same element names in the same order, or dataframes with the
+same column names in the same order, they can be converted to a `data.frame`. If elements are data frames, the rows
+will be concatenated.
+
+```r
+people_stack <- rstack() %>%
+                insert_top(list(name = "Joe", age = 26)) %>%
+                insert_top(list(name = "Kim", age = 30))
+
+people_df <- as.data.frame(people_stack)
+print(people_df)
+```
+
+```
+  name age
+1  Kim  30
+2  Joe  26
+```
+
+As a result, these structures pair nicely with loops. Here's a loop 
+that computes a [Collatz sequence](https://en.wikipedia.org/wiki/Collatz_conjecture) from a given starting number.
+
+```r
+value <- 17
+step <- 1
+
+collatz_stack <- rstack()
+
+while(value != 1) {
+  if(value %% 2 == 0) {
+    value <- value / 2
+  } else {
+    value <- value * 3 + 1
+  }
+  
+  collatz_stack <- collatz_stack %>% insert_top(list(value = value, step = step))
+  step <- step + 1
+}
+
+collatz_df <- as.data.frame(collatz_stack) %>% arrange(step)
+print(collatz_df)
+```
+
+```
+   value step
+1     52    1
+2     26    2
+3     13    3
+4     40    4
+5     20    5
+6     10    6
+7      5    7
+8     16    8
+9      8    9
+10     4   10
+11     2   11
+12     1   12
+```
+
+Note: Although the structures in `rstackdeque` are generally designed to be fast, 
+for performance-critical applications where the size of the result is known 
+a-priori, using a [pre-allocation strategy](https://www.r-bloggers.com/2018/08/growing-objects-and-loop-memory-pre-allocation/) will be faster. 
+Computing the Collatz sequence as shown above is an example where pre-allocation is difficult, and stacks, queues, and deques (double-ended queues) are important components of many algorithms.
+
