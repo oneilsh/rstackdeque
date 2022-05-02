@@ -53,39 +53,39 @@ library(rstackdeque)
 library(dplyr)
 
 
-suits <- rstack() %>%
-         insert_top("Spades") %>%
-         insert_top("Hearts") %>%
-         insert_top("Clubs") %>%
-         insert_top("Diamonds")
+stack <- rstack() %>%
+           insert_top("A") %>%
+           insert_top("B") %>%
+           insert_top("C") %>%
+           insert_top("D")
 
-print(suits)
+print(stack)
 ```
 
 ```
 An rstack with  4  elements. 
- : chr "Diamonds"
- : chr "Clubs"
- : chr "Hearts"
- : chr "Spades"
+ : chr "D"
+ : chr "C"
+ : chr "B"
+ : chr "A"
 ```
 
 They also allow "peeking at" (returning a copy of) the top element. This does not change the contents of the stack.
 
 ```r
-top_suit <- peek_top(suits)
-print(top_suit)
+top_element <- peek_top(stack)
+print(top_element)
 ```
 
 ```
-[1] "Diamonds"
+[1] "D"
 ```
 
 Lastly, they support dropping the top element:
 
 ```r
-suits <- without_top(suits)
-print(suits)
+stack <- without_top(stack)
+print(stack)
 ```
 
 ```
