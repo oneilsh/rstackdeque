@@ -7,7 +7,10 @@ output:
     keep_md: true
 ---
 
-
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+knitr::opts_chunk$set(fig.path = "README_figs/README-")
+```
 
 ## `rstackdeque` Persistent stacks, deques, and queues for R
 
@@ -35,15 +38,13 @@ and [Simple and Efficient Purely Functional Queues and Deques](http://www.westpo
 
 You can install this package via CRAN:
 
-
-```r
+```{r eval=FALSE}
 install.packages("rstackdeque") 
 ```
 
 Then load it up and check the help and examples:
 
-
-```r
+```{r eval=FALSE}
 require(rstackdeque)
 help(package = "rstackdeque")
 help(rstack)
@@ -58,30 +59,11 @@ help(rpqueue)
 
 An `rstack()` is a stack-like structure, that supports adding elements to the "top":
 
-
-```r
+```{r}
 library(rstackdeque)
 library(dplyr)
-```
 
-```
-## 
-## Attaching package: 'dplyr'
-```
 
-```
-## The following objects are masked from 'package:stats':
-## 
-##     filter, lag
-```
-
-```
-## The following objects are masked from 'package:base':
-## 
-##     intersect, setdiff, setequal, union
-```
-
-```r
 stack <- rstack() %>%
            insert_top("A") %>%
            insert_top("B") %>%
@@ -91,42 +73,21 @@ stack <- rstack() %>%
 print(stack)
 ```
 
-```
-## An rstack with  4  elements. 
-##  : chr "D"
-##  : chr "C"
-##  : chr "B"
-##  : chr "A"
-```
-
 
 
 They also allow "peeking at" (returning a copy of) the top element. This does not change the contents of the stack.
 
-
-```r
+```{r}
 top_element <- peek_top(stack)
 print(top_element)
-```
-
-```
-## [1] "D"
 ```
 
 
 Lastly, they support dropping the top element:
 
-
-```r
+```{r}
 stack <- without_top(stack)
 print(stack)
-```
-
-```
-## An rstack with  3  elements. 
-##  : chr "C"
-##  : chr "B"
-##  : chr "A"
 ```
 
 
@@ -138,8 +99,7 @@ and `rpqueue`s (discussed below).
 
 Almost any datatype can be stored - vectors, lists, data.frames, models, etc.
 
-
-```r
+```{r}
 stuff <- rstack() %>%
          insert_top(mtcars) %>%
          insert_top(t.test(rnorm(25), rnorm(25)))
@@ -147,72 +107,20 @@ stuff <- rstack() %>%
 print(stuff)
 ```
 
-```
-## An rstack with  2  elements. 
-##  :List of 10
-##   ..$ statistic  : Named num 0.269
-##   .. ..- attr(*, "names")= chr "t"
-##   ..$ parameter  : Named num 44.3
-##   .. ..- attr(*, "names")= chr "df"
-##   ..$ p.value    : num 0.789
-##   ..$ conf.int   : num [1:2] -0.524 0.686
-##   .. ..- attr(*, "conf.level")= num 0.95
-##   ..$ estimate   : Named num [1:2] -0.185 -0.266
-##   .. ..- attr(*, "names")= chr [1:2] "mean of x" "mean of y"
-##   ..$ null.value : Named num 0
-##   .. ..- attr(*, "names")= chr "difference in means"
-##   ..$ stderr     : num 0.3
-##   ..$ alternative: chr "two.sided"
-##   ..$ method     : chr "Welch Two Sample t-test"
-##   ..$ data.name  : chr "rnorm(25) and rnorm(25)"
-##   ..- attr(*, "class")= chr "htest"
-##  :'data.frame':	32 obs. of  11 variables:
-##   ..$ mpg : num [1:32] 21 21 22.8 21.4 18.7 18.1 14.3 24.4 22.8 19.2 ...
-##   ..$ cyl : num [1:32] 6 6 4 6 8 6 8 4 4 6 ...
-##   ..$ disp: num [1:32] 160 160 108 258 360 ...
-##   ..$ hp  : num [1:32] 110 110 93 110 175 105 245 62 95 123 ...
-##   ..$ drat: num [1:32] 3.9 3.9 3.85 3.08 3.15 2.76 3.21 3.69 3.92 3.92 ...
-##   ..$ wt  : num [1:32] 2.62 2.88 2.32 3.21 3.44 ...
-##   ..$ qsec: num [1:32] 16.5 17 18.6 19.4 17 ...
-##   ..$ vs  : num [1:32] 0 0 1 1 0 1 0 1 1 1 ...
-##   ..$ am  : num [1:32] 1 1 1 0 0 0 0 0 0 0 ...
-##   ..$ gear: num [1:32] 4 4 4 3 3 3 3 4 4 4 ...
-##   ..$ carb: num [1:32] 4 4 1 1 2 1 4 2 2 4 ...
-```
-
 The structures can easily be created from lists and vectors...
 
-
-```r
+```{r}
 letters_stack <- as.rstack(letters)
 print(letters_stack)
-```
-
-```
-## An rstack with  26  elements. 
-## Top of the stack:
-##   : chr "a"
-##   : chr "b"
-##   : chr "c"
-##   : chr "d"
-##   : chr "e"
-##   : chr "f"
-##     ...
 ```
 
 
 ... and converted to a list. If the list is simple, the R-base `unlist()` 
 function is handy:
 
-
-```r
+```{r}
 letters_again <- as.list(letters) %>% unlist()
 print(letters_again)
-```
-
-```
-##  [1] "a" "b" "c" "d" "e" "f" "g" "h" "i" "j" "k" "l" "m" "n" "o" "p" "q" "r" "s"
-## [20] "t" "u" "v" "w" "x" "y" "z"
 ```
 
 
@@ -221,8 +129,7 @@ If the elements are lists that have the same element names in the same order, or
 same column names in the same order, they can be converted to a `data.frame`. If elements are data frames, the rows
 will be concatenated.
 
-
-```r
+```{r}
 people_stack <- rstack() %>%
                 insert_top(list(name = "Joe", age = 26)) %>%
                 insert_top(list(name = "Kim", age = 30))
@@ -231,19 +138,12 @@ people_df <- as.data.frame(people_stack)
 print(people_df)
 ```
 
-```
-##   name age
-## 1  Kim  30
-## 2  Joe  26
-```
-
 
 
 As a result, these structures pair nicely with loops. Here's a loop 
 that computes a [Collatz sequence](https://en.wikipedia.org/wiki/Collatz_conjecture) from a given starting number.
 
-
-```r
+```{r}
 value <- 17
 step <- 1
 
@@ -262,22 +162,6 @@ while(value != 1) {
 
 collatz_df <- as.data.frame(collatz_stack) %>% arrange(step)
 print(collatz_df)
-```
-
-```
-##    value step
-## 1     52    1
-## 2     26    2
-## 3     13    3
-## 4     40    4
-## 5     20    5
-## 6     10    6
-## 7      5    7
-## 8     16    8
-## 9      8    9
-## 10     4   10
-## 11     2   11
-## 12     1   12
 ```
 
 
