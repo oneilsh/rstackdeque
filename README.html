@@ -356,7 +356,7 @@ pre code {
 
 
 <div id="rstackdeque-persistent-stacks-deques-and-queues-for-r" class="section level2">
-<h2><code>rstackdeque</code> Persistent stacks, deques, and queues for R</h2>
+<h2><code>rstackdeque</code>: Persistent stacks, deques, and queues for R</h2>
 <p>R journal publication: <a href="https://journal.r-project.org/archive/2015-1/oneil.pdf">https://journal.r-project.org/archive/2015-1/oneil.pdf</a></p>
 <p>Have you ever wanted to use a stack or a queue for R, but just pulled your hair out trying to use lists or vectors instead? Enter rstackdeque.</p>
 <p>The most important feature of the stacks and queues (and double-ended-queues, or “deques”) in this package are not only are they reasonably fast (amortized or worst-case O(1) depending on which you’re using), inserting and removal are implemented as “side-effect-free” functions operating similar to other R structures.</p>
@@ -502,18 +502,18 @@ print(first_el)</code></pre>
 print(stuff)</code></pre>
 <pre><code>## An rstack with  2  elements. 
 ##  :List of 10
-##   ..$ statistic  : Named num -1.23
+##   ..$ statistic  : Named num -0.558
 ##   .. ..- attr(*, &quot;names&quot;)= chr &quot;t&quot;
-##   ..$ parameter  : Named num 45.7
+##   ..$ parameter  : Named num 47.9
 ##   .. ..- attr(*, &quot;names&quot;)= chr &quot;df&quot;
-##   ..$ p.value    : num 0.227
-##   ..$ conf.int   : num [1:2] -0.747 0.182
+##   ..$ p.value    : num 0.579
+##   ..$ conf.int   : num [1:2] -0.73 0.413
 ##   .. ..- attr(*, &quot;conf.level&quot;)= num 0.95
-##   ..$ estimate   : Named num [1:2] 0.0195 0.3022
+##   ..$ estimate   : Named num [1:2] -0.356 -0.197
 ##   .. ..- attr(*, &quot;names&quot;)= chr [1:2] &quot;mean of x&quot; &quot;mean of y&quot;
 ##   ..$ null.value : Named num 0
 ##   .. ..- attr(*, &quot;names&quot;)= chr &quot;difference in means&quot;
-##   ..$ stderr     : num 0.231
+##   ..$ stderr     : num 0.284
 ##   ..$ alternative: chr &quot;two.sided&quot;
 ##   ..$ method     : chr &quot;Welch Two Sample t-test&quot;
 ##   ..$ data.name  : chr &quot;rnorm(25) and rnorm(25)&quot;

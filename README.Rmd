@@ -12,7 +12,7 @@ knitr::opts_chunk$set(echo = TRUE)
 knitr::opts_chunk$set(fig.path = "README_figs/README-")
 ```
 
-## `rstackdeque` Persistent stacks, deques, and queues for R
+## `rstackdeque`: Persistent stacks, deques, and queues for R
 
 
 R journal publication: [https://journal.r-project.org/archive/2015-1/oneil.pdf](https://journal.r-project.org/archive/2015-1/oneil.pdf)

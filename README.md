@@ -1,15 +1,4 @@
----
-title: "README"
-author: "Shawn T O'Neil"
-date: "5/1/2022"
-output: 
-  html_document:
-    keep_md: true
----
-
-
-
-## `rstackdeque` Persistent stacks, deques, and queues for R
+## `rstackdeque`: Persistent stacks, deques, and queues for R
 
 
 R journal publication: [https://journal.r-project.org/archive/2015-1/oneil.pdf](https://journal.r-project.org/archive/2015-1/oneil.pdf)
@@ -276,18 +265,18 @@ print(stuff)
 ```
 ## An rstack with  2  elements. 
 ##  :List of 10
-##   ..$ statistic  : Named num -1.23
+##   ..$ statistic  : Named num -0.558
 ##   .. ..- attr(*, "names")= chr "t"
-##   ..$ parameter  : Named num 45.7
+##   ..$ parameter  : Named num 47.9
 ##   .. ..- attr(*, "names")= chr "df"
-##   ..$ p.value    : num 0.227
-##   ..$ conf.int   : num [1:2] -0.747 0.182
+##   ..$ p.value    : num 0.579
+##   ..$ conf.int   : num [1:2] -0.73 0.413
 ##   .. ..- attr(*, "conf.level")= num 0.95
-##   ..$ estimate   : Named num [1:2] 0.0195 0.3022
+##   ..$ estimate   : Named num [1:2] -0.356 -0.197
 ##   .. ..- attr(*, "names")= chr [1:2] "mean of x" "mean of y"
 ##   ..$ null.value : Named num 0
 ##   .. ..- attr(*, "names")= chr "difference in means"
-##   ..$ stderr     : num 0.231
+##   ..$ stderr     : num 0.284
 ##   ..$ alternative: chr "two.sided"
 ##   ..$ method     : chr "Welch Two Sample t-test"
 ##   ..$ data.name  : chr "rnorm(25) and rnorm(25)"
