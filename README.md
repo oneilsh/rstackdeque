@@ -30,6 +30,53 @@ Chris Okasaki: see [Purely Functional Data Structures](http://www.amazon.com/Pur
 and [Simple and Efficient Purely Functional Queues and Deques](http://www.westpoint.edu/eecs/SiteAssets/SitePages/Faculty%20Publication%20Documents/Okasaki/jfp95queue.pdf).
 
 
+*Psst, you can use these to efficiently build a data frame or list in a loop:*
+
+
+```r
+library(rstackdeque)
+library(dplyr)
+```
+
+```
+## 
+## Attaching package: 'dplyr'
+```
+
+```
+## The following objects are masked from 'package:stats':
+## 
+##     filter, lag
+```
+
+```
+## The following objects are masked from 'package:base':
+## 
+##     intersect, setdiff, setequal, union
+```
+
+```r
+stack <- rstack()
+
+for(i in 1:5) {
+  stack <- stack %>% insert_top(data.frame(i = i, logi = log(i)))
+}
+
+print(as.data.frame(stack))
+```
+
+```
+##   i      logi
+## 1 5 1.6094379
+## 2 4 1.3862944
+## 3 3 1.0986123
+## 4 2 0.6931472
+## 5 1 0.0000000
+```
+
+*See more good stuff under Common Functionality below.*
+
+
 ## Install
 
 
@@ -62,26 +109,8 @@ An `rstack()` is a stack-like structure, that supports adding elements to the "t
 ```r
 library(rstackdeque)
 library(dplyr)
-```
 
-```
-## 
-## Attaching package: 'dplyr'
-```
 
-```
-## The following objects are masked from 'package:stats':
-## 
-##     filter, lag
-```
-
-```
-## The following objects are masked from 'package:base':
-## 
-##     intersect, setdiff, setequal, union
-```
-
-```r
 stack <- rstack() %>%
            insert_top("A") %>%
            insert_top("B") %>%
@@ -268,18 +297,18 @@ print(stuff)
 ```
 ## An rstack with  2  elements. 
 ##  :List of 10
-##   ..$ statistic  : Named num 1.99
+##   ..$ statistic  : Named num 1.71
 ##   .. ..- attr(*, "names")= chr "t"
-##   ..$ parameter  : Named num 48
+##   ..$ parameter  : Named num 47.8
 ##   .. ..- attr(*, "names")= chr "df"
-##   ..$ p.value    : num 0.0527
-##   ..$ conf.int   : num [1:2] -0.00614 1.01316
+##   ..$ p.value    : num 0.093
+##   ..$ conf.int   : num [1:2] -0.087 1.091
 ##   .. ..- attr(*, "conf.level")= num 0.95
-##   ..$ estimate   : Named num [1:2] 0.137 -0.367
+##   ..$ estimate   : Named num [1:2] 0.282 -0.22
 ##   .. ..- attr(*, "names")= chr [1:2] "mean of x" "mean of y"
 ##   ..$ null.value : Named num 0
 ##   .. ..- attr(*, "names")= chr "difference in means"
-##   ..$ stderr     : num 0.253
+##   ..$ stderr     : num 0.293
 ##   ..$ alternative: chr "two.sided"
 ##   ..$ method     : chr "Welch Two Sample t-test"
 ##   ..$ data.name  : chr "rnorm(25) and rnorm(25)"

@@ -33,6 +33,24 @@ Chris Okasaki: see [Purely Functional Data Structures](http://www.amazon.com/Pur
 and [Simple and Efficient Purely Functional Queues and Deques](http://www.westpoint.edu/eecs/SiteAssets/SitePages/Faculty%20Publication%20Documents/Okasaki/jfp95queue.pdf).
 
 
+*Psst, you can use these to efficiently build a data frame or list in a loop:*
+
+```{r}
+library(rstackdeque)
+library(dplyr)
+
+stack <- rstack()
+
+for(i in 1:5) {
+  stack <- stack %>% insert_top(data.frame(i = i, logi = log(i)))
+}
+
+print(as.data.frame(stack))
+```
+
+*See more good stuff under Common Functionality below.*
+
+
 ## Install
 
 

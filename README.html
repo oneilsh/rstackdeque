@@ -362,6 +362,31 @@ pre code {
 <p>Have you ever wanted to use a stack or a queue for R, but just pulled your hair out trying to use lists or vectors instead? Enter rstackdeque.</p>
 <p>The most important feature of the stacks and queues (and double-ended-queues, or “deques”) in this package are not only are they reasonably fast (amortized or worst-case O(1) depending on which you’re using), inserting and removal are implemented as “side-effect-free” functions operating similar to other R structures.</p>
 <p>This is largely possible due to the fantastic work of Chris Okasaki: see <a href="http://www.amazon.com/Purely-Functional-Structures-Chris-Okasaki/dp/0521663504">Purely Functional Data Structures</a> and <a href="http://www.westpoint.edu/eecs/SiteAssets/SitePages/Faculty%20Publication%20Documents/Okasaki/jfp95queue.pdf">Simple and Efficient Purely Functional Queues and Deques</a>.</p>
+<p><em>Psst, you can use these to efficiently build a data frame or list in a loop:</em></p>
+<pre class="r"><code>library(rstackdeque)
+library(dplyr)</code></pre>
+<pre><code>## 
+## Attaching package: &#39;dplyr&#39;</code></pre>
+<pre><code>## The following objects are masked from &#39;package:stats&#39;:
+## 
+##     filter, lag</code></pre>
+<pre><code>## The following objects are masked from &#39;package:base&#39;:
+## 
+##     intersect, setdiff, setequal, union</code></pre>
+<pre class="r"><code>stack &lt;- rstack()
+
+for(i in 1:5) {
+  stack &lt;- stack %&gt;% insert_top(data.frame(i = i, logi = log(i)))
+}
+
+print(as.data.frame(stack))</code></pre>
+<pre><code>##   i      logi
+## 1 5 1.6094379
+## 2 4 1.3862944
+## 3 3 1.0986123
+## 4 2 0.6931472
+## 5 1 0.0000000</code></pre>
+<p><em>See more good stuff under Common Functionality below.</em></p>
 </div>
 <div id="install" class="section level2">
 <h2>Install</h2>
@@ -380,16 +405,10 @@ help(rpqueue)</code></pre>
 <h3>Stacks</h3>
 <p>An <code>rstack()</code> is a stack-like structure, that supports adding elements to the “top”:</p>
 <pre class="r"><code>library(rstackdeque)
-library(dplyr)</code></pre>
-<pre><code>## 
-## Attaching package: &#39;dplyr&#39;</code></pre>
-<pre><code>## The following objects are masked from &#39;package:stats&#39;:
-## 
-##     filter, lag</code></pre>
-<pre><code>## The following objects are masked from &#39;package:base&#39;:
-## 
-##     intersect, setdiff, setequal, union</code></pre>
-<pre class="r"><code>stack &lt;- rstack() %&gt;%
+library(dplyr)
+
+
+stack &lt;- rstack() %&gt;%
            insert_top(&quot;A&quot;) %&gt;%
            insert_top(&quot;B&quot;) %&gt;%
            insert_top(&quot;C&quot;) %&gt;%
@@ -491,18 +510,18 @@ print(first_el)</code></pre>
 print(stuff)</code></pre>
 <pre><code>## An rstack with  2  elements. 
 ##  :List of 10
-##   ..$ statistic  : Named num 1.99
+##   ..$ statistic  : Named num 1.71
 ##   .. ..- attr(*, &quot;names&quot;)= chr &quot;t&quot;
-##   ..$ parameter  : Named num 48
+##   ..$ parameter  : Named num 47.8
 ##   .. ..- attr(*, &quot;names&quot;)= chr &quot;df&quot;
-##   ..$ p.value    : num 0.0527
-##   ..$ conf.int   : num [1:2] -0.00614 1.01316
+##   ..$ p.value    : num 0.093
+##   ..$ conf.int   : num [1:2] -0.087 1.091
 ##   .. ..- attr(*, &quot;conf.level&quot;)= num 0.95
-##   ..$ estimate   : Named num [1:2] 0.137 -0.367
+##   ..$ estimate   : Named num [1:2] 0.282 -0.22
 ##   .. ..- attr(*, &quot;names&quot;)= chr [1:2] &quot;mean of x&quot; &quot;mean of y&quot;
 ##   ..$ null.value : Named num 0
 ##   .. ..- attr(*, &quot;names&quot;)= chr &quot;difference in means&quot;
-##   ..$ stderr     : num 0.253
+##   ..$ stderr     : num 0.293
 ##   ..$ alternative: chr &quot;two.sided&quot;
 ##   ..$ method     : chr &quot;Welch Two Sample t-test&quot;
 ##   ..$ data.name  : chr &quot;rnorm(25) and rnorm(25)&quot;
