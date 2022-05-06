@@ -413,9 +413,76 @@ print(stack)</code></pre>
 ##  : chr &quot;B&quot;
 ##  : chr &quot;A&quot;</code></pre>
 </div>
+<div id="deques-double-ended-queues" class="section level3">
+<h3>Deques (double-ended queues)</h3>
+<p>Deques, or double-ended queues, support adding and removing elements to either the “front” or “back” of the queue.</p>
+<pre class="r"><code>deque &lt;- rdeque() %&gt;%
+           insert_front(&quot;A&quot;) %&gt;%
+           insert_front(&quot;B&quot;) %&gt;%
+           insert_front(&quot;C&quot;) %&gt;%
+           insert_back(&quot;X&quot;) %&gt;%
+           insert_back(&quot;Y&quot;) %&gt;%
+           insert_back(&quot;Z&quot;)
+
+print(deque)</code></pre>
+<pre><code>## A deque with  6  elements.
+## Front to back: 
+##  $: chr &quot;C&quot;
+##  $: chr &quot;B&quot;
+##  $: chr &quot;A&quot;
+##  $: chr &quot;X&quot;
+##  $: chr &quot;Y&quot;
+##  $: chr &quot;Z&quot;</code></pre>
+<pre class="r"><code>deque &lt;- without_front(deque)
+deque &lt;- without_back(deque)
+print(deque)</code></pre>
+<pre><code>## A deque with  4  elements.
+## Front to back: 
+##  $: chr &quot;B&quot;
+##  $: chr &quot;A&quot;
+##  $: chr &quot;X&quot;
+##  $: chr &quot;Y&quot;</code></pre>
+<p>The <code>peek_front()</code> and <code>peek_back()</code> functions return the first and last elements:</p>
+<pre class="r"><code>first_el &lt;- peek_front(deque)
+last_el &lt;- peek_back(deque)
+
+print(first_el)</code></pre>
+<pre><code>## [1] &quot;B&quot;</code></pre>
+<pre class="r"><code>print(last_el)</code></pre>
+<pre><code>## [1] &quot;Y&quot;</code></pre>
+<p>While insertions and removals from <code>rstack</code>s are always fast, certain patterns of repeated insertions and removals from an <code>rdeque</code> will cause periodic ‘re-balancing’ operations where a full copy of the deque is made with more efficient internal organization. Thus, although <code>rdeque</code>s provide more functionality than <code>rstack</code>s, <code>rstack</code>s are preferred unless deque operations are required.</p>
+</div>
+<div id="queues" class="section level3">
+<h3>Queues</h3>
+<p>Queues support a subset of functionality of dequeus - queues only allow inserting elements at the back of the queue, and removing elements from the front of the queue. Peeking is also only supported at the front of the queue.</p>
+<pre class="r"><code>queue &lt;- rpqueue() %&gt;%
+           insert_back(&quot;A&quot;) %&gt;%
+           insert_back(&quot;B&quot;) %&gt;%
+           insert_back(&quot;C&quot;)
+
+print(queue)</code></pre>
+<pre><code>## A queue with  3  elements.
+## Front: 
+##  $: chr &quot;A&quot;
+##  $: chr &quot;B&quot;
+##  $: chr &quot;C&quot;</code></pre>
+<pre class="r"><code>queue &lt;- without_front(queue)
+print(queue)</code></pre>
+<pre><code>## A queue with  2  elements.
+## Front: 
+##  $: chr &quot;B&quot;
+##  $: chr &quot;C&quot;</code></pre>
+<pre class="r"><code>first_el &lt;- peek_front(queue)
+print(first_el)</code></pre>
+<pre><code>## [1] &quot;B&quot;</code></pre>
+<p>Queues provide a subset of functionality of deques, but this implementation comes with an efficiency improvement: while <code>rdeques</code> may experience periodic re-balancing described above, <code>rpqueus</code> do not, such that insertions and removals always take approximately the same time. The complexity of supporting this for queues, however, makes the implementation slower in practice that <code>rstack</code>s. These queues are thus a good choice when queue functionality is needed in real-time applications (e.g. user interfaces).</p>
+</div>
 <div id="common-functionality" class="section level3">
 <h3>Common Functionality</h3>
-<p>We demonstrate these features for <code>rstack</code>s, but they also apply to <code>rdeque</code>s and <code>rpqueue</code>s (discussed below).</p>
+<p>All three types support <code>empty()</code> (<code>TRUE</code> or <code>FALSE</code>), <code>length()</code>, and <code>head()</code> (where the head is the front of deques and queues, and the top of stacks), and <code>rstacks</code> also support <code>rev()</code> (but this operations makes a full copy).</p>
+<p>We demonstrate features below for <code>rstack</code>s, but they also apply to <code>rdeque</code>s and <code>rpqueue</code>s (discussed below).</p>
+<div id="element-types" class="section level4">
+<h4>Element types</h4>
 <p>Almost any datatype can be stored - vectors, lists, data.frames, models, etc.</p>
 <pre class="r"><code>stuff &lt;- rstack() %&gt;%
          insert_top(mtcars) %&gt;%
@@ -424,18 +491,18 @@ print(stack)</code></pre>
 print(stuff)</code></pre>
 <pre><code>## An rstack with  2  elements. 
 ##  :List of 10
-##   ..$ statistic  : Named num 0.269
+##   ..$ statistic  : Named num 1.99
 ##   .. ..- attr(*, &quot;names&quot;)= chr &quot;t&quot;
-##   ..$ parameter  : Named num 44.3
+##   ..$ parameter  : Named num 48
 ##   .. ..- attr(*, &quot;names&quot;)= chr &quot;df&quot;
-##   ..$ p.value    : num 0.789
-##   ..$ conf.int   : num [1:2] -0.524 0.686
+##   ..$ p.value    : num 0.0527
+##   ..$ conf.int   : num [1:2] -0.00614 1.01316
 ##   .. ..- attr(*, &quot;conf.level&quot;)= num 0.95
-##   ..$ estimate   : Named num [1:2] -0.185 -0.266
+##   ..$ estimate   : Named num [1:2] 0.137 -0.367
 ##   .. ..- attr(*, &quot;names&quot;)= chr [1:2] &quot;mean of x&quot; &quot;mean of y&quot;
 ##   ..$ null.value : Named num 0
 ##   .. ..- attr(*, &quot;names&quot;)= chr &quot;difference in means&quot;
-##   ..$ stderr     : num 0.3
+##   ..$ stderr     : num 0.253
 ##   ..$ alternative: chr &quot;two.sided&quot;
 ##   ..$ method     : chr &quot;Welch Two Sample t-test&quot;
 ##   ..$ data.name  : chr &quot;rnorm(25) and rnorm(25)&quot;
@@ -452,7 +519,9 @@ print(stuff)</code></pre>
 ##   ..$ am  : num [1:32] 1 1 1 0 0 0 0 0 0 0 ...
 ##   ..$ gear: num [1:32] 4 4 4 3 3 3 3 4 4 4 ...
 ##   ..$ carb: num [1:32] 4 4 1 1 2 1 4 2 2 4 ...</code></pre>
-<p>The structures can easily be created from lists and vectors…</p>
+</div>
+<div id="conversion-to-or-from-lists-or-vectors" class="section level4">
+<h4>Conversion to or from lists or vectors</h4>
 <pre class="r"><code>letters_stack &lt;- as.rstack(letters)
 print(letters_stack)</code></pre>
 <pre><code>## An rstack with  26  elements. 
@@ -469,6 +538,9 @@ print(letters_stack)</code></pre>
 print(letters_again)</code></pre>
 <pre><code>##  [1] &quot;a&quot; &quot;b&quot; &quot;c&quot; &quot;d&quot; &quot;e&quot; &quot;f&quot; &quot;g&quot; &quot;h&quot; &quot;i&quot; &quot;j&quot; &quot;k&quot; &quot;l&quot; &quot;m&quot; &quot;n&quot; &quot;o&quot; &quot;p&quot; &quot;q&quot; &quot;r&quot; &quot;s&quot;
 ## [20] &quot;t&quot; &quot;u&quot; &quot;v&quot; &quot;w&quot; &quot;x&quot; &quot;y&quot; &quot;z&quot;</code></pre>
+</div>
+<div id="conversion-to-data.frames" class="section level4">
+<h4>Conversion to data.frames</h4>
 <p>If the elements are lists that have the same element names in the same order, or dataframes with the same column names in the same order, they can be converted to a <code>data.frame</code>. If elements are data frames, the rows will be concatenated.</p>
 <pre class="r"><code>people_stack &lt;- rstack() %&gt;%
                 insert_top(list(name = &quot;Joe&quot;, age = 26)) %&gt;%
@@ -479,6 +551,9 @@ print(people_df)</code></pre>
 <pre><code>##   name age
 ## 1  Kim  30
 ## 2  Joe  26</code></pre>
+</div>
+<div id="usage-with-loops" class="section level4">
+<h4>Usage with loops</h4>
 <p>As a result, these structures pair nicely with loops. Here’s a loop that computes a <a href="https://en.wikipedia.org/wiki/Collatz_conjecture">Collatz sequence</a> from a given starting number.</p>
 <pre class="r"><code>value &lt;- 17
 step &lt;- 1
@@ -511,7 +586,32 @@ print(collatz_df)</code></pre>
 ## 10     4   10
 ## 11     2   11
 ## 12     1   12</code></pre>
-<p>Note: Although the structures in <code>rstackdeque</code> are generally designed to be fast, for performance-critical applications where the size of the result is known a-priori, using a <a href="https://www.r-bloggers.com/2018/08/growing-objects-and-loop-memory-pre-allocation/">pre-allocation strategy</a> will be faster. Computing the Collatz sequence as shown above is an example where pre-allocation is difficult, and stacks, queues, and deques (double-ended queues) are important components of many algorithms.</p>
+<p>Note: Although the structures in <code>rstackdeque</code> are generally designed to be fast, for performance-critical applications where the size of the result is known a-priori, using a <a href="https://www.r-bloggers.com/2018/08/growing-objects-and-loop-memory-pre-allocation/">pre-allocation strategy</a> will be faster. Computing the Collatz sequence as shown above is an example where pre-allocation is difficult, and stacks, queues, and deques (double-ended queues) are important components of many algorithms. See Timothy Barry’s <a href="https://journal.r-project.org/archive/2018/RJ-2018-037/RJ-2018-037.pdf">Collections in R: Review and Proposal</a> (R Journal, 10(1), 2018) for a comparison of different R implementations of these and similar data structures.</p>
+</div>
+<div id="persistence" class="section level4">
+<h4>Persistence</h4>
+<p>All of the structures described are <em>persistent</em>, meaning that additions and removals don’t alter the original; practically, a modified copy is returned. (A full copy is not made however, the structures handle efficient organization of the data in memory.)</p>
+<pre class="r"><code>stack &lt;- as.rstack(c(&quot;A&quot;, &quot;B&quot;, &quot;C&quot;))
+stack2 &lt;- insert_top(stack, &quot;G&quot;)
+stack3 &lt;- without_top(stack)
+
+print(stack)</code></pre>
+<pre><code>## An rstack with  3  elements. 
+##  : chr &quot;A&quot;
+##  : chr &quot;B&quot;
+##  : chr &quot;C&quot;</code></pre>
+<pre class="r"><code>print(stack2)</code></pre>
+<pre><code>## An rstack with  4  elements. 
+##  : chr &quot;G&quot;
+##  : chr &quot;A&quot;
+##  : chr &quot;B&quot;
+##  : chr &quot;C&quot;</code></pre>
+<pre class="r"><code>print(stack3)</code></pre>
+<pre><code>## An rstack with  2  elements. 
+##  : chr &quot;B&quot;
+##  : chr &quot;C&quot;</code></pre>
+<p>This property makes functions that use the structures “side-effect-free” like most R types, supporting pure functions and parallelization.</p>
+</div>
 </div>
 </div>
 
