@@ -12,9 +12,7 @@ output:
 ## `rstackdeque` Persistent stacks, deques, and queues for R
 
 
-A full description can be found in the R journal pub: [https://journal.r-project.org/archive/2015-1/oneil.pdf](https://journal.r-project.org/archive/2015-1/oneil.pdf)
-
-...
+R journal publication: [https://journal.r-project.org/archive/2015-1/oneil.pdf](https://journal.r-project.org/archive/2015-1/oneil.pdf)
 
 Have you ever wanted to use a stack or a queue for R, but just pulled your hair out
 trying to use lists or vectors instead? Enter rstackdeque.
@@ -36,26 +34,7 @@ and [Simple and Efficient Purely Functional Queues and Deques](http://www.westpo
 ```r
 library(rstackdeque)
 library(dplyr)
-```
 
-```
-## 
-## Attaching package: 'dplyr'
-```
-
-```
-## The following objects are masked from 'package:stats':
-## 
-##     filter, lag
-```
-
-```
-## The following objects are masked from 'package:base':
-## 
-##     intersect, setdiff, setequal, union
-```
-
-```r
 stack <- rstack()
 
 for(i in 1:5) {
@@ -297,18 +276,18 @@ print(stuff)
 ```
 ## An rstack with  2  elements. 
 ##  :List of 10
-##   ..$ statistic  : Named num 1.71
+##   ..$ statistic  : Named num -1.23
 ##   .. ..- attr(*, "names")= chr "t"
-##   ..$ parameter  : Named num 47.8
+##   ..$ parameter  : Named num 45.7
 ##   .. ..- attr(*, "names")= chr "df"
-##   ..$ p.value    : num 0.093
-##   ..$ conf.int   : num [1:2] -0.087 1.091
+##   ..$ p.value    : num 0.227
+##   ..$ conf.int   : num [1:2] -0.747 0.182
 ##   .. ..- attr(*, "conf.level")= num 0.95
-##   ..$ estimate   : Named num [1:2] 0.282 -0.22
+##   ..$ estimate   : Named num [1:2] 0.0195 0.3022
 ##   .. ..- attr(*, "names")= chr [1:2] "mean of x" "mean of y"
 ##   ..$ null.value : Named num 0
 ##   .. ..- attr(*, "names")= chr "difference in means"
-##   ..$ stderr     : num 0.293
+##   ..$ stderr     : num 0.231
 ##   ..$ alternative: chr "two.sided"
 ##   ..$ method     : chr "Welch Two Sample t-test"
 ##   ..$ data.name  : chr "rnorm(25) and rnorm(25)"

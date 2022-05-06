@@ -15,9 +15,7 @@ knitr::opts_chunk$set(fig.path = "README_figs/README-")
 ## `rstackdeque` Persistent stacks, deques, and queues for R
 
 
-A full description can be found in the R journal pub: [https://journal.r-project.org/archive/2015-1/oneil.pdf](https://journal.r-project.org/archive/2015-1/oneil.pdf)
-
-...
+R journal publication: [https://journal.r-project.org/archive/2015-1/oneil.pdf](https://journal.r-project.org/archive/2015-1/oneil.pdf)
 
 Have you ever wanted to use a stack or a queue for R, but just pulled your hair out
 trying to use lists or vectors instead? Enter rstackdeque.
@@ -35,7 +33,7 @@ and [Simple and Efficient Purely Functional Queues and Deques](http://www.westpo
 
 *Psst, you can use these to efficiently build a data frame or list in a loop:*
 
-```{r}
+```{r warning=FALSE,message=FALSE}
 library(rstackdeque)
 library(dplyr)
 
