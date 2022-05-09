@@ -16,6 +16,20 @@ This is largely possible due to the fantastic work of
 Chris Okasaki: see [Purely Functional Data Structures](http://www.amazon.com/Purely-Functional-Structures-Chris-Okasaki/dp/0521663504) 
 and [Simple and Efficient Purely Functional Queues and Deques](http://www.westpoint.edu/eecs/SiteAssets/SitePages/Faculty%20Publication%20Documents/Okasaki/jfp95queue.pdf).
 
+- [Install](#install)
+- [Quick Start](#quick-start)
+  * [Stacks](#stacks)
+  * [Deques (double-ended queues)](#deques--double-ended-queues-)
+  * [Queues](#queues)
+  * [Common Functionality](#common-functionality)
+    + [Element types](#element-types)
+    + [Conversion to or from lists or vectors](#conversion-to-or-from-lists-or-vectors)
+    + [Conversion to data.frames](#conversion-to-dataframes)
+    + [Usage with loops](#usage-with-loops)
+    + [Persistence](#persistence)
+
+
+
 
 *Psst, you can use these to efficiently build a data frame or list in a loop:*
 
